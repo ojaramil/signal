@@ -600,7 +600,7 @@ ul {
 }
 
 .initiative-logo {
-    height: 55px;
+    height: 85px;
     width: auto;
     filter: grayscale(100%);
     transition: filter var(--transition-speed);
