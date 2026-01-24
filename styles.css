@@ -437,7 +437,7 @@ ul {
 }
 
 .floating-icon {
-    width: 100px;
+    width: 220px;
     height: auto;
     z-index: 2;
     filter: drop-shadow(0 0 20px var(--accent-primary));
