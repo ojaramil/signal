@@ -10,6 +10,20 @@
     --card-border: rgba(255, 255, 255, 0.08);
     --font-main: 'Plus Jakarta Sans', sans-serif;
     --transition-speed: 0.3s;
+    --clock-bg: rgba(255, 255, 255, 0.05);
+}
+
+/* Helper for accessibility/hiding elements safely */
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 * {
@@ -1248,5 +1262,209 @@ ul {
 
     .schedule-card {
         padding: 30px 20px;
+    }
+}
+
+/* World Clock Section */
+.world-clock-section {
+    padding: 60px 0;
+    background: linear-gradient(to bottom, var(--bg-color), var(--bg-secondary));
+    border-top: 1px solid var(--card-border);
+}
+
+.world-clock-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 20px;
+    justify-content: center;
+}
+
+.clock-card {
+    background: var(--clock-bg);
+    border: 1px solid var(--card-border);
+    border-radius: 15px;
+    padding: 20px 10px;
+    text-align: center;
+    transition: var(--transition-speed);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 130px;
+}
+
+.clock-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-primary);
+    box-shadow: 0 5px 20px rgba(0, 240, 255, 0.15);
+    background: rgba(255, 255, 255, 0.08);
+}
+
+.clock-city {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.clock-time {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+    font-family: 'Courier New', monospace;
+    /* Monospace for digital look */
+    letter-spacing: -1px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+.clock-card:hover .clock-time {
+    color: var(--accent-primary);
+    text-shadow: 0 0 15px var(--accent-glow);
+}
+
+/* Comment Widget */
+.comment-widget {
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    /* Left side to balance Radio Widget on right */
+    z-index: 9998;
+    font-family: var(--font-main);
+}
+
+.comment-toggle-btn {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #fff;
+    font-size: 1.5rem;
+    cursor: pointer;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.comment-toggle-btn:hover {
+    background: var(--accent-secondary);
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 102, 255, 0.4);
+}
+
+.comment-box {
+    position: absolute;
+    bottom: 80px;
+    left: 0;
+    width: 320px;
+    background: rgba(14, 14, 18, 0.95);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 25px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+    transform-origin: bottom left;
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+    opacity: 0;
+    transform: scale(0.8) translateY(20px);
+    pointer-events: none;
+}
+
+.comment-widget.active .comment-box {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: all;
+}
+
+.c-header {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.c-header h3 {
+    font-size: 1.2rem;
+    margin: 0;
+    color: #fff;
+}
+
+.c-close {
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    font-size: 1.5rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.c-close:hover {
+    color: #fff;
+}
+
+.c-form .form-group {
+    margin-bottom: 15px;
+}
+
+.c-form input,
+.c-form textarea {
+    width: 100%;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 12px;
+    color: #fff;
+    font-family: inherit;
+    font-size: 0.9rem;
+    outline: none;
+    transition: 0.3s;
+}
+
+.c-form textarea {
+    resize: none;
+    height: 100px;
+}
+
+.c-form input:focus,
+.c-form textarea:focus {
+    border-color: var(--accent-primary);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.c-submit-btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 50px;
+    background: linear-gradient(135deg, var(--accent-secondary), var(--accent-primary));
+    color: #fff;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+}
+
+.c-submit-btn:hover {
+    opacity: 0.9;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 240, 255, 0.3);
+}
+
+@media (max-width: 480px) {
+    .comment-widget {
+        left: 20px;
+        bottom: 90px;
+        /* Stack above/move if crowded, but left is fine */
+    }
+
+    .comment-box {
+        width: 280px;
     }
 }

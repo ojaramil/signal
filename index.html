@@ -185,6 +185,17 @@
             </div>
         </section>
 
+        <!-- World Clock Section -->
+        <section id="world-clock" class="world-clock-section">
+            <div class="container">
+                <h2 class="section-title text-center" style="margin-bottom: 40px; font-size: 2rem;">Horarios <span
+                        class="text-highlight">Globales</span></h2>
+                <div class="world-clock-grid" id="clockGrid">
+                    <!-- Clocks will be injected here by JS -->
+                </div>
+            </div>
+        </section>
+
         <!-- Quiénes somos -->
         <section id="about" class="section">
             <div class="container about-container">
@@ -390,6 +401,36 @@
         </button>
     </div>
 
+    <!-- Comment Widget -->
+    <div class="comment-widget" id="commentWidget">
+        <div class="comment-box">
+            <div class="c-header">
+                <h3>Enviar Mensaje</h3>
+                <button class="c-close" id="closeCommentWidget"><i class='bx bx-x'></i></button>
+            </div>
+            <form class="c-form" id="commentForm">
+                <div class="form-group">
+                    <input type="text" placeholder="Tu Nombre" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" placeholder="Tu Correo (Opcional)">
+                </div>
+                <!-- Honeypot for anti-spam (Hidden from humans) -->
+                <div class="form-group visually-hidden">
+                    <input type="text" name="b_check" tabindex="-1" autocomplete="off"
+                        placeholder="No llenar si eres humano">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Escribe tu mensaje aquí..." required></textarea>
+                </div>
+                <button type="submit" class="c-submit-btn">Enviar Mensaje</button>
+            </form>
+        </div>
+        <button class="comment-toggle-btn" id="toggleCommentWidget" aria-label="Abrir Mensajes">
+            <i class='bx bx-message-detail'></i>
+        </button>
+    </div>
+
     <script>
         // Floating Widget Logic
         const widget = document.getElementById('floatingWidget');
@@ -422,6 +463,146 @@
                 toggleBtn.classList.remove('playing');
             }
         });
+    </script>
+
+    <script>
+        /* World Clock Logic */
+        const cities = [
+            { name: 'Los Angeles', zone: 'America/Los_Angeles' },
+            { name: 'Miami', zone: 'America/New_York' },
+            { name: 'Caracas', zone: 'America/Caracas' },
+            { name: 'Bogotá', zone: 'America/Bogota' },
+            { name: 'Buenos Aires', zone: 'America/Argentina/Buenos_Aires' },
+            { name: 'Chile', zone: 'America/Santiago' },
+            { name: 'CDMX', zone: 'America/Mexico_City' },
+            { name: 'Madrid', zone: 'Europe/Madrid' },
+            { name: 'Londres', zone: 'Europe/London' }
+        ];
+
+        const clockGrid = document.getElementById('clockGrid');
+
+        function initClocks() {
+            if (!clockGrid) return;
+            clockGrid.innerHTML = '';
+            cities.forEach(city => {
+                const div = document.createElement('div');
+                div.className = 'clock-card';
+                // Remove spaces for ID
+                const safeName = city.name.replace(/\s/g, '');
+                div.innerHTML = `
+                    <div class="clock-city">${city.name}</div>
+                    <div class="clock-time" id="clock-${safeName}">--:--</div>
+                `;
+                clockGrid.appendChild(div);
+            });
+            updateClocks();
+            setInterval(updateClocks, 1000);
+        }
+
+        function updateClocks() {
+            cities.forEach(city => {
+                const safeName = city.name.replace(/\s/g, '');
+                const timeEl = document.getElementById(`clock-${safeName}`);
+                if (timeEl) {
+                    const time = new Date().toLocaleTimeString('es-ES', {
+                        timeZone: city.zone,
+                        hour: '2-digit',
+                        minute: '2-digit',
+                        hour12: false
+                    });
+                    timeEl.innerText = time;
+                }
+            });
+        }
+
+        // Initialize clocks
+        initClocks();
+
+
+        /* Comment Widget Logic */
+        const commentWidget = document.getElementById('commentWidget');
+        const toggleComment = document.getElementById('toggleCommentWidget');
+        const closeComment = document.getElementById('closeCommentWidget');
+        const commentForm = document.getElementById('commentForm');
+
+        if (toggleComment) {
+            toggleComment.addEventListener('click', () => {
+                commentWidget.classList.toggle('active');
+            });
+        }
+
+        if (closeComment) {
+            closeComment.addEventListener('click', () => {
+                commentWidget.classList.remove('active');
+            });
+        }
+
+        if (commentForm) {
+            commentForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+
+                const btn = commentForm.querySelector('button[type="submit"]');
+                const originalText = btn.innerText;
+                const nameInput = commentForm.querySelector('input[type="text"]:not([name="b_check"])');
+                const emailInput = commentForm.querySelector('input[type="email"]');
+                const msgInput = commentForm.querySelector('textarea');
+                const honeypot = commentForm.querySelector('input[name="b_check"]');
+
+                // 1. Anti-Bot: Honeypot Check
+                if (honeypot && honeypot.value !== "") {
+                    console.log('Bot detected via honeypot');
+                    return; // Silently fail for bots
+                }
+
+                // 2. Anti-Bot: Simple Rate Limiting (1 mensaje cada 2 minutos)
+                const lastSent = localStorage.getItem('lastMsgSent');
+                if (lastSent && (Date.now() - lastSent) < 120000) {
+                    alert('Por favor espera unos minutos antes de enviar otro mensaje.');
+                    return;
+                }
+
+                // CAMBIA ESTA URL POR LA QUE OBTUVISTE EN EL PASO 3 DE LAS INSTRUCCIONES
+                const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz32V9hOaLUD4n69xyo6nbJ1hlKG096KajYY0HqUJqRNi945O09NOHXV_66_X_zeAiM/exec';
+
+                if (SCRIPT_URL === 'TU_URL_DE_GOOGLE_SCRIPT_AQUI') {
+                    alert('¡Falta configurar la URL de Google Sheets! Revisa el archivo INSTRUCCIONES_GOOGLE_SHEETS.md');
+                    return;
+                }
+
+                btn.innerText = 'Enviando...';
+                btn.disabled = true;
+
+                const data = {
+                    nombre: nameInput.value,
+                    correo: emailInput.value,
+                    mensaje: msgInput.value
+                };
+
+                fetch(SCRIPT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Importante para Google Apps Script
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => {
+                        // Con no-cors no podemos leer la respuesta JSON, asumimos éxito si no hay error de red
+                        alert('¡Mensaje enviado con éxito! Gracias por escribirnos.');
+                        commentForm.reset();
+                        commentWidget.classList.remove('active');
+                        localStorage.setItem('lastMsgSent', Date.now()); // Guardar timestamp
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('Hubo un error al enviar el mensaje. Por favor intenta de nuevo.');
+                    })
+                    .finally(() => {
+                        btn.innerText = originalText;
+                        btn.disabled = false;
+                    });
+            });
+        }
     </script>
 
 </body>
