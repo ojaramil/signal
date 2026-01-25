@@ -1,0 +1,84 @@
+<div id="signal-radio-widget"
+    style="font-family: 'Outfit', sans-serif; width: 100%; max-width: 350px; background: linear-gradient(145deg, #050507, #0e0e12); padding: 20px; border-radius: 20px; border: 1px solid rgba(255, 255, 255, 0.1); color: white; display: flex; flex-direction: column; align-items: center; gap: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); margin: 0 auto;">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <!-- Header -->
+    <div style="display: flex; align-items: center; gap: 10px; width: 100%; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="https://signal.aspergerparaasperger.org/logo2.jpg" alt="Logo"
+                style="width: 40px; height: 40px; border-radius: 8px; object-fit: cover;">
+            <div style="line-height: 1.2;">
+                <h3 style="margin: 0; font-size: 16px; font-weight: 700;">SIGNAL RADIO</h3>
+                <span style="font-size: 12px; color: #a0a0b0;">Señal Abierta</span>
+            </div>
+        </div>
+        <div
+            style="display: flex; align-items: center; gap: 5px; background: rgba(255, 0, 0, 0.2); border: 1px solid rgba(255, 0, 0, 0.3); padding: 4px 8px; border-radius: 12px;">
+            <div
+                style="width: 6px; height: 6px; background: #ff4d4d; border-radius: 50%; animation: blinkWidget 1.5s infinite;">
+            </div>
+            <span style="color: #ff4d4d; font-size: 10px; font-weight: 700; letter-spacing: 0.5px;">EN VIVO</span>
+        </div>
+    </div>
+
+    <!-- Visualizer / Info -->
+    <div
+        style="width: 100%; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; text-align: center;">
+        <p style="margin: 0; font-size: 13px; color: #00f0ff;">Escuchando ahora:</p>
+        <p style="margin: 5px 0 0 0; font-size: 14px; font-weight: 600;">Transmisión Online</p>
+    </div>
+
+    <!-- Controls -->
+    <div style="display: flex; align-items: center; gap: 20px;">
+        <button id="signal-play-btn" onclick="toggleSignalRadio()"
+            style="width: 50px; height: 50px; border-radius: 50%; border: none; background: linear-gradient(135deg, #00f0ff, #0066ff); color: white; font-size: 24px; cursor: pointer; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 15px rgba(0, 240, 255, 0.4); transition: transform 0.2s;">
+            <i class='bx bx-play' style="margin-left: 3px;"></i>
+        </button>
+    </div>
+
+    <!-- Audio Element (Hidden) -->
+    <audio id="signal-audio-stream" preload="none">
+        <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/radio.mp3" type="audio/mpeg">
+    </audio>
+
+    <style>
+        @keyframes blinkWidget {
+            0% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.4;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+    </style>
+
+    <script>
+        var isPlaying = false;
+        var audio = document.getElementById('signal-audio-stream');
+        var btn = document.getElementById('signal-play-btn');
+        var icon = btn.querySelector('i');
+
+        function toggleSignalRadio() {
+            if (isPlaying) {
+                audio.pause();
+                icon.className = 'bx bx-play';
+                icon.style.marginLeft = '3px'; // Center visual adjustment
+                isPlaying = false;
+            } else {
+                audio.load(); // Refresh stream to be live
+                audio.play();
+                icon.className = 'bx bx-pause';
+                icon.style.marginLeft = '0';
+                isPlaying = true;
+            }
+        }
+    </script>
+</div>
