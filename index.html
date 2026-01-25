@@ -347,6 +347,41 @@
             });
         });
     </script>
+    <!-- Chat Widget -->
+    <div class="chat-widget" id="chatWidget">
+        <div class="chat-content">
+            <div class="chat-header">
+                <div class="chat-title">
+                    <span class="chat-status-dot"></span> Chat en Vivo
+                </div>
+                <button class="chat-close-btn" id="chatCloseBtn"><i class='bx bx-x'></i></button>
+            </div>
+
+            <div class="chat-messages" id="chatMessages">
+                <!-- Messages will appear here -->
+                <div class="message">
+                    <div class="msg-header">
+                        <span class="msg-author">SignalBot</span>
+                    </div>
+                    <div class="msg-text">¡Bienvenido al chat de Signal Radio! 👋</div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <input type="text" id="chatUser" class="username-input" placeholder="Tu Apodo..." maxlength="20">
+                <div class="input-wrapper">
+                    <input type="text" id="chatInput" class="chat-input" placeholder="Escribe un mensaje..."
+                        autocomplete="off">
+                    <button id="chatSendBtn" class="chat-send-btn"><i class='bx bx-send'></i></button>
+                </div>
+            </div>
+        </div>
+
+        <button class="chat-toggle-btn" id="chatToggle" aria-label="Abrir Chat">
+            <i class='bx bx-message-rounded-dots'></i>
+        </button>
+    </div>
+
     <!-- Floating Radio Widget -->
     <div class="floating-widget" id="floatingWidget">
         <div class="widget-content">
@@ -420,6 +455,146 @@
                 toggleBtn.classList.remove('playing');
             }
         });
+    </script>
+    <script type="module">
+        // Firebase SDK Imports (v10.7.1)
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+        import { getDatabase, ref, push, onChildAdded, serverTimestamp, query, limitToLast } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+        import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
+
+        // Configuración proporcionada
+        const firebaseConfig = {
+            apiKey: "AIzaSyDcwOQt3bnGgbo9q3Bv7wuJvGaljsMp8tU",
+            authDomain: "signal-radio-chat.firebaseapp.com",
+            databaseURL: "https://signal-radio-chat-default-rtdb.firebaseio.com",
+            projectId: "signal-radio-chat",
+            storageBucket: "signal-radio-chat.firebasestorage.app",
+            messagingSenderId: "192268141953",
+            appId: "1:192268141953:web:1690ed96ed5ad6d9981480",
+            measurementId: "G-8T2ZJHJMCZ"
+        };
+
+
+        // Initialize Firebase
+        let app, db, analytics;
+        try {
+            app = initializeApp(firebaseConfig);
+            analytics = getAnalytics(app);
+            db = getDatabase(app);
+            console.log("Firebase conectado (v10.7.1 compatible)");
+            initChat();
+        } catch (e) {
+            console.error("Error inicializando Firebase:", e);
+        }
+
+        // Chat UI Logic
+        const chatWidget = document.getElementById('chatWidget');
+        const chatToggle = document.getElementById('chatToggle');
+        const chatClose = document.getElementById('chatCloseBtn');
+        const chatInput = document.getElementById('chatInput');
+        const chatUser = document.getElementById('chatUser');
+        const chatSend = document.getElementById('chatSendBtn');
+        const messagesContainer = document.getElementById('chatMessages');
+
+        // Toggle Chat
+        chatToggle.addEventListener('click', () => {
+            chatWidget.classList.toggle('expanded');
+            if (chatWidget.classList.contains('expanded')) {
+                chatToggle.classList.remove('has-new');
+                scrollToBottom();
+                // Focus input
+                if (!localStorage.getItem('chat_username')) {
+                    chatUser.focus();
+                } else {
+                    chatInput.focus();
+                }
+            }
+        });
+
+        chatClose.addEventListener('click', () => {
+            chatWidget.classList.remove('expanded');
+        });
+
+        // Load Username
+        if (localStorage.getItem('chat_username')) {
+            chatUser.value = localStorage.getItem('chat_username');
+        }
+
+        // Save Username on change
+        chatUser.addEventListener('input', () => {
+            localStorage.setItem('chat_username', chatUser.value);
+        });
+
+        function scrollToBottom() {
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function initChat() {
+            if (!db) return;
+
+            const messagesRef = ref(db, 'messages');
+            const q = query(messagesRef, limitToLast(50));
+
+            // Load messages
+            onChildAdded(q, (snapshot) => {
+                const data = snapshot.val();
+                renderMessage(data.user, data.text, data.timestamp);
+
+                // Notification enhancement
+                if (!chatWidget.classList.contains('expanded')) {
+                    chatToggle.classList.add('has-new');
+                }
+            });
+
+            // Send Message
+            function sendMessage() {
+                const text = chatInput.value.trim();
+                const user = chatUser.value.trim() || 'Anónimo';
+
+                if (text === "") return;
+
+                if (user === 'Anónimo') {
+                    // Start shake animation or warning on user input if empty? 
+                    // For now just allow it or save 'Anónimo'
+                }
+
+                push(messagesRef, {
+                    user: user,
+                    text: text,
+                    timestamp: serverTimestamp()
+                });
+
+                chatInput.value = "";
+                scrollToBottom();
+            }
+
+            chatSend.addEventListener('click', sendMessage);
+
+            chatInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') sendMessage();
+            });
+        }
+
+        function renderMessage(user, text, timestamp) {
+            const msgDiv = document.createElement('div');
+            const isOwn = user === chatUser.value;
+
+            msgDiv.className = `message ${isOwn ? 'own' : ''}`;
+
+            // Simple sanitization
+            const cleanText = text.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+            const cleanUser = user.replace(/</g, "&lt;").replace(/>/g, "&gt;");
+
+            msgDiv.innerHTML = `
+                <div class="msg-header">
+                    <span class="msg-author">${cleanUser}</span>
+                </div>
+                <div class="msg-text">${cleanText}</div>
+            `;
+
+            messagesContainer.appendChild(msgDiv);
+            scrollToBottom();
+        }
     </script>
 </body>
 
