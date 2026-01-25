@@ -800,6 +800,11 @@ ul {
     .notification-banner {
         padding: 10px;
     }
+
+    .subtitle {
+        font-size: 1rem;
+        padding: 0 10px;
+    }
 }
 
 /* Floating Radio Widget */
