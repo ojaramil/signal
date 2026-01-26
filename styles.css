@@ -1550,11 +1550,11 @@ ul {
 .badge-footer {
     background: var(--accent-secondary);
     color: #fff;
-    padding: 5px 15px;
+    padding: 5px 10px;
     border-radius: 50px;
-    font-size: 0.8rem;
+    font-size: 0.65rem;
     font-weight: 700;
-    letter-spacing: 2px;
+    letter-spacing: 1px;
 }
 
 .badge-caption {
