@@ -1608,3 +1608,18 @@ ul {
     filter: grayscale(100%);
     opacity: 0.9;
 }
+.listener-count {
+    margin-top: 10px;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    animation: fadeIn 2s ease-out;
+}
+
+.listener-count i {
+    color: var(--accent-primary);
+    font-size: 1rem;
+    animation: pulse 3s infinite;
+}
