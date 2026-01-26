@@ -278,6 +278,55 @@
             </div>
         </section>
 
+        <!-- Signal Spaces (B2B / Viralization) -->
+        <section id="signal-spaces" class="section bg-darker">
+            <div class="container">
+                <div class="spaces-content">
+                    <div class="spaces-text">
+                        <h2 class="section-title">Signal en tu <span class="text-highlight">Espacio</span></h2>
+                        <p class="lead-text" style="color: #fff;">
+                            ¿Tienes un Café, Hotel u Oficina?
+                        </p>
+                        <p>
+                            Convierte tu negocio en un <strong>Espacio Neuro-Inclusivo</strong>.
+                            Nuestra programación musical está curada para favorecer la <strong>calma, la concentración y
+                                el bienestar</strong>,
+                            creando la atmósfera perfecta para tus clientes y colaboradores mientras apoyas una causa
+                            global.
+                        </p>
+                        <ul class="spaces-benefits">
+                            <li><i class='bx bx-check-circle'></i> Ambiente sonoro sin estridencias.</li>
+                            <li><i class='bx bx-check-circle'></i> Ideal para el "Deep Work" y conversaciones.</li>
+                            <li><i class='bx bx-check-circle'></i> Distintivo digital de "Marca Inclusiva".</li>
+                        </ul>
+                        <br>
+                        <a href="https://lp.aspergerparaasperger.org/22wd5h94" id="btn-signal-space"
+                            class="btn btn-outline btn-lg" target="_blank">
+                            <i class='bx bx-check-shield'></i> Certifica tu Espacio Gratis
+                        </a>
+                    </div>
+                    <div class="spaces-badge">
+                        <div class="badge-card">
+                            <div class="badge-header">AQUÍ SUENA</div>
+                            <div class="badge-logo">
+                                <img src="logo-neuro-amigable.png" alt="Neuro Amigable">
+                            </div>
+                            <div class="badge-footer">ZONA NEURO-AMIGABLE</div>
+                            <div
+                                style="font-size: 0.6rem; color: #a0a0b0; letter-spacing: 1px; margin-top: 5px; text-transform: uppercase;">
+                                ESPACIO INCLUSIVO CERTIFICADO</div>
+                            <div class="badge-url">signalradio.club</div>
+                            <div class="badge-sub">
+                                <span>Una iniciativa de:</span>
+                                <img src="logo.png" alt="Asperger para Asperger">
+                            </div>
+                        </div>
+                        <p class="badge-caption">Ejemplo de Sticker para puerta</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <!-- Call to Action -->
         <section id="community" class="section cta-section">
             <div class="background-waves"></div>
@@ -403,7 +452,7 @@
     <div class="comment-widget" id="commentWidget">
         <div class="comment-box">
             <div class="c-header">
-                <h3>Enviar Mensaje</h3>
+                <h3>Sugerir Música / Mensaje</h3>
                 <button class="c-close" id="closeCommentWidget"><i class='bx bx-x'></i></button>
             </div>
             <form class="c-form" id="commentForm">
@@ -419,7 +468,7 @@
                         placeholder="No llenar si eres humano">
                 </div>
                 <div class="form-group">
-                    <textarea placeholder="Escribe tu mensaje aquí..." required></textarea>
+                    <textarea placeholder="Escribe tu sugerencia de canción o mensaje aquí..." required></textarea>
                 </div>
                 <button type="submit" class="c-submit-btn">Enviar Mensaje</button>
             </form>
@@ -586,7 +635,7 @@
                 })
                     .then(response => {
                         // Con no-cors no podemos leer la respuesta JSON, asumimos éxito si no hay error de red
-                        alert('¡Mensaje enviado con éxito! Gracias por escribirnos.');
+                        alert('¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.');
                         commentForm.reset();
                         commentWidget.classList.remove('active');
                         localStorage.setItem('lastMsgSent', Date.now()); // Guardar timestamp
@@ -601,6 +650,23 @@
                     });
             });
         }
+
+        /* Signal Spaces Button Logic - DEPRECATED (Now Direct Link)
+        const spaceBtn = document.getElementById('btn-signal-space');
+        if (spaceBtn) {
+            spaceBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                // Open widget
+                commentWidget.classList.add('active');
+                // Pre-fill message
+                const msgInput = commentForm.querySelector('textarea');
+                msgInput.value = "Hola, me interesa convertir mi negocio en un Espacio Signal. Quisiera recibir el Kit de Embajador.";
+                // Focus name
+                const nameInput = commentForm.querySelector('input[type="text"]:not([name="b_check"])');
+                nameInput.focus();
+            });
+        }
+        */
     </script>
 
 </body>

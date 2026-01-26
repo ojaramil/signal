@@ -84,10 +84,14 @@ Este será el logo que va dentro de Certopus y en el sticker.
 >
 > Estilo Visual: Acabado metálico mate, estilo corporativo y tecnológico, sin sombras excesivas, flat design con un toque de gradiente. Fondo blanco puro."
 
-### B. Mockup del Sticker en Puerta de Vidrio (Para marketing)
-Para mostrar en la Landing Page cómo se vería en un café.
+### B. Mockup Realista en Espacio Público (Para la Landing Page)
+Este es el prompt para generar la imagen que reemplazará a los libros azules en FlexyFunnels.
 > **Prompt:**
-> "Fotografía profesional de una puerta de vidrio de una cafetería moderna y elegante con iluminación cálida. En el vidrio hay pegado un sticker circular (decal) de alta calidad. El diseño del sticker es moderno, colores cyan y azul oscuro, con el texto 'AQUÍ SUENA SIGNAL RADIO'. El sticker tiene un efecto visual semitransparente moderno. Se ve el interior del café desenfocado al fondo con gente trabajando tranquila. Estilo fotorealista, 4k, iluminación de atardecer, ángulo ligeramente lateral."
+> "Fotografía profesional de plano medio. La entrada de cristal de una cafetería moderna y acogedora en una ciudad cosmopolita. En el cristal de la puerta, a la altura de la vista, hay pegado un STICKER circular (calcomanía) de diseño premium.
+>
+> **Detalles del Sticker:** Fondo negro mate y bordes en azul cyan neón. Texto legible 'ZONA NEURO-AMIGABLE'.
+>
+> **Entorno:** Se ve a través del cristal el interior desenfocado con gente feliz tomando café. Luz natural de atardecer reflejándose suavemente en el vidrio. Estilo 'Street Photography' comercial de alta gama, 8k, hiperrealista."
 
 ### C. Mockup del "Hablador" (Table Tent) con QR
 Para mostrar lo que va en las mesas.
