@@ -75,6 +75,61 @@
             /* Simple dark mode tweak for standard audio player */
         }
 
+        /* Language Switcher Styles - Flags */
+        .lang-switch {
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 30px;
+            padding: 4px;
+            margin-left: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+            position: relative;
+            height: 36px;
+            width: 74px;
+            transition: all 0.3s ease;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .lang-option {
+            flex: 1;
+            text-align: center;
+            font-size: 1.2rem;
+            /* Larger for flags */
+            z-index: 2;
+            opacity: 0.5;
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            line-height: 28px;
+            filter: grayscale(100%);
+            /* Flags grey when inactive */
+        }
+
+        .lang-option.active {
+            opacity: 1;
+            filter: grayscale(0%);
+            transform: scale(1.1);
+        }
+
+        .lang-bg {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 34px;
+            height: 28px;
+            background: rgba(255, 255, 255, 0.15);
+            /* Subtle highlight behind active flag */
+            border-radius: 50%;
+            transition: transform 0.3s cubic-bezier(0.4, 0.0, 0.2, 1);
+            z-index: 1;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        /* State for English */
+        .lang-switch.en-active .lang-bg {
+            transform: translateX(34px);
+        }
+
         @keyframes fadeIn {
             from {
                 opacity: 0;
@@ -86,6 +141,23 @@
                 transform: translateY(0);
             }
         }
+
+        /* Mobile Adjustments for Lang Switch */
+        @media (max-width: 768px) {
+            .header-cta {
+                display: none;
+                /* Hide CTA on mobile to fit lang switch if needed, or adjust flex */
+            }
+
+            .header-container {
+                gap: 10px;
+            }
+
+            .lang-switch {
+                margin-left: auto;
+                margin-right: 10px;
+            }
+        }
     </style>
 </head>
 
@@ -95,8 +167,9 @@
     <header id="main-header">
         <div class="notification-banner">
             <div class="banner-content">
-                <span class="banner-tag" style="background: var(--accent-primary); color: #000;">🚀 PRÓXIMAMENTE</span>
-                <span>
+                <span class="banner-tag" style="background: var(--accent-primary); color: #000;"
+                    data-i18n="banner_tag">🚀 PRÓXIMAMENTE</span>
+                <span data-i18n="banner_text">
                     Pronto tendrán la conversación en <strong>Signal Radio Club</strong> con <strong>Ezra el
                         CoderzLegend</strong>, creador de <strong>projectopia.live</strong>
                 </span>
@@ -106,16 +179,26 @@
             <div class="logo">
                 <img src="logo2.jpg" alt="Signal Radio Logo" class="logo-img">
             </div>
+
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#about">Quiénes somos</a></li>
-                    <li><a href="#services">Qué hacemos</a></li>
-                    <li><a href="#values">Impacto</a></li>
+                    <li><a href="#about" data-i18n="nav_about">Quiénes somos</a></li>
+                    <li><a href="#services" data-i18n="nav_what_we_do">Qué hacemos</a></li>
+                    <li><a href="#values" data-i18n="nav_impact">Impacto</a></li>
                 </ul>
             </nav>
-            <div class="header-cta">
-                <a href="#listen" class="btn btn-primary btn-sm">Escuchar ahora</a>
+
+            <!-- Language Switcher -->
+            <div class="lang-switch" id="langSwitch" onclick="toggleLanguage()" aria-label="Cambiar idioma">
+                <div class="lang-bg"></div>
+                <div class="lang-option active" id="btn-es">🇪🇸</div>
+                <div class="lang-option" id="btn-en">🇺🇸</div>
             </div>
+
+            <div class="header-cta">
+                <a href="#listen" class="btn btn-primary btn-sm" data-i18n="nav_listen">Escuchar ahora</a>
+            </div>
+
             <button class="mobile-menu-btn" aria-label="Abrir menú">
                 <i class='bx bx-menu'></i>
             </button>
@@ -131,15 +214,17 @@
             </div>
             <div class="container hero-content">
                 <div class="signal-indicator">
-                    <span class="dot"></span> EN VIVO
+                    <span class="dot"></span> <span data-i18n="hero_live">EN VIVO</span>
                 </div>
                 <h2 class="main-title">Signal <span class="text-gradient">Radio</span></h2>
-                <p class="subtitle">Una señal abierta para la convivencia e inclusión laboral del talento
+                <p class="subtitle" data-i18n="hero_subtitle">Una señal abierta para la convivencia e inclusión laboral
+                    del talento
                     auténticamente capaz.</p>
 
                 <!-- Opcion 1: Audio Tag -->
                 <div class="player-container">
-                    <div class="player-label"><i class='bx bx-broadcast'></i> Señal en Vivo</div>
+                    <div class="player-label"><i class='bx bx-broadcast'></i> <span data-i18n="player_label">Señal en
+                            Vivo</span></div>
                     <audio controls autoplay>
                         <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/radio.mp3"
                             type="audio/mpeg">
@@ -149,7 +234,8 @@
 
                 <div class="hero-actions">
                     <!-- Removed Play Button since player is active -->
-                    <a href="#community" class="btn btn-outline btn-lg">Sumarse a la comunidad</a>
+                    <a href="#community" class="btn btn-outline btn-lg" data-i18n="hero_community">Sumarse a la
+                        comunidad</a>
                 </div>
             </div>
             <div class="scroll-down">
@@ -160,34 +246,41 @@
         <!-- Weekly Schedule -->
         <section id="schedule" class="section" style="padding-bottom: 50px;">
             <div class="container text-center">
-                <h2 class="section-title" style="margin-bottom: 50px;">Programación <span
-                        class="text-highlight">Semanal</span></h2>
+                <h2 class="section-title" style="margin-bottom: 50px;"><span
+                        data-i18n="schedule_title_1">Programación</span> <span class="text-highlight"
+                        data-i18n="schedule_title_2">Semanal</span></h2>
+
+                <!-- Card 1 -->
                 <div class="schedule-card">
-                    <div class="schedule-badge">ESTRENO</div>
+                    <div class="schedule-badge" data-i18n="badge_premiere">ESTRENO</div>
                     <h3 class="schedule-title">Signal Radio CLub Talks</h3>
-                    <p class="schedule-topic"><strong>Tema:</strong> Construyendo Realidades: Projectopia.live</p>
-                    <p class="schedule-guest"><strong>Invitado Especial:</strong> Ezra "The CoderzLegend"</p>
+                    <p class="schedule-topic"><strong data-i18n="topic_label">Tema:</strong> Construyendo Realidades:
+                        Projectopia.live</p>
+                    <p class="schedule-guest"><strong data-i18n="guest_label">Invitado Especial:</strong> Ezra "The
+                        CoderzLegend"</p>
                     <div class="schedule-details">
                         <div class="schedule-time">
-                            <i class='bx bx-time'></i> 12:00 PM EST (Mediodia)
+                            <i class='bx bx-time'></i> <span data-i18n="time_est">12:00 PM EST (Mediodia)</span>
                         </div>
                         <div class="schedule-date">
-                            <i class='bx bx-calendar'></i> 1 Febrero - 11 Feb 2026
+                            <i class='bx bx-calendar'></i> <span data-i18n="date_feb">1 Febrero - 11 Feb 2026</span>
                         </div>
                     </div>
                     <div style="margin-top: 30px;">
-                        <p style="color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;">Rotación durante 2
+                        <p style="color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;"
+                            data-i18n="rotation_note">Rotación durante 2
                             semanas.</p>
                     </div>
                 </div>
 
                 <!-- Second Card: Andrés Galli -->
                 <div class="schedule-card" style="margin-top: 60px;">
-                    <div class="schedule-badge">EN DIFERIDO</div>
+                    <div class="schedule-badge" data-i18n="badge_deferred">EN DIFERIDO</div>
                     <h3 class="schedule-title">Sintonizando con el Autismo - Episodio 165</h3>
-                    <p class="schedule-topic"><strong>Tema:</strong> Importancia de la consulta pediátrica en el Autismo
+                    <p class="schedule-topic"><strong data-i18n="topic_label">Tema:</strong> <span
+                            data-i18n="topic_165">Importancia de la consulta pediátrica en el Autismo</span>
                     </p>
-                    <p class="schedule-guest"><strong>Invitado:</strong> Dr. Jesus Rojas</p>
+                    <p class="schedule-guest"><strong data-i18n="guest_label">Invitado:</strong> Dr. Jesus Rojas</p>
                     <div class="schedule-details">
                         <div class="schedule-time">
                             <i class='bx bx-time'></i> 7:00 AM & 7:00 PM
@@ -197,16 +290,19 @@
                         </div>
                     </div>
                     <div style="margin-top: 30px;">
-                        <p style="color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;">Lunes a Domingo</p>
+                        <p style="color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;"
+                            data-i18n="mon_sun">Lunes a Domingo</p>
                     </div>
                 </div>
 
                 <!-- Third Card: Andrés Galli -->
                 <div class="schedule-card" style="margin-top: 60px;">
-                    <div class="schedule-badge">EN DIFERIDO</div>
+                    <div class="schedule-badge" data-i18n="badge_deferred">EN DIFERIDO</div>
                     <h3 class="schedule-title">Sintonizando con el Autismo - Episodio 166</h3>
-                    <p class="schedule-topic"><strong>Tema:</strong> Migración y Cambio en población Asperger</p>
-                    <p class="schedule-guest"><strong>Invitado:</strong> Andrés Galli (desde Valencia, España)</p>
+                    <p class="schedule-topic"><strong data-i18n="topic_label">Tema:</strong> <span
+                            data-i18n="topic_166">Migración y Cambio en población Asperger</span></p>
+                    <p class="schedule-guest"><strong data-i18n="guest_label">Invitado:</strong> Andrés Galli (<span
+                            data-i18n="from_spain">desde Valencia, España</span>)</p>
                     <div class="schedule-details">
                         <div class="schedule-time">
                             <i class='bx bx-time'></i> 7:00 AM & 7:00 PM
@@ -217,7 +313,8 @@
                         </div>
                     </div>
                     <div style="margin-top: 30px;">
-                        <p style="color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;">Lunes a Domingo</p>
+                        <p style="color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;"
+                            data-i18n="mon_sun">Lunes a Domingo</p>
                     </div>
                 </div>
             </div>
@@ -226,8 +323,9 @@
         <!-- World Clock Section -->
         <section id="world-clock" class="world-clock-section">
             <div class="container">
-                <h2 class="section-title text-center" style="margin-bottom: 40px; font-size: 2rem;">Horarios <span
-                        class="text-highlight">Globales</span></h2>
+                <h2 class="section-title text-center" style="margin-bottom: 40px; font-size: 2rem;"><span
+                        data-i18n="clock_title">Horarios</span> <span class="text-highlight"
+                        data-i18n="clock_highlight">Globales</span></h2>
                 <div class="world-clock-grid" id="clockGrid">
                     <!-- Clocks will be injected here by JS -->
                 </div>
@@ -295,16 +393,16 @@
         <section id="about" class="section">
             <div class="container about-container">
                 <div class="about-text">
-                    <h2 class="section-title">Quiénes <span class="text-highlight">Somos</span></h2>
-                    <p class="lead-text">
+                    <h2 class="section-title"><span data-i18n="about_title">Quiénes</span> <span class="text-highlight"
+                            data-i18n="about_highlight">Somos</span></h2>
+                    <p class="lead-text" data-i18n="about_lead">
                         Iniciativa de inclusión laboral <strong class="text-cyan">Asperger para Asperger®</strong>.
                     </p>
-                    <p>
+                    <p data-i18n="about_desc">
                         Promovemos y visibilizamos talento neurodivergente auténticamente capaz en toda la diversidad
                         cognitiva y el espectro autista. Educamos a la sociedad y actuamos como un medio de múltiples
                         propósitos para estas minorías, visibilizando, sensibilizando, promoviendo la comprensión real
-                        de la
-                        neurodiversidad y la creación de oportunidades que transforman realidades.
+                        de la neurodiversidad y la creación de oportunidades que transforman realidades.
                     </p>
                 </div>
                 <div class="about-visual">
@@ -318,30 +416,35 @@
         <!-- Qué hacemos -->
         <section id="services" class="section bg-darker">
             <div class="container">
-                <h2 class="section-title text-center">Nuestra <span class="text-highlight">Señal</span></h2>
+                <h2 class="section-title text-center"><span data-i18n="services_title">Nuestra</span> <span
+                        class="text-highlight" data-i18n="services_highlight">Señal</span></h2>
                 <div class="grid-cards">
                     <div class="card">
                         <div class="card-icon"><i class='bx bx-broadcast'></i></div>
-                        <h3>Radio Online</h3>
-                        <p>Contenidos diversos, música y entrevistas producidas y locutadas por talento neurodivergente.
+                        <h3 data-i18n="card1_title">Radio Online</h3>
+                        <p data-i18n="card1_desc">Contenidos diversos, música y entrevistas producidas y locutadas por
+                            talento neurodivergente.
                             También canciones educativas que enseñan cómo viven e interpretan el mundo las personas
                             neurocognitivas diversas. Una señal con contenido propositivo para la sociedad.</p>
                     </div>
                     <div class="card">
                         <div class="card-icon"><i class='bx bx-message-rounded-dots'></i></div>
-                        <h3>Comunicación Social</h3>
-                        <p>Plataformas de expresión que conectan historias reales con una audiencia global.</p>
+                        <h3 data-i18n="card2_title">Comunicación Social</h3>
+                        <p data-i18n="card2_desc">Plataformas de expresión que conectan historias reales con una
+                            audiencia global.</p>
                     </div>
                     <div class="card">
                         <div class="card-icon"><i class='bx bx-chip'></i></div>
-                        <h3>Tecnología</h3>
-                        <p>Innovación en formatos digitales y herramientas accesibles para la creación de contenidos.
+                        <h3 data-i18n="card3_title">Tecnología</h3>
+                        <p data-i18n="card3_desc">Innovación en formatos digitales y herramientas accesibles para la
+                            creación de contenidos.
                         </p>
                     </div>
                     <div class="card highlight-card">
                         <div class="card-icon"><i class='bx bx-briefcase-alt'></i></div>
-                        <h3>Oportunidades</h3>
-                        <p>Desarrollo profesional real y participación activa en proyectos creativos.</p>
+                        <h3 data-i18n="card4_title">Oportunidades</h3>
+                        <p data-i18n="card4_desc">Desarrollo profesional real y participación activa en proyectos
+                            creativos.</p>
                     </div>
                 </div>
             </div>
@@ -350,27 +453,28 @@
         <!-- Impacto / Valores -->
         <section id="values" class="section">
             <div class="container">
-                <h2 class="section-title text-center">Impacto y <span class="text-highlight">Valores</span></h2>
+                <h2 class="section-title text-center"><span data-i18n="values_title">Impacto y</span> <span
+                        class="text-highlight" data-i18n="values_highlight">Valores</span></h2>
                 <div class="values-grid">
                     <div class="value-item">
                         <span class="value-number">01</span>
-                        <h3>Inclusión</h3>
-                        <p>Sin barreras.</p>
+                        <h3 data-i18n="value1_title">Inclusión</h3>
+                        <p data-i18n="value1_desc">Sin barreras.</p>
                     </div>
                     <div class="value-item">
                         <span class="value-number">02</span>
-                        <h3>Autenticidad</h3>
-                        <p>Voces reales y auténticas.</p>
+                        <h3 data-i18n="value2_title">Autenticidad</h3>
+                        <p data-i18n="value2_desc">Voces reales y auténticas.</p>
                     </div>
                     <div class="value-item">
                         <span class="value-number">03</span>
-                        <h3>Comunidad</h3>
-                        <p>Red de apoyo y crecimiento mutuo.</p>
+                        <h3 data-i18n="value3_title">Comunidad</h3>
+                        <p data-i18n="value3_desc">Red de apoyo y crecimiento mutuo.</p>
                     </div>
                     <div class="value-item">
                         <span class="value-number">04</span>
-                        <h3>Innovación</h3>
-                        <p>Mirando siempre hacia el futuro.</p>
+                        <h3 data-i18n="value4_title">Innovación</h3>
+                        <p data-i18n="value4_desc">Mirando siempre hacia el futuro.</p>
                     </div>
                 </div>
             </div>
@@ -381,11 +485,12 @@
             <div class="container">
                 <div class="spaces-content">
                     <div class="spaces-text">
-                        <h2 class="section-title">Signal en tu <span class="text-highlight">Espacio</span></h2>
-                        <p class="lead-text" style="color: #fff;">
+                        <h2 class="section-title"><span data-i18n="spaces_title">Signal en tu</span> <span
+                                class="text-highlight" data-i18n="spaces_highlight">Espacio</span></h2>
+                        <p class="lead-text" style="color: #fff;" data-i18n="spaces_lead">
                             ¿Tienes un Café, Hotel u Oficina?
                         </p>
-                        <p>
+                        <p data-i18n="spaces_desc">
                             Convierte tu negocio en un <strong>Espacio Neuro-Inclusivo</strong>.
                             Nuestra programación musical está curada para favorecer la <strong>calma, la concentración y
                                 el bienestar</strong>,
@@ -393,33 +498,42 @@
                             global.
                         </p>
                         <ul class="spaces-benefits">
-                            <li><i class='bx bx-check-circle'></i> Ambiente sonoro sin estridencias.</li>
-                            <li><i class='bx bx-check-circle'></i> Ideal para el "Deep Work" y conversaciones.</li>
-                            <li><i class='bx bx-check-circle'></i> Distintivo digital de "Marca Inclusiva".</li>
+                            <li data-i18n="benefit1"><i class='bx bx-check-circle'></i> Ambiente sonoro sin
+                                estridencias.</li>
+                            <li data-i18n="benefit2"><i class='bx bx-check-circle'></i> Ideal para el "Deep Work" y
+                                conversaciones.</li>
+                            <li data-i18n="benefit3"><i class='bx bx-check-circle'></i> Distintivo digital de "Marca
+                                Inclusiva".</li>
                         </ul>
                         <br>
                         <a href="https://lp.aspergerparaasperger.org/22wd5h94" id="btn-signal-space"
                             class="btn btn-outline btn-lg" target="_blank">
-                            <i class='bx bx-check-shield'></i> Certifica tu Espacio Gratis
+                            <i class='bx bx-check-shield'></i> <span data-i18n="btn_certify">Certifica tu Espacio
+                                Gratis</span>
                         </a>
+                        <button id="btn-local-play" class="btn btn-primary btn-lg"
+                            style="margin-left: 10px; margin-top: 10px;">
+                            <i class='bx bx-play-circle'></i> <span data-i18n="btn_local_play">Play para tu Local</span>
+                        </button>
                     </div>
                     <div class="spaces-badge">
                         <div class="badge-card">
-                            <div class="badge-header">AQUÍ SUENA</div>
+                            <div class="badge-header" data-i18n="badge_header">AQUÍ SUENA</div>
                             <div class="badge-logo">
                                 <img src="logo-neuro-amigable.png" alt="Neuro Amigable">
                             </div>
-                            <div class="badge-footer">ZONA NEURO-AMIGABLE</div>
-                            <div
-                                style="font-size: 0.6rem; color: #a0a0b0; letter-spacing: 1px; margin-top: 5px; text-transform: uppercase;">
+                            <div class="badge-footer" data-i18n="badge_zone">ZONA NEURO-AMIGABLE</div>
+                            <div class="badge-verified"
+                                style="font-size: 0.6rem; color: #a0a0b0; letter-spacing: 1px; margin-top: 5px; text-transform: uppercase;"
+                                data-i18n="badge_verified">
                                 ESPACIO INCLUSIVO CERTIFICADO</div>
                             <div class="badge-url">signalradio.club</div>
                             <div class="badge-sub">
-                                <span>Una iniciativa de:</span>
+                                <span data-i18n="badge_initiative">Una iniciativa de:</span>
                                 <img src="logo.png" alt="Asperger para Asperger">
                             </div>
                         </div>
-                        <p class="badge-caption">Ejemplo de Sticker para puerta</p>
+                        <p class="badge-caption" data-i18n="badge_caption">Ejemplo de Sticker para puerta</p>
                     </div>
                 </div>
             </div>
@@ -429,12 +543,14 @@
         <section id="community" class="section cta-section">
             <div class="background-waves"></div>
             <div class="container text-center">
-                <h2>Sintoniza el <span class="text-gradient">Futuro</span></h2>
-                <p>Forma parte de una comunidad que valora el talento por lo que es.</p>
+                <h2><span data-i18n="cta_title">Sintoniza el</span> <span class="text-gradient"
+                        data-i18n="cta_highlight">Futuro</span></h2>
+                <p data-i18n="cta_desc">Forma parte de una comunidad que valora el talento por lo que es.</p>
                 <div class="cta-buttons">
                     <a href="https://comunidad.aspergerparaasperger.org/invitation?code=9J8594" target="_blank"
-                        class="btn btn-primary btn-lg">Unirse a la Comunidad</a>
-                    <a href="https://www.aspergerparaasperger.org/" target="_blank" class="btn btn-outline btn-lg">Más
+                        class="btn btn-primary btn-lg" data-i18n="cta_join">Unirse a la Comunidad</a>
+                    <a href="https://www.aspergerparaasperger.org/" target="_blank" class="btn btn-outline btn-lg"
+                        data-i18n="cta_more">Más
                         Soluciones</a>
                 </div>
             </div>
@@ -445,16 +561,16 @@
         <div class="container footer-content">
             <div class="footer-brand">
                 <h3>SIGNAL RADIO</h3>
-                <p>Convivir, incluir y, conectar.</p>
+                <p data-i18n="footer_slogan">Convivir, incluir y, conectar.</p>
                 <div class="initiative-ref">
-                    <span class="initiative-text">Una iniciativa de:</span>
+                    <span class="initiative-text" data-i18n="footer_initiative">Una iniciativa de:</span>
                     <img src="logo.png" alt="Asperger para Asperger" class="initiative-logo">
                 </div>
             </div>
             <div class="footer-links">
-                <a href="#">Privacidad</a>
-                <a href="#">Términos</a>
-                <a href="#">Contacto</a>
+                <a href="#" data-i18n="link_privacy">Privacidad</a>
+                <a href="#" data-i18n="link_terms">Términos</a>
+                <a href="#" data-i18n="link_contact">Contacto</a>
             </div>
             <div class="footer-social">
                 <a href="https://instagram.com/aspergerparaasperger" target="_blank" aria-label="Instagram"><i
@@ -466,7 +582,7 @@
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2026 Signal Radio. Todos los derechos reservados.</p>
+            <p>&copy; 2026 Signal Radio. <span data-i18n="footer_rights">Todos los derechos reservados.</span></p>
         </div>
     </footer>
 
@@ -501,6 +617,38 @@
                 glow.style.left = e.clientX + 'px';
                 glow.style.top = e.clientY + 'px';
             });
+
+            /* Signal Spaces Play Button Logic */
+            const btnLocalPlay = document.getElementById('btn-local-play');
+            if (btnLocalPlay) {
+                btnLocalPlay.addEventListener('click', () => {
+                    // 1. Check if widget is already playing
+                    const widgetAudio = document.getElementById('widgetAudio');
+                    const widgetPlayBtn = document.getElementById('widgetPlayBtn');
+
+                    if (widgetAudio.paused) {
+                        // Trigger click on widget play button to handle icon swap and logic
+                        if (widgetPlayBtn) widgetPlayBtn.click();
+                    }
+
+                    // 2. Open the widget to show it's playing
+                    const widget = document.getElementById('floatingWidget');
+                    if (widget && !widget.classList.contains('expanded')) {
+                        widget.classList.add('expanded');
+                    }
+
+                    // 3. Optional: Scroll to widget if needed, but it's fixed/floating so visible.
+                });
+            }
+
+            // Initial translation load
+            const savedLang = localStorage.getItem('siteLang') || 'es';
+            if (savedLang === 'en') {
+                updateLanguageDOM('en');
+            } else {
+                // Ensure UI is set to default
+                updateLanguageDOM('es');
+            }
         });
     </script>
 
@@ -514,7 +662,7 @@
                     <div style="line-height: 1.2;">
                         <span style="font-weight: 700; font-size: 1rem; color: #fff; display: block;">SIGNAL
                             RADIO</span>
-                        <span style="font-size: 0.8rem; color: #a0a0b0;">Señal Abierta</span>
+                        <span style="font-size: 0.8rem; color: #a0a0b0;" data-i18n="widget_slogan">Señal Abierta</span>
                     </div>
                 </div>
                 <div class="w-live-badge">
@@ -527,8 +675,8 @@
 
             <div class="w-controls">
                 <div class="w-info">
-                    <p class="label">Escuchando ahora</p>
-                    <p class="status">Transmisión Online</p>
+                    <p class="label" data-i18n="widget_listening">Escuchando ahora</p>
+                    <p class="status" data-i18n="widget_status">Transmisión Online</p>
                 </div>
                 <button class="w-play-btn" id="widgetPlayBtn">
                     <i class='bx bx-play'></i>
@@ -550,15 +698,15 @@
     <div class="comment-widget" id="commentWidget">
         <div class="comment-box">
             <div class="c-header">
-                <h3>Sugerir Música / Mensaje</h3>
+                <h3 data-i18n="comment_title">Sugerir Música / Mensaje</h3>
                 <button class="c-close" id="closeCommentWidget"><i class='bx bx-x'></i></button>
             </div>
             <form class="c-form" id="commentForm">
                 <div class="form-group">
-                    <input type="text" placeholder="Tu Nombre" required>
+                    <input type="text" placeholder="Tu Nombre" data-i18n-placeholder="placeholder_name" required>
                 </div>
                 <div class="form-group">
-                    <input type="email" placeholder="Tu Correo (Opcional)">
+                    <input type="email" placeholder="Tu Correo (Opcional)" data-i18n-placeholder="placeholder_email">
                 </div>
                 <!-- Honeypot for anti-spam (Hidden from humans) -->
                 <div class="form-group visually-hidden">
@@ -566,15 +714,16 @@
                         placeholder="No llenar si eres humano">
                 </div>
                 <div class="form-group">
-                    <textarea placeholder="Escribe tu sugerencia de canción o mensaje aquí..." required></textarea>
+                    <textarea placeholder="Escribe tu sugerencia de canción o mensaje aquí..."
+                        data-i18n-placeholder="placeholder_msg" required></textarea>
                 </div>
-                <button type="submit" class="c-submit-btn">Enviar Mensaje</button>
+                <button type="submit" class="c-submit-btn" data-i18n="btn_send">Enviar Mensaje</button>
             </form>
         </div>
         <button class="comment-toggle-btn" id="toggleCommentWidget" aria-label="Abrir Mensajes">
             <i class='bx bx-message-detail'></i>
         </button>
-        <span class="comment-tooltip">¡Clic para pedir tu saludo en la radio!</span>
+        <span class="comment-tooltip" data-i18n="comment_tooltip">¡Clic para pedir tu saludo en la radio!</span>
     </div>
 
     <script>
@@ -612,17 +761,236 @@
     </script>
 
     <script>
+        /* Internationalization Support */
+        const translations = {
+            'es': {
+                'banner_tag': '🚀 PRÓXIMAMENTE',
+                'banner_text': 'Pronto tendrán la conversación en <strong>Signal Radio Club</strong> con <strong>Ezra el CoderzLegend</strong>, creador de <strong>projectopia.live</strong>',
+                'nav_about': 'Quiénes somos',
+                'nav_what_we_do': 'Qué hacemos',
+                'nav_impact': 'Impacto',
+                'nav_listen': 'Escuchar ahora',
+                'hero_live': 'EN VIVO',
+                'hero_subtitle': 'Una señal abierta para la convivencia e inclusión laboral del talento auténticamente capaz.',
+                'player_label': 'Señal en Vivo',
+                'hero_community': 'Sumarse a la comunidad',
+                'schedule_title_1': 'Programación',
+                'schedule_title_2': 'Semanal',
+                'badge_premiere': 'ESTRENO',
+                'topic_label': 'Tema:',
+                'guest_label': 'Invitado Especial:',
+                'time_est': '12:00 PM EST (Mediodia)',
+                'date_feb': '1 Febrero - 11 Feb 2026',
+                'rotation_note': 'Rotación durante 2 semanas.',
+                'badge_deferred': 'EN DIFERIDO',
+                'topic_165': 'Importancia de la consulta pediátrica en el Autismo',
+                'topic_166': 'Migración y Cambio en población Asperger',
+                'mon_sun': 'Lunes a Domingo',
+                'from_spain': 'desde Valencia, España',
+                'clock_title': 'Horarios',
+                'clock_highlight': 'Globales',
+                'about_title': 'Quiénes',
+                'about_highlight': 'Somos',
+                'about_lead': 'Iniciativa de inclusión laboral <strong class="text-cyan">Asperger para Asperger®</strong>.',
+                'about_desc': 'Promovemos y visibilizamos talento neurodivergente auténticamente capaz en toda la diversidad cognitiva y el espectro autista. Educamos a la sociedad y actuamos como un medio de múltiples propósitos para estas minorías, visibilizando, sensibilizando, promoviendo la comprensión real de la neurodiversidad y la creación de oportunidades que transforman realidades.',
+                'services_title': 'Nuestra',
+                'services_highlight': 'Señal',
+                'card1_title': 'Radio Online',
+                'card1_desc': 'Contenidos diversos, música y entrevistas producidas y locutadas por talento neurodivergente. También canciones educativas que enseñan cómo viven e interpretan el mundo las personas neurocognitivas diversas. Una señal con contenido propositivo para la sociedad.',
+                'card2_title': 'Comunicación Social',
+                'card2_desc': 'Plataformas de expresión que conectan historias reales con una audiencia global.',
+                'card3_title': 'Tecnología',
+                'card3_desc': 'Innovación en formatos digitales y herramientas accesibles para la creación de contenidos.',
+                'card4_title': 'Oportunidades',
+                'card4_desc': 'Desarrollo profesional real y participación activa en proyectos creativos.',
+                'values_title': 'Impacto y',
+                'values_highlight': 'Valores',
+                'value1_title': 'Inclusión',
+                'value1_desc': 'Sin barreras.',
+                'value2_title': 'Autenticidad',
+                'value2_desc': 'Voces reales y auténticas.',
+                'value3_title': 'Comunidad',
+                'value3_desc': 'Red de apoyo y crecimiento mutuo.',
+                'value4_title': 'Innovación',
+                'value4_desc': 'Mirando siempre hacia el futuro.',
+                'spaces_title': 'Signal en tu',
+                'spaces_highlight': 'Espacio',
+                'spaces_lead': '¿Tienes un Café, Hotel u Oficina?',
+                'spaces_desc': 'Convierte tu negocio en un <strong>Espacio Neuro-Inclusivo</strong>. Nuestra programación musical está curada para favorecer la <strong>calma, la concentración y el bienestar</strong>, creando la atmósfera perfecta para tus clientes y colaboradores mientras apoyas una causa global.',
+                'benefit1': '<i class=\'bx bx-check-circle\'></i> Ambiente sonoro sin estridencias.',
+                'benefit2': '<i class=\'bx bx-check-circle\'></i> Ideal para el "Deep Work" y conversaciones.',
+                'benefit3': '<i class=\'bx bx-check-circle\'></i> Distintivo digital de "Marca Inclusiva".',
+                'btn_certify': 'Certifica tu Espacio Gratis',
+                'btn_local_play': 'Play para tu Local',
+                'badge_header': 'AQUÍ SUENA',
+                'badge_zone': 'ZONA NEURO-AMIGABLE',
+                'badge_verified': 'ESPACIO INCLUSIVO CERTIFICADO',
+                'badge_initiative': 'Una iniciativa de:',
+                'badge_caption': 'Ejemplo de Sticker para puerta',
+                'cta_title': 'Sintoniza el',
+                'cta_highlight': 'Futuro',
+                'cta_desc': 'Forma parte de una comunidad que valora el talento por lo que es.',
+                'cta_join': 'Unirse a la Comunidad',
+                'cta_more': 'Más Soluciones',
+                'footer_slogan': 'Convivir, incluir y, conectar.',
+                'footer_initiative': 'Una iniciativa de:',
+                'link_privacy': 'Privacidad',
+                'link_terms': 'Términos',
+                'link_contact': 'Contacto',
+                'footer_rights': 'Todos los derechos reservados.',
+                'widget_slogan': 'Señal Abierta',
+                'widget_listening': 'Escuchando ahora',
+                'widget_status': 'Transmisión Online',
+                'comment_title': 'Sugerir Música / Mensaje',
+                'placeholder_name': 'Tu Nombre',
+                'placeholder_email': 'Tu Correo (Opcional)',
+                'placeholder_msg': 'Escribe tu sugerencia de canción o mensaje aquí...',
+                'btn_send': 'Enviar Mensaje',
+                'comment_tooltip': '¡Clic para pedir tu saludo en la radio!',
+            },
+            'en': {
+                'banner_tag': '🚀 COMING SOON',
+                'banner_text': 'Soon featuring a conversation on <strong>Signal Radio Club</strong> with <strong>Ezra the CoderzLegend</strong>, creator of <strong>projectopia.live</strong>',
+                'nav_about': 'About Us',
+                'nav_what_we_do': 'What We Do',
+                'nav_impact': 'Impact',
+                'nav_listen': 'Listen Now',
+                'hero_live': 'LIVE',
+                'hero_subtitle': 'An open signal for coexistence and labor inclusion of authentically capable talent.',
+                'player_label': 'Live Signal',
+                'hero_community': 'Join the Community',
+                'schedule_title_1': 'Weekly',
+                'schedule_title_2': 'Schedule',
+                'badge_premiere': 'PREMIERE',
+                'topic_label': 'Topic:',
+                'guest_label': 'Special Guest:',
+                'time_est': '12:00 PM EST (Noon)',
+                'date_feb': 'February 1 - Feb 11, 2026',
+                'rotation_note': 'Rotation for 2 weeks.',
+                'badge_deferred': 'REBROADCAST',
+                'topic_165': 'Importance of Pediatric Consultation in Autism',
+                'topic_166': 'Migration and Change in the Asperger Population',
+                'mon_sun': 'Monday to Sunday',
+                'from_spain': 'from Valencia, Spain',
+                'clock_title': 'Global',
+                'clock_highlight': 'Hours',
+                'about_title': 'About',
+                'about_highlight': 'Us',
+                'about_lead': 'Labor inclusion initiative <strong class="text-cyan">Asperger para Asperger®</strong>.',
+                'about_desc': 'We promote and visualize authentically capable neurodivergent talent across diverse cognitive spectrums and the autistic spectrum. We educate society and act as a multi-purpose medium for these minorities, visualizing, sensitizing, promoting real understanding of neurodiversity and creating opportunities that transform realities.',
+                'services_title': 'Our',
+                'services_highlight': 'Signal',
+                'card1_title': 'Online Radio',
+                'card1_desc': 'Diverse content, music, and interviews produced and hosted by neurodivergent talent. Also educational songs that teach how diverse neurocognitive people live and interpret the world. A signal with proactive content for society.',
+                'card2_title': 'Social Communication',
+                'card2_desc': 'Expression platforms bridging real stories with a global audience.',
+                'card3_title': 'Technology',
+                'card3_desc': 'Innovation in digital formats and accessible tools for content creation.',
+                'card4_title': 'Opportunities',
+                'card4_desc': 'Real professional development and active participation in creative projects.',
+                'values_title': 'Impact &',
+                'values_highlight': 'Values',
+                'value1_title': 'Inclusion',
+                'value1_desc': 'Without barriers.',
+                'value2_title': 'Authenticity',
+                'value2_desc': 'Real and authentic voices.',
+                'value3_title': 'Community',
+                'value3_desc': 'Support network and mutual growth.',
+                'value4_title': 'Innovation',
+                'value4_desc': 'Always looking towards the future.',
+                'spaces_title': 'Signal in your',
+                'spaces_highlight': 'Space',
+                'spaces_lead': 'Do you have a Cafe, Hotel, or Office?',
+                'spaces_desc': 'Turn your business into a <strong>Neuro-Inclusive Space</strong>. Our musical programming is curated to favor <strong>calm, concentration, and well-being</strong>, creating the perfect atmosphere for your clients and collaborators while supporting a global cause.',
+                'benefit1': '<i class=\'bx bx-check-circle\'></i> Sound environment without stridency.',
+                'benefit2': '<i class=\'bx bx-check-circle\'></i> Ideal for "Deep Work" and conversations.',
+                'benefit3': '<i class=\'bx bx-check-circle\'></i> Digital "Inclusive Brand" badge.',
+                'btn_certify': 'Certify your Space Free',
+                'btn_local_play': 'Play for your Venue',
+                'badge_header': 'PLAYING HERE',
+                'badge_zone': 'NEURO-FRIENDLY ZONE',
+                'badge_verified': 'CERTIFIED INCLUSIVE SPACE',
+                'badge_initiative': 'An initiative by:',
+                'badge_caption': 'Door Sticker Example',
+                'cta_title': 'Tune in the',
+                'cta_highlight': 'Future',
+                'cta_desc': 'Be part of a community that values talent for what it is.',
+                'cta_join': 'Join the Community',
+                'cta_more': 'More Solutions',
+                'footer_slogan': 'Coexist, include, and connect.',
+                'footer_initiative': 'An initiative by:',
+                'link_privacy': 'Privacy',
+                'link_terms': 'Terms',
+                'link_contact': 'Contact',
+                'footer_rights': 'All rights reserved.',
+                'widget_slogan': 'Open Signal',
+                'widget_listening': 'Listening now',
+                'widget_status': 'Online Stream',
+                'comment_title': 'Suggest Music / Message',
+                'placeholder_name': 'Your Name',
+                'placeholder_email': 'Your Email (Optional)',
+                'placeholder_msg': 'Write your song suggestion or message here...',
+                'btn_send': 'Send Message',
+                'comment_tooltip': 'Click to ask for a radio shoutout!',
+            }
+        };
+
+        function toggleLanguage() {
+            const currentLang = localStorage.getItem('siteLang') === 'en' ? 'en' : 'es';
+            const newLang = currentLang === 'es' ? 'en' : 'es';
+            updateLanguageDOM(newLang);
+        }
+
+        function updateLanguageDOM(lang) {
+            // Save preference
+            localStorage.setItem('siteLang', lang);
+
+            // Update Toggle UI
+            const switchEl = document.getElementById('langSwitch');
+            const btns = switchEl.querySelectorAll('.lang-option');
+
+            if (lang === 'en') {
+                switchEl.classList.add('en-active');
+                document.getElementById('btn-en').classList.add('active');
+                document.getElementById('btn-es').classList.remove('active');
+            } else {
+                switchEl.classList.remove('en-active');
+                document.getElementById('btn-es').classList.add('active');
+                document.getElementById('btn-en').classList.remove('active');
+            }
+
+            // Update Text Content
+            const texts = translations[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (texts[key]) {
+                    el.innerHTML = texts[key];
+                }
+            });
+
+            // Update Placeholders
+            document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+                const key = el.getAttribute('data-i18n-placeholder');
+                if (texts[key]) {
+                    el.placeholder = texts[key];
+                }
+            });
+
+            // Update HTML lang attribute
+            document.documentElement.lang = lang;
+        }
+
         /* World Clock Logic */
         const cities = [
-            { name: 'Los Angeles', zone: 'America/Los_Angeles' },
-            { name: 'Miami', zone: 'America/New_York' },
-            { name: 'Caracas', zone: 'America/Caracas' },
-            { name: 'Bogotá', zone: 'America/Bogota' },
-            { name: 'Buenos Aires', zone: 'America/Argentina/Buenos_Aires' },
-            { name: 'Chile', zone: 'America/Santiago' },
-            { name: 'CDMX', zone: 'America/Mexico_City' },
-            { name: 'Madrid', zone: 'Europe/Madrid' },
-            { name: 'Londres', zone: 'Europe/London' }
+            { name_es: 'Los Angeles', name_en: 'Los Angeles', zone: 'America/Los_Angeles' },
+            { name_es: 'Miami', name_en: 'Miami', zone: 'America/New_York' },
+            { name_es: 'Caracas', name_en: 'Caracas', zone: 'America/Caracas' },
+            { name_es: 'Bogotá', name_en: 'Bogota', zone: 'America/Bogota' },
+            { name_es: 'Buenos Aires', name_en: 'Buenos Aires', zone: 'America/Argentina/Buenos_Aires' },
+            { name_es: 'Chile', name_en: 'Chile', zone: 'America/Santiago' },
+            { name_es: 'CDMX', name_en: 'Mexico City', zone: 'America/Mexico_City' },
+            { name_es: 'Madrid', name_en: 'Madrid', zone: 'Europe/Madrid' },
+            { name_es: 'Londres', name_en: 'London', zone: 'Europe/London' }
         ];
 
         const clockGrid = document.getElementById('clockGrid');
@@ -634,20 +1002,37 @@
                 const div = document.createElement('div');
                 div.className = 'clock-card';
                 // Remove spaces for ID
-                const safeName = city.name.replace(/\s/g, '');
+                const safeName = city.name_es.replace(/\s/g, '');
                 div.innerHTML = `
-                    <div class="clock-city">${city.name}</div>
+                    <div class="clock-city" data-city-es="${city.name_es}" data-city-en="${city.name_en}">${city.name_es}</div>
                     <div class="clock-time" id="clock-${safeName}">--:--</div>
                 `;
                 clockGrid.appendChild(div);
             });
             updateClocks();
             setInterval(updateClocks, 1000);
+
+            // Also update city names based on current lang
+            updateClockNames();
+        }
+
+        function updateClockNames() {
+            const lang = localStorage.getItem('siteLang') || 'es';
+            document.querySelectorAll('.clock-city').forEach(el => {
+                el.innerText = lang === 'en' ? el.getAttribute('data-city-en') : el.getAttribute('data-city-es');
+            });
+        }
+
+        // Hook into toggleLanguage to update clocks immediately
+        const originalToggle = toggleLanguage;
+        toggleLanguage = function () {
+            originalToggle();
+            updateClockNames();
         }
 
         function updateClocks() {
             cities.forEach(city => {
-                const safeName = city.name.replace(/\s/g, '');
+                const safeName = city.name_es.replace(/\s/g, '');
                 const timeEl = document.getElementById(`clock-${safeName}`);
                 if (timeEl) {
                     const time = new Date().toLocaleTimeString('es-ES', {
@@ -689,6 +1074,10 @@
 
                 const btn = commentForm.querySelector('button[type="submit"]');
                 const originalText = btn.innerText;
+                const lang = localStorage.getItem('siteLang') || 'es';
+
+                const sendingText = lang === 'en' ? 'Sending...' : 'Enviando...';
+
                 const nameInput = commentForm.querySelector('input[type="text"]:not([name="b_check"])');
                 const emailInput = commentForm.querySelector('input[type="email"]');
                 const msgInput = commentForm.querySelector('textarea');
@@ -703,11 +1092,10 @@
                 // 2. Anti-Bot: Simple Rate Limiting (1 mensaje cada 2 minutos)
                 const lastSent = localStorage.getItem('lastMsgSent');
                 if (lastSent && (Date.now() - lastSent) < 120000) {
-                    alert('Por favor espera unos minutos antes de enviar otro mensaje.');
+                    alert(lang === 'en' ? 'Please wait a few minutes before sending another message.' : 'Por favor espera unos minutos antes de enviar otro mensaje.');
                     return;
                 }
 
-                // CAMBIA ESTA URL POR LA QUE OBTUVISTE EN EL PASO 3 DE LAS INSTRUCCIONES
                 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz32V9hOaLUD4n69xyo6nbJ1hlKG096KajYY0HqUJqRNi945O09NOHXV_66_X_zeAiM/exec';
 
                 if (SCRIPT_URL === 'TU_URL_DE_GOOGLE_SCRIPT_AQUI') {
@@ -715,7 +1103,7 @@
                     return;
                 }
 
-                btn.innerText = 'Enviando...';
+                btn.innerText = sendingText;
                 btn.disabled = true;
 
                 const data = {
@@ -734,14 +1122,14 @@
                 })
                     .then(response => {
                         // Con no-cors no podemos leer la respuesta JSON, asumimos éxito si no hay error de red
-                        alert('¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.');
+                        alert(lang === 'en' ? 'Message sent successfully! We will contact you soon.' : '¡Mensaje enviado con éxito! Nos pondremos en contacto contigo pronto.');
                         commentForm.reset();
                         commentWidget.classList.remove('active');
                         localStorage.setItem('lastMsgSent', Date.now()); // Guardar timestamp
                     })
                     .catch(error => {
                         console.error('Error:', error);
-                        alert('Hubo un error al enviar el mensaje. Por favor intenta de nuevo.');
+                        alert(lang === 'en' ? 'There was an error sending the message. Please try again.' : 'Hubo un error al enviar el mensaje. Por favor intenta de nuevo.');
                     })
                     .finally(() => {
                         btn.innerText = originalText;
@@ -749,23 +1137,6 @@
                     });
             });
         }
-
-        /* Signal Spaces Button Logic - DEPRECATED (Now Direct Link)
-        const spaceBtn = document.getElementById('btn-signal-space');
-        if (spaceBtn) {
-            spaceBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                // Open widget
-                commentWidget.classList.add('active');
-                // Pre-fill message
-                const msgInput = commentForm.querySelector('textarea');
-                msgInput.value = "Hola, me interesa convertir mi negocio en un Espacio Signal. Quisiera recibir el Kit de Embajador.";
-                // Focus name
-                const nameInput = commentForm.querySelector('input[type="text"]:not([name="b_check"])');
-                nameInput.focus();
-            });
-        }
-        */
     </script>
 
 </body>
