@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Signal Radio APP</title>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-HJBBLT3CT5"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'G-HJBBLT3CT5');
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <!-- Boxicons -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+
+    <style>
+        :root {
+            --bg-color: #050510;
+            /* Almost black */
+            --text-color: #ffffff;
+            --accent-primary: #a3ff12;
+            /* Acid Green */
+            --accent-secondary: #00f2e2;
+            /* Cyan */
+            --glass-bg: rgba(20, 20, 35, 0.85);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --bottom-nav-height: 85px;
+            /* Taller for modern look */
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+            /* Remove tap highlight on iOS */
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            padding-bottom: calc(var(--bottom-nav-height) + 20px);
+            /* Space for bottom nav */
+            /* Safe Area for notched phones */
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom));
+        }
+
+        /* --- UI COMPONENTS FOR MOBILE --- */
+
+        /* 1. Sticky Header (Minimal) */
+        .app-header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background: rgba(5, 5, 16, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--glass-border);
+        }
+
+        .header-logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-logo img {
+            height: 32px;
+            border-radius: 5px;
+        }
+
+        .header-logo span {
+            font-weight: 800;
+            font-size: 1.1rem;
+            letter-spacing: -0.5px;
+        }
+
+        /* Language Toggle (Compact) */
+        .lang-switch-mini {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 3px;
+            display: flex;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .lang-btn {
+            font-size: 1.2rem;
+            padding: 2px 6px;
+            border-radius: 50%;
+            opacity: 0.4;
+            filter: grayscale(1);
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .lang-btn.active {
+            opacity: 1;
+            filter: grayscale(0);
+            background: rgba(255, 255, 255, 0.1);
+            transform: scale(1.1);
+        }
+
+        /* 2. Main Content Container */
+        .app-content {
+            padding: 20px;
+        }
+
+        /* Hero Card (Replica of Main Site but Card-based) */
+        .hero-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.01));
+            border-radius: 24px;
+            padding: 25px;
+            text-align: center;
+            border: 1px solid var(--glass-border);
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .live-tag {
+            background: #ff4757;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: inline-block;
+            margin-bottom: 15px;
+            box-shadow: 0 0 10px rgba(255, 71, 87, 0.4);
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            margin: 0 0 10px 0;
+            line-height: 1.1;
+        }
+
+        .text-gradient {
+            background: linear-gradient(to right, var(--accent-primary), var(--accent-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text {
+            color: #a0a0b0;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        /* Mobile Player */
+        .mobile-player {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 16px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        audio {
+            width: 100%;
+            height: 35px;
+            filter: invert(0.9) hue-rotate(180deg);
+            opacity: 0.8;
+            outline: none;
+        }
+
+        .player-note-mobile {
+            font-size: 0.75rem;
+            color: #888;
+            margin-top: 10px;
+        }
+
+        /* Section Titles */
+        .section-header {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            border-left: 4px solid var(--accent-primary);
+            padding-left: 15px;
+        }
+
+        /* Cards Lists (Vertical Scroll) */
+        .card-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .item-card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 16px;
+            padding: 20px;
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+        }
+
+        .item-icon {
+            font-size: 1.5rem;
+            color: var(--accent-secondary);
+            background: rgba(0, 242, 226, 0.1);
+            padding: 10px;
+            border-radius: 12px;
+            flex-shrink: 0;
+        }
+
+        .item-content h3 {
+            margin: 0 0 5px 0;
+            font-size: 1rem;
+        }
+
+        .item-content p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: #a0a0b0;
+            line-height: 1.4;
+        }
+
+        /* Schedule / Cards */
+        .schedule-mini {
+            background: #111118;
+            border-radius: 16px;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 2px solid var(--accent-primary);
+        }
+
+        .s-day {
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            color: var(--accent-primary);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .s-title {
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 5px;
+        }
+
+        .s-meta {
+            font-size: 0.8rem;
+            color: #777;
+        }
+
+        /* 3. Bottom Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom));
+            background: rgba(10, 10, 20, 0.95);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            z-index: 1000;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+            text-decoration: none;
+            flex: 1;
+            height: 100%;
+            transition: all 0.3s ease;
+        }
+
+        .nav-item i {
+            font-size: 1.5rem;
+            margin-bottom: 4px;
+            transition: transform 0.2s;
+        }
+
+        .nav-item span {
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+
+        .nav-item.active {
+            color: var(--accent-primary);
+        }
+
+        .nav-item.active i {
+            transform: translateY(-2px);
+        }
+
+        /* Play FAB (Floating Action Button in Center) */
+        .nav-fab-container {
+            position: relative;
+            top: -25px;
+            /* Lift it up */
+            width: 60px;
+            height: 60px;
+        }
+
+        .nav-fab {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--accent-primary), #7abd0f);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 20px rgba(163, 255, 18, 0.3);
+            color: #000;
+            font-size: 2rem;
+            border: 4px solid var(--bg-color);
+            /* Cutout effect */
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .nav-fab:active {
+            transform: scale(0.95);
+        }
+
+        /* Sections Visibility Control */
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Forms */
+        .app-input {
+            width: 100%;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px;
+            border-radius: 10px;
+            color: white;
+            margin-bottom: 10px;
+            font-family: inherit;
+        }
+
+        .app-btn {
+            width: 100%;
+            background: var(--accent-primary);
+            color: #000;
+            border: none;
+            padding: 14px;
+            border-radius: 12px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- 1. Header Sticky -->
+    <header class="app-header">
+        <div class="header-logo">
+            <img src="icono-signal.png" alt="Icon">
+            <span>Signal Radio</span>
+        </div>
+        <div class="lang-switch-mini" onclick="toggleAppLang()">
+            <div class="lang-btn active" id="m-btn-es">🇪🇸</div>
+            <div class="lang-btn" id="m-btn-en">🇺🇸</div>
+        </div>
+    </header>
+
+    <!-- 2. Main Scrollable Content Area -->
+    <main class="app-content">
+
+        <!-- TAB 1: HOME / RADIO -->
+        <div id="tab-home" class="tab-content active">
+
+            <div class="hero-card">
+                <span class="live-tag" id="t-live">EN VIVO</span>
+                <h1 class="hero-title">Signal <span class="text-gradient">Radio</span></h1>
+                <p class="hero-text" id="t-subtitle">Señal abierta para la inclusión laboral del talento
+                    neurodivergente.</p>
+
+                <div class="mobile-player">
+                    <audio id="mainAudio" controls>
+                        <!-- Same source as main site -->
+                        <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/radio.mp3"
+                            type="audio/mpeg">
+                    </audio>
+                    <p id="t-immersion" class="player-note-mobile">Conectando talento hispano con el mundo.</p>
+                </div>
+            </div>
+
+            <h2 class="section-header" id="t-schedule">Programación</h2>
+
+            <div class="card-list">
+                <!-- Schedule Items Simplified -->
+                <div class="schedule-mini">
+                    <div class="s-day">DESTACADO</div>
+                    <div class="s-title">Signal Radio Club Talks</div>
+                    <div class="s-meta">Guest: Ezra "CoderzLegend"</div>
+                    <div class="s-meta">12:00 PM EST</div>
+                </div>
+
+                <div class="schedule-mini">
+                    <div class="s-day">LUN - DOM</div>
+                    <div class="s-title">Sintonizando con el Autismo</div>
+                    <div class="s-meta">Dr. Jesus Rojas / Andrés Galli</div>
+                    <div class="s-meta">7:00 AM & 7:00 PM</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- TAB 2: ABOUT / SERVICES -->
+        <div id="tab-about" class="tab-content">
+            <h2 class="section-header" id="t-whatido">Qué Hacemos</h2>
+
+            <div class="card-list">
+                <div class="item-card">
+                    <div class="item-icon"><i class='bx bx-broadcast'></i></div>
+                    <div class="item-content">
+                        <h3 id="t-card1-title">Radio Online</h3>
+                        <p id="t-card1-desc">Contenidos diversos, música y entrevistas producidas y locutadas por
+                            talento neurodivergente.</p>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-icon"><i class='bx bx-message-rounded-dots'></i></div>
+                    <div class="item-content">
+                        <h3 id="t-card2-title">Comunicación</h3>
+                        <p id="t-card2-desc">Plataformas de expresión que conectan historias reales con una audiencia
+                            global.</p>
+                    </div>
+                </div>
+
+                <div class="item-card">
+                    <div class="item-icon"><i class='bx bx-briefcase-alt'></i></div>
+                    <div class="item-content">
+                        <h3 id="t-card4-title">Oportunidades</h3>
+                        <p id="t-card4-desc">Desarrollo profesional real y participación activa en proyectos creativos.
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 30px; text-align: center;">
+                <h2 class="section-header" style="border:none; padding:0;" id="t-values">Nuestros Valores</h2>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <div style="background:rgba(255,255,255,0.05); padding:10px; border-radius:10px;" id="t-val1">
+                        Inclusión</div>
+                    <div style="background:rgba(255,255,255,0.05); padding:10px; border-radius:10px;" id="t-val2">
+                        Autenticidad</div>
+                    <div style="background:rgba(255,255,255,0.05); padding:10px; border-radius:10px;" id="t-val3">
+                        Comunidad</div>
+                    <div style="background:rgba(255,255,255,0.05); padding:10px; border-radius:10px;" id="t-val4">
+                        Innovación</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- TAB 3: CONTACT / INTERACT -->
+        <div id="tab-contact" class="tab-content">
+            <h2 class="section-header" id="t-contact-title">Pide tu Canción</h2>
+
+            <div class="hero-card" style="text-align: left;">
+                <p style="margin-top:0; color:#a0a0b0; font-size:0.9rem;" id="t-contact-desc">Manda un saludo o pide un
+                    tema musical a la cabina.</p>
+
+                <form id="mobileForm">
+                    <input type="text" class="app-input" placeholder="Tu Nombre">
+                    <textarea class="app-input" rows="4" placeholder="Mensaje..."></textarea>
+                    <button type="button" class="app-btn"
+                        onclick="alert('Funcionalidad Demo: Tu mensaje ha sido enviado!')" id="t-btn-send">Enviar
+                        Mensaje</button>
+                </form>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <a href="https://comunidad.aspergerparaasperger.org/invitation?code=9J8594" target="_blank"
+                    class="app-btn"
+                    style="background: transparent; border: 1px solid var(--accent-primary); color: var(--accent-primary); display:block; text-align:center; text-decoration:none;">
+                    Join Community
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- 3. Bottom Navigation Bar -->
+    <nav class="bottom-nav">
+        <a href="#" class="nav-item active" onclick="switchTab('home', this)">
+            <i class='bx bx-home-alt-2'></i>
+            <span id="nav-home">Inicio</span>
+        </a>
+        <a href="#" class="nav-item" onclick="switchTab('about', this)">
+            <i class='bx bx-grid-alt'></i>
+            <span id="nav-about">Signal</span>
+        </a>
+
+        <!-- Center Floating Play/Pause Action - Controls the Audio -->
+        <div class="nav-fab-container">
+            <div class="nav-fab" onclick="togglePlayFAB()">
+                <i class='bx bx-play' id="fabIcon"></i>
+            </div>
+        </div>
+
+        <a href="#" class="nav-item" onclick="switchTab('contact', this)">
+            <i class='bx bx-message-square-dots'></i>
+            <span id="nav-msg">Mensaje</span>
+        </a>
+        <!-- External Link example -->
+        <a href="https://www.aspergerparaasperger.org/" target="_blank" class="nav-item">
+            <i class='bx bx-link-external'></i>
+            <span>Web</span>
+        </a>
+    </nav>
+
+    <script>
+        // --- LOGIC ---
+
+        // 1. Tab Switching
+        function switchTab(tabName, element) {
+            // Hide all tabs
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            // Show selected
+            document.getElementById('tab-' + tabName).classList.add('active');
+
+            // Update Nav State
+            // (Only for internal links, ignoring the center FAB)
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            if (element) element.classList.add('active');
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        // 2. Play/Pause Logic (Linked to FAB and Audio Tag)
+        const audio = document.getElementById('mainAudio');
+        const fabIcon = document.getElementById('fabIcon');
+
+        // Sync standard controls with FAB
+        audio.onplay = () => { fabIcon.classList.replace('bx-play', 'bx-pause'); };
+        audio.onpause = () => { fabIcon.classList.replace('bx-pause', 'bx-play'); };
+
+        function togglePlayFAB() {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        }
+
+        // 3. Language Logic (Simplified)
+        let currentLang = 'es';
+        const texts = {
+            'es': {
+                'live': 'EN VIVO', 'subtitle': 'Señal abierta para la inclusión laboral del talento neurodivergente.',
+                'immersion': 'Conectando talento hispano con el mundo.', 'schedule': 'Programación',
+                'whatido': 'Qué Hacemos',
+                'card1t': 'Radio Online', 'card1d': 'Contenidos diversos y música.',
+                'card2t': 'Comunicación', 'card2d': 'Conectando historias reales.',
+                'card4t': 'Oportunidades', 'card4d': 'Desarrollo profesional real.',
+                'values': 'Nuestros Valores', 'v1': 'Inclusión', 'v2': 'Autenticidad', 'v3': 'Comunidad', 'v4': 'Innovación',
+                'ctitle': 'Pide tu Canción', 'cdesc': 'Manda un saludo o pide un tema musical.', 'btnsend': 'Enviar Mensaje',
+                'nhome': 'Inicio', 'nabout': 'Signal', 'nmsg': 'Mensaje'
+            },
+            'en': {
+                'live': 'LIVE', 'subtitle': 'Open signal for labor inclusion of neurodivergent talent.',
+                'immersion': 'Cultural Immersion: Authentic Spanish Content.', 'schedule': 'Schedule',
+                'whatido': 'What We Do',
+                'card1t': 'Online Radio', 'card1d': 'Diverse content & cultural immersion.',
+                'card2t': 'Communication', 'card2d': 'Connecting real stories globally.',
+                'card4t': 'Opportunities', 'card4d': 'Real professional development.',
+                'values': 'Our Values', 'v1': 'Inclusion', 'v2': 'Authenticity', 'v3': 'Community', 'v4': 'Innovation',
+                'ctitle': 'Request a Song', 'cdesc': 'Send a shoutout or request a track.', 'btnsend': 'Send Message',
+                'nhome': 'Home', 'nabout': 'Signal', 'nmsg': 'Interact'
+            }
+        };
+
+        function toggleAppLang() {
+            currentLang = currentLang === 'es' ? 'en' : 'es';
+
+            // Toggle Buttons Visuals
+            document.getElementById('m-btn-es').classList.toggle('active');
+            document.getElementById('m-btn-en').classList.toggle('active');
+
+            // Apply Texts
+            const t = texts[currentLang];
+            document.getElementById('t-live').innerText = t.live;
+            document.getElementById('t-subtitle').innerText = t.subtitle;
+            document.getElementById('t-immersion').innerText = t.immersion;
+            document.getElementById('t-schedule').innerText = t.schedule;
+
+            document.getElementById('t-whatido').innerText = t.whatido;
+            document.getElementById('t-card1-title').innerText = t.card1t;
+            document.getElementById('t-card1-desc').innerText = t.card1d;
+            document.getElementById('t-card2-title').innerText = t.card2t;
+            document.getElementById('t-card2-desc').innerText = t.card2d;
+            document.getElementById('t-card4-title').innerText = t.card4t;
+            document.getElementById('t-card4-desc').innerText = t.card4d;
+
+            document.getElementById('t-values').innerText = t.values;
+            document.getElementById('t-val1').innerText = t.v1;
+            document.getElementById('t-val2').innerText = t.v2;
+            document.getElementById('t-val3').innerText = t.v3;
+            document.getElementById('t-val4').innerText = t.v4;
+
+            document.getElementById('t-contact-title').innerText = t.ctitle;
+            document.getElementById('t-contact-desc').innerText = t.cdesc;
+            document.getElementById('t-btn-send').innerText = t.btnsend;
+
+            document.getElementById('nav-home').innerText = t.nhome;
+            document.getElementById('nav-about').innerText = t.nabout;
+            document.getElementById('nav-msg').innerText = t.nmsg;
+        }
+    </script>
+</body>
+
+</html>
