@@ -494,6 +494,17 @@
                         Innovación</div>
                 </div>
             </div>
+
+            <!-- Trust Badges Mobile -->
+            <div
+                style="margin-top: 30px; text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
+                <p style="color: #666; font-size: 0.7rem; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 15px;"
+                    id="t-trust">RECONOCIMIENTOS</p>
+                <div style="display: flex; justify-content: center; align-items: center; gap: 20px;">
+                    <img src="logo-neuro-amigable.png" alt="Sello" style="height: 50px; opacity: 0.8;">
+                    <img src="sello-english.png" alt="Seal" style="height: 50px; opacity: 0.8;">
+                </div>
+            </div>
         </div>
 
         <!-- TAB 3: CONTACT / INTERACT -->
@@ -600,7 +611,8 @@
                 'card4t': 'Oportunidades', 'card4d': 'Desarrollo profesional real.',
                 'values': 'Nuestros Valores', 'v1': 'Inclusión', 'v2': 'Autenticidad', 'v3': 'Comunidad', 'v4': 'Innovación',
                 'ctitle': 'Pide tu Canción', 'cdesc': 'Manda un saludo o pide un tema musical.', 'btnsend': 'Enviar Mensaje',
-                'nhome': 'Inicio', 'nabout': 'Signal', 'nmsg': 'Mensaje'
+                'nhome': 'Inicio', 'nabout': 'Signal', 'nmsg': 'Mensaje',
+                'trust': 'RECONOCIMIENTOS'
             },
             'en': {
                 'live': 'LIVE', 'subtitle': 'Open signal for labor inclusion of neurodivergent talent.',
@@ -611,7 +623,8 @@
                 'card4t': 'Opportunities', 'card4d': 'Real professional development.',
                 'values': 'Our Values', 'v1': 'Inclusion', 'v2': 'Authenticity', 'v3': 'Community', 'v4': 'Innovation',
                 'ctitle': 'Request a Song', 'cdesc': 'Send a shoutout or request a track.', 'btnsend': 'Send Message',
-                'nhome': 'Home', 'nabout': 'Signal', 'nmsg': 'Interact'
+                'nhome': 'Home', 'nabout': 'Signal', 'nmsg': 'Interact',
+                'trust': 'RECOGNITIONS'
             }
         };
 
@@ -642,6 +655,8 @@
             document.getElementById('t-val2').innerText = t.v2;
             document.getElementById('t-val3').innerText = t.v3;
             document.getElementById('t-val4').innerText = t.v4;
+
+            document.getElementById('t-trust').innerText = t.trust;
 
             document.getElementById('t-contact-title').innerText = t.ctitle;
             document.getElementById('t-contact-desc').innerText = t.cdesc;
