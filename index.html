@@ -523,7 +523,7 @@
                         <div class="badge-card">
                             <div class="badge-header" data-i18n="badge_header">AQUÍ SUENA</div>
                             <div class="badge-logo">
-                                <img src="logo-neuro-amigable.png" alt="Neuro Amigable">
+                                <img src="logo-neuro-amigable.png" alt="Neuro Amigable" id="badge-logo-img">
                             </div>
                             <div class="badge-footer" data-i18n="badge_zone">ZONA NEURO-AMIGABLE</div>
                             <div class="badge-verified"
@@ -983,6 +983,12 @@
 
             // Update HTML lang attribute
             document.documentElement.lang = lang;
+
+            // Update Badge Image logic
+            const badgeImg = document.getElementById('badge-logo-img');
+            if (badgeImg) {
+                badgeImg.src = lang === 'en' ? 'sello-english.png' : 'logo-neuro-amigable.png';
+            }
         }
 
         /* World Clock Logic */
