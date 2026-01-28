@@ -1332,10 +1332,11 @@
         }
     </script>
 
-    </script>
-
     <!-- Feedspace Popup Widget -->
-    <div class="feedspace-embed" data-id="38cb4bb3-e7df-41b6-b1f9-1d3f62dd8ece">Feedspace</div>
+    <!-- Positioned manually to avoid overlap with Comment Widget -->
+    <div style="position: fixed; bottom: 100px; right: 25px; z-index: 200000;">
+        <div class="feedspace-embed" data-id="38cb4bb3-e7df-41b6-b1f9-1d3f62dd8ece"></div>
+    </div>
     <script src="https://js.feedspace.io/v1/embed/embed.min.js" type="text/javascript" async></script>
 
 </body>
