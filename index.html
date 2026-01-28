@@ -1025,14 +1025,20 @@
         /* World Clock Logic */
         const cities = [
             { name_es: 'Los Angeles', name_en: 'Los Angeles', zone: 'America/Los_Angeles' },
+            { name_es: 'Austin', name_en: 'Austin', zone: 'America/Chicago' },
+            { name_es: 'CDMX', name_en: 'Mexico City', zone: 'America/Mexico_City' },
+            { name_es: 'Bogotá', name_en: 'Bogota', zone: 'America/Bogota' },
             { name_es: 'Miami', name_en: 'Miami', zone: 'America/New_York' },
             { name_es: 'Caracas', name_en: 'Caracas', zone: 'America/Caracas' },
-            { name_es: 'Bogotá', name_en: 'Bogota', zone: 'America/Bogota' },
-            { name_es: 'Buenos Aires', name_en: 'Buenos Aires', zone: 'America/Argentina/Buenos_Aires' },
             { name_es: 'Chile', name_en: 'Chile', zone: 'America/Santiago' },
-            { name_es: 'CDMX', name_en: 'Mexico City', zone: 'America/Mexico_City' },
+            { name_es: 'Buenos Aires', name_en: 'Buenos Aires', zone: 'America/Argentina/Buenos_Aires' },
+            { name_es: 'Lisboa', name_en: 'Lisbon', zone: 'Europe/Lisbon' },
+            { name_es: 'Londres', name_en: 'London', zone: 'Europe/London' },
             { name_es: 'Madrid', name_en: 'Madrid', zone: 'Europe/Madrid' },
-            { name_es: 'Londres', name_en: 'London', zone: 'Europe/London' }
+            { name_es: 'Zúrich', name_en: 'Zurich', zone: 'Europe/Zurich' },
+            { name_es: 'Perth', name_en: 'Perth', zone: 'Australia/Perth' },
+            { name_es: 'Tokio', name_en: 'Tokyo', zone: 'Asia/Tokyo' },
+            { name_es: 'Sídney', name_en: 'Sydney', zone: 'Australia/Sydney' }
         ];
 
         const clockGrid = document.getElementById('clockGrid');
@@ -1081,7 +1087,8 @@
                         timeZone: city.zone,
                         hour: '2-digit',
                         minute: '2-digit',
-                        hour12: false
+                        second: '2-digit',
+                        hour12: true
                     });
                     timeEl.innerText = time;
                 }
