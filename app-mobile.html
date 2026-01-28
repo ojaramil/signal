@@ -517,11 +517,19 @@
                     tema musical a la cabina.</p>
 
                 <form id="mobileForm">
-                    <input type="text" class="app-input" placeholder="Tu Nombre">
-                    <textarea class="app-input" rows="4" placeholder="Mensaje..."></textarea>
-                    <button type="button" class="app-btn"
-                        onclick="alert('Funcionalidad Demo: Tu mensaje ha sido enviado!')" id="t-btn-send">Enviar
-                        Mensaje</button>
+                    <input type="text" class="app-input" id="m-name" placeholder="Tu Nombre">
+                    <input type="email" class="app-input" id="m-email" placeholder="Tu Correo (Opcional)">
+                    <select class="app-input" id="m-type" style="color:#fff;">
+                        <option value="General" id="opt-gen">Mensaje General</option>
+                        <option value="Focus" id="opt-foc">Música para Concentrarse</option>
+                        <option value="Relax" id="opt-rel">Música para Relajarse</option>
+                        <option value="Energy" id="opt-ene">Música para Subir Ánimo</option>
+                    </select>
+                    <!-- Honeypot -->
+                    <input type="text" id="m-check" style="display:none;" autocomplete="off">
+
+                    <textarea class="app-input" id="m-msg" rows="4" placeholder="Mensaje..."></textarea>
+                    <button type="submit" class="app-btn" id="t-btn-send">Enviar Mensaje</button>
                 </form>
             </div>
 
@@ -613,7 +621,8 @@
                 'values': 'Nuestros Valores', 'v1': 'Inclusión', 'v2': 'Autenticidad', 'v3': 'Comunidad', 'v4': 'Innovación',
                 'ctitle': 'Pide tu Canción', 'cdesc': 'Manda un saludo o pide un tema musical.', 'btnsend': 'Enviar Mensaje',
                 'nhome': 'Inicio', 'nabout': 'Signal', 'nmsg': 'Mensaje',
-                'trust': 'RECONOCIMIENTOS'
+                'trust': 'RECONOCIMIENTOS',
+                'ogen': 'Mensaje General', 'ofoc': 'Música para Concentrarse', 'orel': 'Música para Relajarse', 'oene': 'Música para Subir Ánimo'
             },
             'en': {
                 'live': 'LIVE', 'subtitle': 'Open signal for labor inclusion of neurodivergent talent.',
@@ -625,7 +634,8 @@
                 'values': 'Our Values', 'v1': 'Inclusion', 'v2': 'Authenticity', 'v3': 'Community', 'v4': 'Innovation',
                 'ctitle': 'Request a Song', 'cdesc': 'Send a shoutout or request a track.', 'btnsend': 'Send Message',
                 'nhome': 'Home', 'nabout': 'Signal', 'nmsg': 'Interact',
-                'trust': 'RECOGNITIONS'
+                'trust': 'RECOGNITIONS',
+                'ogen': 'General Message', 'ofoc': 'Music for Focus', 'orel': 'Music for Relax', 'oene': 'Music for Energy'
             }
         };
 
@@ -666,7 +676,62 @@
             document.getElementById('nav-home').innerText = t.nhome;
             document.getElementById('nav-about').innerText = t.nabout;
             document.getElementById('nav-msg').innerText = t.nmsg;
+
+            // Options
+            document.getElementById('opt-gen').innerText = t.ogen;
+            document.getElementById('opt-foc').innerText = t.ofoc;
+            document.getElementById('opt-rel').innerText = t.orel;
+            document.getElementById('opt-ene').innerText = t.oene;
         }
+
+        // 4. Form Submission Logic
+        const mobileForm = document.getElementById('mobileForm');
+        mobileForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('t-btn-send');
+            const originalText = btn.innerText;
+            const sendingText = currentLang === 'en' ? 'Sending...' : 'Enviando...';
+
+            const name = document.getElementById('m-name').value;
+            const email = document.getElementById('m-email').value;
+            const type = document.getElementById('m-type').value;
+            const msg = document.getElementById('m-msg').value;
+            const honeypot = document.getElementById('m-check');
+
+            if (honeypot && honeypot.value !== "") return; // Bot check
+
+            // Rate Limit
+            const lastSent = localStorage.getItem('lastMsgSent');
+            if (lastSent && (Date.now() - lastSent) < 120000) {
+                alert(currentLang === 'en' ? 'Please wait a few minutes.' : 'Por favor espera unos minutos.');
+                return;
+            }
+
+            btn.innerText = sendingText;
+            btn.disabled = true;
+
+            const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbz32V9hOaLUD4n69xyo6nbJ1hlKG096KajYY0HqUJqRNi945O09NOHXV_66_X_zeAiM/exec';
+
+            fetch(SCRIPT_URL, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ nombre: name, correo: email, mensaje: msg, tipo: type })
+            })
+                .then(() => {
+                    alert(currentLang === 'en' ? 'Message sent!' : '¡Mensaje enviado!');
+                    mobileForm.reset();
+                    localStorage.setItem('lastMsgSent', Date.now());
+                })
+                .catch(err => {
+                    console.error(err);
+                    alert('Error');
+                })
+                .finally(() => {
+                    btn.innerText = originalText;
+                    btn.disabled = false;
+                });
+        });
     </script>
 </body>
 

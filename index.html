@@ -742,32 +742,32 @@
                 <div class="form-group">
                     <input type="email" placeholder="Tu Correo (Opcional)" data-i18n-placeholder="placeholder_email">
                 </div>
+                <div class="form-group">
+                    <select class="app-input"
+                        style="width:100%; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.05); padding:10px; border-radius:10px; color:#fff;"
+                        id="msgType">
+                        <option value="General" data-i18n="opt_general">Mensaje General</option>
+                        <option value="Focus" data-i18n="opt_focus">Música para Concentrarse</option>
+                        <option value="Relax" data-i18n="opt_relax">Música para Relajarse</option>
+                        <option value="Energy" data-i18n="opt_energy">Música para Subir Ánimo</option>
+                    </select>
+                </div>
+                <!-- Honeypot for anti-spam (Hidden from humans) -->
+                <div class="form-group visually-hidden">
+                    <input type="text" name="b_check" tabindex="-1" autocomplete="off"
+                        placeholder="No llenar si eres humano">
+                </div>
+                <div class="form-group">
+                    <textarea placeholder="Escribe tu sugerencia de canción o mensaje aquí..."
+                        data-i18n-placeholder="placeholder_msg" required></textarea>
+                </div>
+                <button type="submit" class="c-submit-btn" data-i18n="btn_send">Enviar Mensaje</button>
+            </form>
         </div>
-        <div class="form-group">
-            <select class="app-input"
-                style="width:100%; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.05); padding:10px; border-radius:10px; color:#fff;"
-                id="msgType">
-                <option value="General" data-i18n="opt_general">Mensaje General</option>
-                <option value="Focus" data-i18n="opt_focus">Música para Concentrarse</option>
-                <option value="Relax" data-i18n="opt_relax">Música para Relajarse</option>
-                <option value="Energy" data-i18n="opt_energy">Música para Subir Ánimo</option>
-            </select>
-        </div>
-        <!-- Honeypot for anti-spam (Hidden from humans) -->
-        <div class="form-group visually-hidden">
-            <input type="text" name="b_check" tabindex="-1" autocomplete="off" placeholder="No llenar si eres humano">
-        </div>
-        <div class="form-group">
-            <textarea placeholder="Escribe tu sugerencia de canción o mensaje aquí..."
-                data-i18n-placeholder="placeholder_msg" required></textarea>
-        </div>
-        <button type="submit" class="c-submit-btn" data-i18n="btn_send">Enviar Mensaje</button>
-        </form>
-    </div>
-    <button class="comment-toggle-btn" id="toggleCommentWidget" aria-label="Abrir Mensajes">
-        <i class='bx bx-message-detail'></i>
-    </button>
-    <span class="comment-tooltip" data-i18n="comment_tooltip">¡Pide tu canción o saludo!</span>
+        <button class="comment-toggle-btn" id="toggleCommentWidget" aria-label="Abrir Mensajes">
+            <i class='bx bx-message-detail'></i>
+        </button>
+        <span class="comment-tooltip" data-i18n="comment_tooltip">¡Pide tu canción o saludo!</span>
     </div>
 
     <script>
