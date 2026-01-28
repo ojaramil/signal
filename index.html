@@ -222,10 +222,10 @@
                     auténticamente capaz.</p>
 
                 <!-- Opcion 1: Audio Tag -->
-                <div class="player-container">
+                <div class="player-container" id="listen">
                     <div class="player-label"><i class='bx bx-broadcast'></i> <span data-i18n="player_label">Señal en
                             Vivo</span></div>
-                    <audio controls autoplay>
+                    <audio id="mainRadio" controls autoplay>
                         <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/radio.mp3"
                             type="audio/mpeg">
                         Tu navegador no soporta el elemento de audio.
@@ -625,9 +625,19 @@
             document.querySelectorAll('a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function (e) {
                     e.preventDefault();
-                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    const targetId = this.getAttribute('href');
+                    document.querySelector(targetId).scrollIntoView({
                         behavior: 'smooth'
                     });
+
+                    // Auto Play if listening
+                    if (targetId === '#listen') {
+                        const audio = document.getElementById('mainRadio');
+                        if (audio && audio.paused) {
+                            audio.play().catch(e => console.log('Autoplay prevent:', e));
+                        }
+                    }
+
                     // Close mobile menu if open
                     if (nav.classList.contains('active')) {
                         nav.classList.remove('active');
@@ -732,22 +742,32 @@
                 <div class="form-group">
                     <input type="email" placeholder="Tu Correo (Opcional)" data-i18n-placeholder="placeholder_email">
                 </div>
-                <!-- Honeypot for anti-spam (Hidden from humans) -->
-                <div class="form-group visually-hidden">
-                    <input type="text" name="b_check" tabindex="-1" autocomplete="off"
-                        placeholder="No llenar si eres humano">
-                </div>
-                <div class="form-group">
-                    <textarea placeholder="Escribe tu sugerencia de canción o mensaje aquí..."
-                        data-i18n-placeholder="placeholder_msg" required></textarea>
-                </div>
-                <button type="submit" class="c-submit-btn" data-i18n="btn_send">Enviar Mensaje</button>
-            </form>
         </div>
-        <button class="comment-toggle-btn" id="toggleCommentWidget" aria-label="Abrir Mensajes">
-            <i class='bx bx-message-detail'></i>
-        </button>
-        <span class="comment-tooltip" data-i18n="comment_tooltip">¡Clic para pedir tu saludo en la radio!</span>
+        <div class="form-group">
+            <select class="app-input"
+                style="width:100%; border:1px solid rgba(255,255,255,0.1); background:rgba(255,255,255,0.05); padding:10px; border-radius:10px; color:#fff;"
+                id="msgType">
+                <option value="General" data-i18n="opt_general">Mensaje General</option>
+                <option value="Focus" data-i18n="opt_focus">Música para Concentrarse</option>
+                <option value="Relax" data-i18n="opt_relax">Música para Relajarse</option>
+                <option value="Energy" data-i18n="opt_energy">Música para Subir Ánimo</option>
+            </select>
+        </div>
+        <!-- Honeypot for anti-spam (Hidden from humans) -->
+        <div class="form-group visually-hidden">
+            <input type="text" name="b_check" tabindex="-1" autocomplete="off" placeholder="No llenar si eres humano">
+        </div>
+        <div class="form-group">
+            <textarea placeholder="Escribe tu sugerencia de canción o mensaje aquí..."
+                data-i18n-placeholder="placeholder_msg" required></textarea>
+        </div>
+        <button type="submit" class="c-submit-btn" data-i18n="btn_send">Enviar Mensaje</button>
+        </form>
+    </div>
+    <button class="comment-toggle-btn" id="toggleCommentWidget" aria-label="Abrir Mensajes">
+        <i class='bx bx-message-detail'></i>
+    </button>
+    <span class="comment-tooltip" data-i18n="comment_tooltip">¡Pide tu canción o saludo!</span>
     </div>
 
     <script>
@@ -872,7 +892,11 @@
                 'placeholder_email': 'Tu Correo (Opcional)',
                 'placeholder_msg': 'Escribe tu sugerencia de canción o mensaje aquí...',
                 'btn_send': 'Enviar Mensaje',
-                'comment_tooltip': '¡Clic para pedir tu saludo en la radio!',
+                'comment_tooltip': '¡Pide tu canción o saludo!',
+                'opt_general': 'Mensaje General',
+                'opt_focus': 'Música para Concentrarse',
+                'opt_relax': 'Música para Relajarse',
+                'opt_energy': 'Música para Subir Ánimo',
             },
             'en': {
                 'banner_tag': '🚀 COMING SOON',
@@ -959,7 +983,11 @@
                 'placeholder_email': 'Your Email (Optional)',
                 'placeholder_msg': 'Write your song suggestion or message here...',
                 'btn_send': 'Send Message',
-                'comment_tooltip': 'Click to ask for a radio shoutout!',
+                'comment_tooltip': 'Ask for a song or shoutout!',
+                'opt_general': 'General Message',
+                'opt_focus': 'Music for Focus',
+                'opt_relax': 'Music for Relax',
+                'opt_energy': 'Music for Energy',
             }
         };
 
@@ -1130,6 +1158,7 @@
                 const nameInput = commentForm.querySelector('input[type="text"]:not([name="b_check"])');
                 const emailInput = commentForm.querySelector('input[type="email"]');
                 const msgInput = commentForm.querySelector('textarea');
+                const msgTypeInput = document.getElementById('msgType');
                 const honeypot = commentForm.querySelector('input[name="b_check"]');
 
                 // 1. Anti-Bot: Honeypot Check
@@ -1158,7 +1187,8 @@
                 const data = {
                     nombre: nameInput.value,
                     correo: emailInput.value,
-                    mensaje: msgInput.value
+                    mensaje: msgInput.value,
+                    tipo: msgTypeInput ? msgTypeInput.value : 'General'
                 };
 
                 fetch(SCRIPT_URL, {
