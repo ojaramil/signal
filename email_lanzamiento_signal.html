@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>¡Lanzamiento Oficial Signal Radio! - Asperger para Asperger</title>
+    <style type="text/css">
+        /* Estilos Generales */
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            font-family: Arial, Helvetica, sans-serif;
+            color: #333333;
+        }
+
+        table {
+            border-spacing: 0;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 0;
+        }
+
+        img {
+            border: 0;
+            display: block;
+            max-width: 100%;
+            height: auto;
+        }
+
+        a {
+            text-decoration: none;
+            color: #003B73;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 680px;
+            margin: 0 auto;
+            background-color: #FFFFFF;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .content-padding {
+            padding: 20px 30px;
+        }
+
+        .presented-by {
+            font-size: 10px;
+            font-weight: bold;
+            color: #555555;
+            text-transform: uppercase;
+            margin-bottom: 5px;
+            margin-top: 15px;
+        }
+
+        td.content-padding>.presented-by:first-of-type {
+            margin-top: 0;
+        }
+
+        .header-wrapper {
+            background-color: #003B73;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        .header-content {
+            padding: 25px 20px;
+            text-align: center;
+        }
+
+        .header-content img.logo-header {
+            max-width: 180px;
+            height: auto;
+            margin: 0 auto 15px auto;
+            display: block;
+        }
+
+        .header-content .newsletter-title-main {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 28px;
+            font-weight: bold;
+            color: #FFFFFF;
+            line-height: 1.2;
+        }
+
+        .header-content .tagline {
+            color: #FFFFFF;
+            font-size: 14px;
+            margin-top: 8px;
+            margin-bottom: 0;
+            font-weight: normal;
+        }
+
+        .intro-wrapper {
+            width: 100%;
+            padding: 0 20px;
+            box-sizing: border-box;
+        }
+
+        .section-divider {
+            background-color: #000000;
+            padding: 10px 0;
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .section-divider h2 {
+            color: #FFFFFF;
+            font-size: 16px;
+            margin: 0;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .article-card {
+            margin-bottom: 20px;
+            border: 2px solid #000000;
+            border-radius: 8px;
+            background-color: #FFFFFF;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.08);
+        }
+
+        .article-card-inner-wrapper {
+            border-radius: 6px;
+            overflow: hidden;
+        }
+
+        .article-card-content {
+            padding: 15px 20px;
+        }
+
+        .article-card h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 22px;
+            /* Aumentado para impacto */
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        .article-card h3.title-color-gold a,
+        .article-card h3.title-color-gold {
+            color: #D4A017;
+        }
+
+        .article-card p {
+            margin-top: 0;
+            margin-bottom: 15px;
+            font-size: 15px;
+            line-height: 1.6;
+            color: #333333;
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+        }
+
+        .article-card .action-button {
+            display: inline-block;
+            padding: 15px 25px;
+            /* Botón más grande */
+            background-color: #00f0ff;
+            /* Cyan Neon marca */
+            background: linear-gradient(135deg, #003B73 0%, #0066ff 100%);
+            color: #FFFFFF;
+            border-radius: 50px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 10px;
+            text-decoration: none;
+            box-shadow: 0 4px 10px rgba(0, 59, 115, 0.3);
+        }
+
+        .article-card .action-button:hover {
+            background: linear-gradient(135deg, #002c5a 0%, #004bbd 100%);
+        }
+
+        /* Features List specialized for this card */
+        .features-list {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .features-list li {
+            display: inline-block;
+            background: #f4f4f4;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            color: #555;
+            margin: 3px;
+            border: 1px solid #ddd;
+        }
+
+        .footer {
+            background-color: #333333;
+            color: #cccccc;
+            padding: 25px 20px;
+            text-align: center;
+            font-size: 12px;
+            line-height: 1.5;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        .footer a {
+            color: #ffffff;
+            text-decoration: underline;
+            padding: 0 3px;
+        }
+
+        @media screen and (max-width: 680px) {
+            .container {
+                max-width: 100% !important;
+                width: 100% !important;
+                border-radius: 0;
+            }
+
+            .header-wrapper {
+                border-top-left-radius: 0;
+                border-top-right-radius: 0;
+            }
+
+            .footer {
+                border-bottom-left-radius: 0;
+                border-bottom-right-radius: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <center>
+        <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="background-color: #f0f0f0;"
+            width="100%">
+            <tbody>
+                <tr>
+                    <td align="center" style="padding: 20px 0;">
+                        <table border="0" cellpadding="0" cellspacing="0" class="container" role="presentation"
+                            width="680">
+                            <tbody><!-- Header -->
+                                <tr>
+                                    <td class="header-wrapper">
+                                        <table border="0" cellpadding="0" cellspacing="0" role="presentation"
+                                            width="100%">
+                                            <tbody>
+                                                <tr>
+                                                    <td class="header-content"><img alt="Logo Asperger para Asperger"
+                                                            class="logo-header"
+                                                            src="https://assets.ipzmarketing.com/data/227bd8184d67825de07e363e1cdb79f6fab2a789/media_files/111/original/hus-logo.png"
+                                                            style="height: 100px; width: auto;" />
+                                                        <h1 class="newsletter-title-main">¡ESTAMOS AL AIRE!</h1>
+                                                        <p class="tagline">Una nueva forma de conectar con el talento
+                                                        </p>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                </tr>
+
+                                <!-- Single Launch Card Section -->
+                                <tr>
+                                    <td class="content-padding">
+                                        <div class="section-divider">
+                                            <h2>GRAN LANZAMIENTO</h2>
+                                        </div>
+
+                                        <p class="presented-by" style="text-align: center;">UNA INICIATIVA DE ASPERGER
+                                            PARA ASPERGER</p>
+
+                                        <div class="article-card">
+                                            <div class="article-card-inner-wrapper">
+                                                <!-- Using the existing Signal Radio cover image from your previous email -->
+                                                <a href="https://signalradio.club/">
+                                                    <img alt="Signal Radio Cover" class="featured-image"
+                                                        src="https://assets.ipzmarketing.com/data/227bd8184d67825de07e363e1cdb79f6fab2a789/media_files/257/original/portada-signal-radio-asperger-para-asperger.jpg"
+                                                        style="width: 100%; border-bottom: 2px solid #000;" />
+                                                </a>
+
+                                                <div class="article-card-content">
+                                                    <h3 class="title-color-gold"><a
+                                                            href="https://signalradio.club/">Signal Radio Club</a></h3>
+
+                                                    <p style="font-size: 16px;">
+                                                        <strong>Señal abierta para la convivencia e inclusión
+                                                            laboral</strong><br>
+                                                        del talento auténticamente capaz.
+                                                    </p>
+
+                                                    <p>Hemos creado un espacio sonoro diseñado para ti. Un entorno libre
+                                                        de estridencias, curado para potenciar tu <strong>concentración,
+                                                            calma y bienestar</strong>. Conducido y producido por
+                                                        talento neurodivergente.</p>
+
+                                                    <ul class="features-list">
+                                                        <li>🎶 Música Curada</li>
+                                                        <li>🧠 Espacio Neuro-Amigable</li>
+                                                        <li>🎤 Historias Reales</li>
+                                                        <li>🌍 Conexión Global</li>
+                                                    </ul>
+
+                                                    <div
+                                                        style="text-align: center; margin-top: 25px; margin-bottom: 10px;">
+                                                        <a class="action-button"
+                                                            href="https://signalradio.club/">ESCUCHAR AHORA EN VIVO
+                                                            &rarr;</a>
+                                                    </div>
+
+                                                    <p style="font-size: 12px; margin-top: 20px; color: #777;">
+                                                        Disponible 24/7 en cualquier dispositivo.
+                                                    </p>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                                <!-- Footer -->
+                                <tr>
+                                    <td class="footer">
+                                        <p>
+                                            <a href="https://signalradio.club/">Signal Radio</a> |
+                                            <a href="https://revista.aspergerparaasperger.org/">Revista</a> |
+                                            <a href="https://www.aspergerparaasperger.org">Web Principal</a>
+                                        </p>
+
+                                        <p>© 2026 Asperger para Asperger ®. Todos los derechos reservados.</p>
+                                        <p style="opacity: 0.6;">Estás recibiendo este correo porque eres parte de
+                                            nuestra comunidad auténticamente capaz.</p>
+                                        <p style="margin-top: 15px; font-size: 10px; opacity: 0.4;">
+                                            <a href="[unsubscribe_url]"
+                                                style="color: #cccccc; text-decoration: none;">Darse de baja</a>
+                                        </p>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </center>
+</body>
+
+</html>

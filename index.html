@@ -254,7 +254,7 @@
                         data-i18n="schedule_title_2">Semanal</span></h2>
 
                 <!-- Card 1 -->
-                <div class="schedule-card">
+                <div class="schedule-card" id="schedule-ezra">
                     <div class="schedule-badge" data-i18n="badge_premiere">ESTRENO</div>
                     <h3 class="schedule-title">Signal Radio CLub Talks</h3>
                     <p class="schedule-topic"><strong data-i18n="topic_label">Tema:</strong> Construyendo Realidades:
@@ -274,10 +274,17 @@
                             data-i18n="rotation_note">Rotación durante 2
                             semanas.</p>
                     </div>
+                    <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                        <button class="btn btn-outline btn-sm"
+                            onclick="shareCard('schedule-ezra', 'Signal Radio CLub Talks: Ezra - Projectopia')"
+                            style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <i class='bx bx-share-alt'></i> <span data-i18n="share_btn">Compartir</span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Second Card: Andrés Galli -->
-                <div class="schedule-card" style="margin-top: 60px;">
+                <div class="schedule-card" id="schedule-165" style="margin-top: 60px;">
                     <div class="schedule-badge" data-i18n="badge_deferred">EN DIFERIDO</div>
                     <h3 class="schedule-title">Sintonizando con el Autismo - Episodio 165</h3>
                     <p class="schedule-topic"><strong data-i18n="topic_label">Tema:</strong> <span
@@ -296,10 +303,17 @@
                         <p style="color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;"
                             data-i18n="mon_sun">Lunes a Domingo</p>
                     </div>
+                    <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                        <button class="btn btn-outline btn-sm"
+                            onclick="shareCard('schedule-165', 'Signal Radio: Sintonizando con el Autismo - Ep 165')"
+                            style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <i class='bx bx-share-alt'></i> <span data-i18n="share_btn">Compartir</span>
+                        </button>
+                    </div>
                 </div>
 
                 <!-- Third Card: Andrés Galli -->
-                <div class="schedule-card" style="margin-top: 60px;">
+                <div class="schedule-card" id="schedule-166" style="margin-top: 60px;">
                     <div class="schedule-badge" data-i18n="badge_deferred">EN DIFERIDO</div>
                     <h3 class="schedule-title">Sintonizando con el Autismo - Episodio 166</h3>
                     <p class="schedule-topic"><strong data-i18n="topic_label">Tema:</strong> <span
@@ -318,6 +332,13 @@
                     <div style="margin-top: 30px;">
                         <p style="color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;"
                             data-i18n="mon_sun">Lunes a Domingo</p>
+                    </div>
+                    <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                        <button class="btn btn-outline btn-sm"
+                            onclick="shareCard('schedule-166', 'Signal Radio: Sintonizando con el Autismo - Ep 166')"
+                            style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <i class='bx bx-share-alt'></i> <span data-i18n="share_btn">Compartir</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -443,11 +464,15 @@
                             creación de contenidos.
                         </p>
                     </div>
-                    <div class="card highlight-card">
-                        <div class="card-icon"><i class='bx bx-briefcase-alt'></i></div>
-                        <h3 data-i18n="card4_title">Oportunidades</h3>
-                        <p data-i18n="card4_desc">Desarrollo profesional real y participación activa en proyectos
-                            creativos.</p>
+                    <div class="card highlight-card"
+                        style="position: relative; overflow: hidden; border: 1px solid var(--accent-secondary);">
+                        <div
+                            style="position: absolute; top: 0; right: 0; background: var(--accent-secondary); color: #000; font-size: 0.6rem; font-weight: 800; padding: 4px 12px; border-bottom-left-radius: 12px;">
+                            NUEVO</div>
+                        <div class="card-icon"><i class='bx bx-star'></i></div>
+                        <h3 data-i18n="card4_title">Programa Embajadores</h3>
+                        <p data-i18n="card4_desc"><strong>Para Adultos:</strong> Potencia tu Marca Personal. Recibe
+                            capacitación y dirige tu propio programa en nuestra señal.</p>
                     </div>
                 </div>
             </div>
@@ -810,6 +835,7 @@
             'es': {
                 'banner_tag': '🚀 PRÓXIMAMENTE',
                 'banner_text': 'Pronto tendrán la conversación en <strong>Signal Radio Club</strong> con <strong>Ezra el CoderzLegend</strong>, creador de <strong>projectopia.live</strong>',
+                'share_btn': 'Compartir',
                 'nav_about': 'Quiénes somos',
                 'nav_what_we_do': 'Qué hacemos',
                 'nav_impact': 'Impacto',
@@ -901,6 +927,7 @@
             'en': {
                 'banner_tag': '🚀 COMING SOON',
                 'banner_text': 'Soon featuring a conversation on <strong>Signal Radio Club</strong> with <strong>Ezra the CoderzLegend</strong>, creator of <strong>projectopia.live</strong>',
+                'share_btn': 'Share',
                 'nav_about': 'About Us',
                 'nav_what_we_do': 'What We Do',
                 'nav_impact': 'Impact',
@@ -1215,6 +1242,33 @@
                         btn.disabled = false;
                     });
             });
+        }
+
+        /* Share Card Logic */
+
+        function shareCard(id, title) {
+            const url = `${window.location.origin}${window.location.pathname}#${id}`;
+            const text = `¡No te pierdas este programa en Signal Radio! 🎧\n${title}\n\nEscúchalo aquí: ${url}`;
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Signal Radio',
+                    text: text,
+                    url: url
+                }).catch(console.error);
+            } else {
+                // Determine language for alert
+                const lang = localStorage.getItem('siteLang') || 'es';
+                const alertMsg = lang === 'en' ? 'Link copied to clipboard!' : '¡Enlace copiado al portapapeles!';
+
+                // Fallback: Copy to clipboard
+                navigator.clipboard.writeText(text).then(() => {
+                    alert(alertMsg);
+                }).catch(err => {
+                    console.error('Error al copiar:', err);
+                    prompt('Copia este enlace:', url);
+                });
+            }
         }
     </script>
 
