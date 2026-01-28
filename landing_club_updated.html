@@ -175,9 +175,6 @@
 
         <div class="flex items-center">
 
-            <img src="https://www.aspergerparaasperger.org/wp-content/uploads/2025/12/logo-navidad.png" alt="Logo"
-                class="h-10 w-auto mr-3">
-
             <span
                 class="hidden md:inline-block ml-2 px-3 py-1 bg-indigo-100 text-indigo-800 rounded-full text-xs font-semibold">10
                 Años de Trayectoria</span>
@@ -188,7 +185,7 @@
 
             <div class="px-3 py-1 bg-red-100 text-red-600 rounded-full animate-pulse font-bold text-xs">
 
-                🎄 OFERTA ESPECIAL FIN DE AÑO
+                PROMOCION BONIFICADA DE TIEMPO LIMITADO
 
             </div>
 
@@ -1522,9 +1519,11 @@
                         Radio</span>
                 </h2>
                 <p class="text-lg text-gray-300 mb-8 leading-relaxed">
-                    No solo seas parte del club, <strong>conviértete en un referente</strong>. Con el nuevo plan
-                    <strong>Embajadores</strong>, recibirás <em>Media Training</em> profesional y tendrás tu propio
-                    espacio al aire para proyectar tu autoridad.
+                    Respaldo y experiencia real: Liderado por el fundador, con <strong>25 años de experiencia en
+                        proyectos de Tecnologías de Información</strong> y <strong>10 años junto a la comunidad
+                        Asperger</strong> y la diversidad cognitiva. Al ser parte de la neurodivergencia, entiende
+                    profundamente los desafíos de la inclusión laboral y ha creado este espacio para que tu voz resuene
+                    con fuerza y profesionalismo.
                 </p>
                 <ul class="space-y-6 mb-8">
                     <li class="flex items-start">
@@ -2116,7 +2115,8 @@
 
 
 
-<div id="videoModal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+<div id="videoModal" class="fixed inset-0 z-[100] hidden" aria-labelledby="modal-title" role="dialog" aria-modal="true"
+    style="display: none;">
 
     <div class="fixed inset-0 bg-black/90 transition-opacity backdrop-blur-sm" onclick="closeVideoModal()"></div>
 
@@ -2223,6 +2223,7 @@
         iframe.src = "https://www.youtube.com/embed/k4-6nKZIwao?autoplay=1&rel=0";
 
         modal.classList.remove('hidden');
+        modal.style.display = 'block'; // Ensure it shows even if inline style was set
 
         document.body.style.overflow = 'hidden'; // Evita scroll fondo
 
@@ -2241,6 +2242,7 @@
         iframe.src = "";
 
         modal.classList.add('hidden');
+        modal.style.display = 'none'; // Ensure it hides
 
         document.body.style.overflow = 'auto'; // Restaura scroll
 
@@ -2311,3 +2313,6 @@
     });
 
 </script>
+</body>
+
+</html>
