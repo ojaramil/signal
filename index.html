@@ -775,13 +775,16 @@
             }
 
             // Initial translation load
-            const savedLang = localStorage.getItem('siteLang') || 'es';
-            if (savedLang === 'en') {
-                updateLanguageDOM('en');
-            } else {
-                // Ensure UI is set to default
-                updateLanguageDOM('es');
+            // Initial translation load
+            let savedLang = localStorage.getItem('siteLang');
+
+            if (!savedLang) {
+                // Auto-detect browser language if no preference saved
+                const userLang = navigator.language || navigator.userLanguage;
+                savedLang = userLang.startsWith('en') ? 'en' : 'es';
             }
+
+            updateLanguageDOM(savedLang);
         });
     </script>
 
