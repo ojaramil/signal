@@ -272,6 +272,17 @@
                         <div class="schedule-date">
                             <i class='bx bx-calendar'></i> <span data-i18n="date_feb">1 Febrero - 11 Feb 2026</span>
                         </div>
+                        <div class="local-time-calculator" style="margin-top: 15px;">
+                            <button class="btn btn-text btn-xs"
+                                onclick="calculateLocalTime('12:30', 'America/Bogota', this)"
+                                style="font-size: 0.8rem; color: var(--accent-primary); cursor: pointer; background: none; border: none; padding: 0; text-decoration: underline;">
+                                <i class='bx bx-world'></i> <span data-i18n="view_local_time">Ver en mi horario
+                                    local</span>
+                            </button>
+                            <div class="local-time-result"
+                                style="display: none; margin-top: 8px; font-size: 0.85rem; color: #fff; background: rgba(0,240,255,0.1); padding: 8px; border-radius: 6px;">
+                            </div>
+                        </div>
                     </div>
                     <div style="margin-top: 30px;">
                         <p style="color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;"
@@ -302,6 +313,17 @@
                         <div class="schedule-date">
                             <i class='bx bx-calendar'></i> 26 Ene - 31 Ene 2026
                         </div>
+                        <div class="local-time-calculator" style="margin-top: 15px;">
+                            <button class="btn btn-text btn-xs"
+                                onclick="calculateLocalTime('07:00', 'America/Bogota', this)"
+                                style="font-size: 0.8rem; color: var(--accent-primary); cursor: pointer; background: none; border: none; padding: 0; text-decoration: underline;">
+                                <i class='bx bx-world'></i> <span data-i18n="view_local_time">Ver en mi horario
+                                    local</span>
+                            </button>
+                            <div class="local-time-result"
+                                style="display: none; margin-top: 8px; font-size: 0.85rem; color: #fff; background: rgba(0,240,255,0.1); padding: 8px; border-radius: 6px;">
+                            </div>
+                        </div>
                     </div>
                     <div style="margin-top: 30px;">
                         <p style="color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;"
@@ -331,6 +353,17 @@
 
                         <div class="schedule-date">
                             <i class='bx bx-calendar'></i> 26 Ene - 31 Ene 2026
+                        </div>
+                        <div class="local-time-calculator" style="margin-top: 15px;">
+                            <button class="btn btn-text btn-xs"
+                                onclick="calculateLocalTime('07:00', 'America/Bogota', this)"
+                                style="font-size: 0.8rem; color: var(--accent-primary); cursor: pointer; background: none; border: none; padding: 0; text-decoration: underline;">
+                                <i class='bx bx-world'></i> <span data-i18n="view_local_time">Ver en mi horario
+                                    local</span>
+                            </button>
+                            <div class="local-time-result"
+                                style="display: none; margin-top: 8px; font-size: 0.85rem; color: #fff; background: rgba(0,240,255,0.1); padding: 8px; border-radius: 6px;">
+                            </div>
                         </div>
                     </div>
                     <div style="margin-top: 30px;">
@@ -997,6 +1030,8 @@
                 'widget_slogan': 'La Primera Radio Neuro-Inclusiva',
                 'widget_listening': 'Escuchando ahora',
                 'widget_status': 'Transmisión Online',
+                'view_local_time': 'Ver en mi horario local',
+                'local_time_msg': 'Tu hora local es <strong>{time}</strong>. (Bogotá {offset})',
                 'comment_title': 'Sugerir Música / Mensaje',
                 'placeholder_name': 'Tu Nombre',
                 'placeholder_email': 'Tu Correo (Opcional)',
@@ -1110,6 +1145,8 @@
                 'opt_focus': 'Music for Focus',
                 'opt_relax': 'Music for Relax',
                 'opt_energy': 'Music for Energy',
+                'view_local_time': 'View in my local time',
+                'local_time_msg': 'Your local time is <strong>{time}</strong>. (Bogota {offset})',
             }
         };
 
@@ -1177,6 +1214,7 @@
             { name_es: 'Los Angeles', name_en: 'Los Angeles', zone: 'America/Los_Angeles' },
             { name_es: 'Austin', name_en: 'Austin', zone: 'America/Chicago' },
             { name_es: 'CDMX', name_en: 'Mexico City', zone: 'America/Mexico_City' },
+            { name_es: 'Costa Rica', name_en: 'Costa Rica', zone: 'America/Costa_Rica' },
             { name_es: 'Bogotá', name_en: 'Bogota', zone: 'America/Bogota' },
             { name_es: 'Miami', name_en: 'Miami', zone: 'America/New_York' },
             { name_es: 'Caracas', name_en: 'Caracas', zone: 'America/Caracas' },
@@ -1243,6 +1281,80 @@
                     timeEl.innerText = time;
                 }
             });
+        }
+
+        /* Time Converter Logic */
+        function calculateLocalTime(timeStr, baseZone, btnEl) {
+            const container = btnEl.nextElementSibling;
+            const lang = localStorage.getItem('siteLang') || 'es';
+            const texts = translations[lang];
+
+            // 1. Create a date object for the base time (today at 'timeStr' in Bogota)
+            const [hours, minutes] = timeStr.split(':');
+            const now = new Date();
+
+            // Format for Bogota
+            const bogotaTime = new Intl.DateTimeFormat('en-US', {
+                timeZone: baseZone,
+                year: 'numeric', month: '2-digit', day: '2-digit',
+                hour: '2-digit', minute: '2-digit', second: '2-digit',
+                hour12: false
+            }).formatToParts(now);
+
+            const bYear = bogotaTime.find(p => p.type === 'year').value;
+            const bMonth = bogotaTime.find(p => p.type === 'month').value;
+            const bDay = bogotaTime.find(p => p.type === 'day').value;
+
+            // Target time in Bogota ISO format
+            const targetISO = `${bYear}-${bMonth}-${bDay}T${hours}:${minutes}:00`;
+
+            // Create date object interpreting targetISO as being in America/Bogota
+            const bogotaOffset = -5; // Bogota is UTC-5 (no DST usually)
+            const dateInBogota = new Date(new Date(targetISO).getTime() + (bogotaOffset * 60 * 60 * 1000));
+            // Actually, simpler:
+            const formatter = new Intl.DateTimeFormat('en-US', {
+                timeZone: baseZone,
+                hour: 'numeric', minute: 'numeric', hour12: false
+            });
+
+            // Detect user offset
+            const userDate = new Date();
+            const userFormatter = new Intl.DateTimeFormat('en-US', {
+                hour: 'numeric', hour12: false
+            });
+
+            // Get current hour in Bogota and User to find diff
+            const bogotaHour = parseInt(new Intl.DateTimeFormat('en-US', { timeZone: baseZone, hour: 'numeric', hour12: false }).format(now));
+            const userHour = parseInt(new Intl.DateTimeFormat('en-US', { hour: 'numeric', hour12: false }).format(now));
+
+            // More robust diff using Date objects
+            const bDateStr = now.toLocaleString('en-US', { timeZone: baseZone });
+            const uDateStr = now.toLocaleString('en-US'); // Local
+            const bDateObj = new Date(bDateStr);
+            const uDateObj = new Date(uDateStr);
+            const diffHours = Math.round((uDateObj - bDateObj) / (1000 * 60 * 60));
+
+            const offsetSign = diffHours >= 0 ? '+' : '';
+            const offsetText = `${offsetSign}${diffHours}h`;
+
+            // Calculate user local time for the target
+            const targetDate = new Date(bDateObj);
+            targetDate.setHours(parseInt(hours), parseInt(minutes), 0);
+
+            // Convert to local string
+            const localTimeStr = new Date(targetDate.getTime() + (diffHours * 60 * 60 * 1000)).toLocaleTimeString([], {
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+
+            const resultMsg = texts['local_time_msg']
+                .replace('{time}', localTimeStr)
+                .replace('{offset}', offsetText);
+
+            container.innerHTML = resultMsg;
+            container.style.display = 'block';
+            btnEl.style.display = 'none';
         }
 
         // Initialize clocks
