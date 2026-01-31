@@ -548,7 +548,7 @@
                     <p class="schedule-guest"><strong data-i18n="guest_label">Invitado:</strong> Dr. Jesus Rojas</p>
                     <div class="schedule-details">
                         <div class="schedule-time">
-                            <i class='bx bx-time'></i> 7:00 AM & 7:00 PM
+                            <i class='bx bx-time'></i> 7:00 AM
                         </div>
                         <div class="schedule-date">
                             <i class='bx bx-calendar'></i> 26 Ene - 31 Ene 2026
@@ -578,6 +578,48 @@
                     </div>
                 </div>
 
+                <!-- New Card: Ignacio CF -->
+                <div class="schedule-card" id="schedule-ignacio" style="margin-top: 60px;">
+                    <div class="schedule-badge" data-i18n="badge_deferred">DIFERIDO</div>
+                    <h3 class="schedule-title">Signal Radio CLub Talks</h3>
+                    <p class="schedule-topic"><strong data-i18n="topic_label">Tema:</strong> <span
+                            data-i18n="topic_ignacio">Importancia de desarrollar habilidades sociales en el Espectro
+                            Autista</span></p>
+                    <p class="schedule-guest"><strong data-i18n="guest_label">Invitado Especial:</strong> Ignacio CF</p>
+                    <div class="schedule-details">
+                        <div class="schedule-time">
+                            <i class='bx bx-time'></i> <span data-i18n="time_est">12:30 PM EST / Bogota</span>
+                        </div>
+                        <div class="schedule-date">
+                            <i class='bx bx-calendar'></i> <span data-i18n="date_feb">28 de Enero al 11 de Febrero,
+                                2026</span>
+                        </div>
+                        <div class="local-time-calculator" style="margin-top: 15px;">
+                            <button class="btn btn-text btn-xs"
+                                onclick="calculateLocalTime('12:30', 'America/Bogota', this)"
+                                style="font-size: 0.8rem; color: var(--accent-primary); cursor: pointer; background: none; border: none; padding: 0; text-decoration: underline;">
+                                <i class='bx bx-world'></i> <span data-i18n="view_local_time">Ver en mi horario
+                                    local</span>
+                            </button>
+                            <div class="local-time-result"
+                                style="display: none; margin-top: 8px; font-size: 0.85rem; color: #fff; background: rgba(0,240,255,0.1); padding: 8px; border-radius: 6px;">
+                            </div>
+                        </div>
+                    </div>
+                    <div style="margin-top: 30px;">
+                        <p style="color: var(--text-muted); margin-bottom: 10px; font-size: 0.9rem;"
+                            data-i18n="rotation_note">Rotación durante 2
+                            semanas.</p>
+                    </div>
+                    <div style="margin-top: 15px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 15px;">
+                        <button class="btn btn-outline btn-sm"
+                            onclick="shareCard('schedule-ignacio', 'Signal Radio CLub Talks: Ignacio CF - Habilidades Sociales')"
+                            style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+                            <i class='bx bx-share-alt'></i> <span data-i18n="share_btn">Compartir</span>
+                        </button>
+                    </div>
+                </div>
+
                 <!-- Third Card: Andrés Galli -->
                 <div class="schedule-card" id="schedule-166" style="margin-top: 60px;">
                     <div class="schedule-badge" data-i18n="badge_deferred">EN DIFERIDO</div>
@@ -588,7 +630,7 @@
                             data-i18n="from_spain">desde Valencia, España</span>)</p>
                     <div class="schedule-details">
                         <div class="schedule-time">
-                            <i class='bx bx-time'></i> 7:00 AM & 7:00 PM
+                            <i class='bx bx-time'></i> 7:00 AM
                         </div>
 
                         <div class="schedule-date">
@@ -1272,6 +1314,7 @@
                 'badge_deferred': 'DIFERIDO',
                 'topic_165': 'Importancia de la consulta pediátrica en el Autismo',
                 'topic_166': 'Migración y Cambio en población Asperger',
+                'topic_ignacio': 'Importancia de desarrollar habilidades sociales en el Espectro Autista',
                 'mon_sun': 'Lunes a Domingo',
                 'from_spain': 'desde Valencia, España',
                 'clock_title': 'Horarios',
@@ -1396,6 +1439,7 @@
                 'btn_record_voice': 'Record Voice Message',
                 'topic_165': 'Importance of Pediatric Consultation in Autism',
                 'topic_166': 'Migration and Change in the Asperger Population',
+                'topic_ignacio': 'Importance of developing social skills in the Autism Spectrum',
                 'mon_sun': 'Monday to Sunday',
                 'from_spain': 'from Valencia, Spain',
                 'clock_title': 'Global',
