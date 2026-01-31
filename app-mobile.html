@@ -428,25 +428,82 @@
                     <p id="t-immersion" class="player-note-mobile">Conectando talento hispano con el mundo.</p>
                 </div>
             </div>
+        </div>
 
-            <h2 class="section-header" id="t-schedule">Programación</h2>
+        <!-- Additional Channels Mobile -->
+        <h2 class="section-header" id="t-channels">Nuestras Señales</h2>
+        <div class="card-list" style="margin-bottom: 25px;">
 
-            <div class="card-list">
-                <!-- Schedule Items Simplified -->
-                <div class="schedule-mini">
-                    <div class="s-day">DESTACADO</div>
-                    <div class="s-title">Signal Radio Club Talks</div>
-                    <div class="s-meta">Guest: Ezra "CoderzLegend"</div>
-                    <div class="s-meta">1:00 PM EST | Jan 28 - Feb 11</div>
+            <!-- Inspiration -->
+            <div class="item-card" style="flex-direction: column;">
+                <div style="display:flex; align-items:center; gap:10px; width:100%;">
+                    <div class="item-icon"><i class='bx bx-bulb'></i></div>
+                    <div class="item-content">
+                        <h3 id="t-ch-inst-title">Inspiración y Motivación</h3>
+                        <p id="t-ch-inst-desc">Instrumental y Neuroamigable</p>
+                    </div>
                 </div>
-
-                <div class="schedule-mini">
-                    <div class="s-day">LUN - DOM</div>
-                    <div class="s-title">Sintonizando con el Autismo</div>
-                    <div class="s-meta">Dr. Jesus Rojas / Andrés Galli</div>
-                    <div class="s-meta">7:00 AM & 7:00 PM</div>
+                <div class="mobile-player" style="width:100%; margin-top:10px; padding:10px;">
+                    <audio controls preload="none" class="channel-player">
+                        <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/inst.mp3"
+                            type="audio/mpeg">
+                    </audio>
                 </div>
             </div>
+
+            <!-- Soft -->
+            <div class="item-card" style="flex-direction: column;">
+                <div style="display:flex; align-items:center; gap:10px; width:100%;">
+                    <div class="item-icon"><i class='bx bx-water'></i></div>
+                    <div class="item-content">
+                        <h3 id="t-ch-soft-title">Neuro-Soft</h3>
+                        <p id="t-ch-soft-desc">Sonidos suaves para la calma</p>
+                    </div>
+                </div>
+                <div class="mobile-player" style="width:100%; margin-top:10px; padding:10px;">
+                    <audio controls preload="none" class="channel-player">
+                        <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/radio_soft.mp3"
+                            type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
+
+            <!-- Voice -->
+            <div class="item-card" style="flex-direction: column;">
+                <div style="display:flex; align-items:center; gap:10px; width:100%;">
+                    <div class="item-icon"><i class='bx bx-book-reader'></i></div>
+                    <div class="item-content">
+                        <h3 id="t-ch-voz-title">Canciones Neuro-Educativas</h3>
+                        <p id="t-ch-voz-desc">Voz y aprendizaje</p>
+                    </div>
+                </div>
+                <div class="mobile-player" style="width:100%; margin-top:10px; padding:10px;">
+                    <audio controls preload="none" class="channel-player">
+                        <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/voz.mp3"
+                            type="audio/mpeg">
+                    </audio>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-header" id="t-schedule">Programación</h2>
+
+        <div class="card-list">
+            <!-- Schedule Items Simplified -->
+            <div class="schedule-mini">
+                <div class="s-day">DESTACADO</div>
+                <div class="s-title">Signal Radio Club Talks</div>
+                <div class="s-meta">Guest: Ezra "CoderzLegend"</div>
+                <div class="s-meta">1:00 PM EST | Jan 28 - Feb 11</div>
+            </div>
+
+            <div class="schedule-mini">
+                <div class="s-day">LUN - DOM</div>
+                <div class="s-title">Sintonizando con el Autismo</div>
+                <div class="s-meta">Dr. Jesus Rojas / Andrés Galli</div>
+                <div class="s-meta">7:00 AM & 7:00 PM</div>
+            </div>
+        </div>
 
         </div>
 
@@ -601,6 +658,18 @@
         audio.onplay = () => { fabIcon.classList.replace('bx-play', 'bx-pause'); };
         audio.onpause = () => { fabIcon.classList.replace('bx-pause', 'bx-play'); };
 
+        // Global Player Management (Mobile)
+        const allAudios = document.querySelectorAll('audio');
+        allAudios.forEach(aud => {
+            aud.addEventListener('play', () => {
+                allAudios.forEach(otherAudio => {
+                    if (otherAudio !== aud && !otherAudio.paused) {
+                        otherAudio.pause();
+                    }
+                });
+            });
+        });
+
         function togglePlayFAB() {
             if (audio.paused) {
                 audio.play();
@@ -623,7 +692,11 @@
                 'ctitle': 'Pide tu Canción', 'cdesc': 'Manda un saludo o pide un tema musical.', 'btnsend': 'Enviar Mensaje',
                 'nhome': 'Inicio', 'nabout': 'Signal', 'nmsg': 'Mensaje',
                 'trust': 'RECONOCIMIENTOS',
-                'ogen': 'Mensaje General', 'ofoc': 'Música para Concentrarse', 'orel': 'Música para Relajarse', 'oene': 'Música para Subir Ánimo'
+                'ogen': 'Mensaje General', 'ofoc': 'Música para Concentrarse', 'orel': 'Música para Relajarse', 'oene': 'Música para Subir Ánimo',
+                'channels': 'Nuestras Señales',
+                'ch_inst_t': 'Inspiración y Motivación', 'ch_inst_d': 'Instrumental y Neuroamigable',
+                'ch_soft_t': 'Neuro-Soft', 'ch_soft_d': 'Sonidos suaves para la calma',
+                'ch_voz_t': 'Canciones Neuro-Educativas', 'ch_voz_d': 'Voz y aprendizaje'
             },
             'en': {
                 'live': 'LIVE', 'subtitle': 'The first Hispanic-led open signal for the world. Backed by a decade of experience, we use global music and neurodivergent voices as a bridge for coexistence and workplace inclusion of all cognitive diversity.',
@@ -636,7 +709,11 @@
                 'ctitle': 'Request a Song', 'cdesc': 'Send a shoutout or request a track.', 'btnsend': 'Send Message',
                 'nhome': 'Home', 'nabout': 'Signal', 'nmsg': 'Interact',
                 'trust': 'RECOGNITIONS',
-                'ogen': 'General Message', 'ofoc': 'Music for Focus', 'orel': 'Music for Relax', 'oene': 'Music for Energy'
+                'ogen': 'General Message', 'ofoc': 'Music for Focus', 'orel': 'Music for Relax', 'oene': 'Music for Energy',
+                'channels': 'Our Signals',
+                'ch_inst_t': 'Inspiration & Motivation', 'ch_inst_d': 'Instrumental and Neuro-friendly',
+                'ch_soft_t': 'Neuro-Soft', 'ch_soft_d': 'Soft sounds for calm',
+                'ch_voz_t': 'Neuro-Educational Songs', 'ch_voz_d': 'Voice and learning'
             }
         };
 
@@ -653,6 +730,15 @@
             document.getElementById('t-subtitle').innerText = t.subtitle;
             document.getElementById('t-immersion').innerText = t.immersion;
             document.getElementById('t-schedule').innerText = t.schedule;
+
+            // Channels
+            document.getElementById('t-channels').innerText = t.channels;
+            document.getElementById('t-ch-inst-title').innerText = t.ch_inst_t;
+            document.getElementById('t-ch-inst-desc').innerText = t.ch_inst_d;
+            document.getElementById('t-ch-soft-title').innerText = t.ch_soft_t;
+            document.getElementById('t-ch-soft-desc').innerText = t.ch_soft_d;
+            document.getElementById('t-ch-voz-title').innerText = t.ch_voz_t;
+            document.getElementById('t-ch-voz-desc').innerText = t.ch_voz_d;
 
             document.getElementById('t-whatido').innerText = t.whatido;
             document.getElementById('t-card1-title').innerText = t.card1t;
