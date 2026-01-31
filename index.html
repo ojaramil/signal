@@ -1825,13 +1825,15 @@
 
         function shareCard(id, title) {
             const url = `${window.location.origin}${window.location.pathname}#${id}`;
-            const text = `¡No te pierdas este programa en Signal Radio! 🎧\n${title}\n\nEscúchalo aquí: ${url}`;
+            // Combine link into text to ensure visibility across apps (WhatsApp trick)
+            const text = `¡No te pierdas este programa en Signal Radio! 🎧\n\n${title}\n\nEscúchalo aquí: ${url}`;
 
             if (navigator.share) {
                 navigator.share({
                     title: 'Signal Radio',
-                    text: text,
-                    url: url
+                    text: text
+                    // We remove 'url' property here to force text+url to be shared as a single block
+                    // This prevents some apps from dropping the text and only showing the link preview
                 }).catch(console.error);
             } else {
                 // Determine language for alert
