@@ -486,7 +486,7 @@
                     </div>
 
                     <!-- Invisible Audio Element -->
-                    <audio id="mainRadio" preload="none">
+                    <audio id="mainRadio" preload="metadata" crossorigin="anonymous">
                         <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/radio.mp3"
                             type="audio/mpeg">
                     </audio>
@@ -1156,13 +1156,42 @@
             cpStatusText.style.color = '#ff4757';
             document.querySelector('.pulse-dot').style.backgroundColor = '#ff4757';
         });
+
+        mainAudio.addEventListener('waiting', () => {
+            cpStatusText.innerText = 'BUFFERING...';
+            cpStatusText.style.color = 'yellow';
+        });
+
+        mainAudio.addEventListener('error', (e) => {
+            console.error('Audio Element Error:', e);
+            cpStatusText.innerText = 'OFFLINE';
+            cpStatusText.style.color = 'red';
+            cpTrackName.innerText = "Error de conexión con la señal.";
+        });
     });
 
         // --- GLOBAL Player Functions (must be outside DOMContentLoaded scope for onclick) ---
         window.toggleCustomPlayer = function () {
             const mainAudio = document.getElementById('mainRadio');
+            const cpStatusText = document.getElementById('cpStatusText');
+
             if (mainAudio.paused) {
-                mainAudio.play();
+                cpStatusText.innerText = 'CONECTANDO...'; // Immediate feedback
+                cpStatusText.style.color = 'var(--text-muted)';
+
+                var playPromise = mainAudio.play();
+
+                if (playPromise !== undefined) {
+                    playPromise.then(_ => {
+                        // Play has started! UI updates via 'play' event listener
+                    })
+                        .catch(error => {
+                            console.error('Playback Error:', error);
+                            cpStatusText.innerText = 'ERROR';
+                            cpStatusText.style.color = 'red';
+                            alert("No se pudo iniciar la reproducción. Por favor verifica tu conexión o intenta de nuevo.");
+                        });
+                }
             } else {
                 mainAudio.pause();
             }
