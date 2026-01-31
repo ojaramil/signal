@@ -1,0 +1,497 @@
+<!-- SIGNAL RADIO - WIDGET BURBUJA (VERSIÓN SEGURA WP) -->
+<!-- Instrucciones: Copia y pega esto en un bloque "HTML Personalizado" en tu Footer o Widget Area -->
+
+<div id="sr-floating-widget-container">
+
+    <!-- 1. La Burbuja (Trigger) -->
+    <div id="sr-bubble-trigger">
+        <div class="sr-bubble-content">
+            <img src="https://signal.aspergerparaasperger.org/logo2.jpg" alt="Signal Radio" id="sr-bubble-icon"
+                onerror="this.src='https://via.placeholder.com/60/000000/FFFFFF/?text=SR'">
+            <div class="sr-pulse-ring"></div>
+        </div>
+        <div class="sr-bubble-tooltip">Escuchar Radio 🔴</div>
+    </div>
+
+    <!-- 2. El Reproductor (Card) -->
+    <div id="sr-player-card">
+        <div class="sr-card-header">
+            <div class="sr-card-logo">
+                <img src="https://signal.aspergerparaasperger.org/logo2.jpg" alt="Logo"
+                    onerror="this.src='https://via.placeholder.com/40/000000/FFFFFF/?text=SR'">
+            </div>
+            <div class="sr-card-info">
+                <h4>Signal Radio</h4>
+                <span>Neuro-Inclusiva 24/7</span>
+            </div>
+            <!-- Usamos DIV en lugar de button para evitar submit accidental -->
+            <div class="sr-close-btn" id="sr-close-btn" role="button">×</div>
+        </div>
+
+        <div class="sr-card-status">
+            <span class="sr-dot"></span> EN VIVO DESDE LA COMUNIDAD
+        </div>
+
+        <div class="sr-card-controls">
+            <!-- Usamos DIV en lugar de button para evitar submit accidental -->
+            <div id="sr-play-toggle" role="button">
+                <!-- Icono Play -->
+                <svg id="sr-icon-play" viewBox="0 0 24 24" width="32" height="32" fill="white">
+                    <path d="M8 5v14l11-7z" />
+                </svg>
+                <!-- Icono Pause (Oculto por defecto) -->
+                <svg id="sr-icon-pause" viewBox="0 0 24 24" width="32" height="32" fill="white" style="display:none;">
+                    <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
+                </svg>
+            </div>
+            <div class="sr-visualizer">
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+                <div class="bar"></div>
+            </div>
+        </div>
+
+        <div id="sr-sponsor-msg">
+            Esta canción está patrocinada por: <br>
+            <strong>Asperger para Asperger</strong>
+        </div>
+
+        <div class="sr-card-footer">
+            <a href="https://signalradio.club" target="_blank" rel="noopener noreferrer">Ir al sitio web <span
+                    style="font-size:10px;">↗</span></a>
+        </div>
+    </div>
+
+    <!-- Audio Player Oculto -->
+    <audio id="sr-audio-stream" preload="none">
+        <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/radio.mp3" type="audio/mpeg">
+    </audio>
+
+    <style>
+        /* CSS SIGNAL RADIO WIDGET */
+        #sr-floating-widget-container {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            /* IZQUIERDA */
+            z-index: 2147483647;
+            /* Z-index máximo permitido */
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.5;
+            box-sizing: border-box;
+        }
+
+        #sr-floating-widget-container * {
+            box-sizing: border-box;
+        }
+
+        /* --- Burbuja --- */
+        #sr-bubble-trigger {
+            width: 60px;
+            height: 60px;
+            cursor: pointer;
+            position: relative;
+            z-index: 2147483647;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #sr-bubble-trigger:hover {
+            transform: scale(1.1);
+        }
+
+        .sr-bubble-content {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: #1a1a2e;
+            border: 2px solid rgba(0, 240, 255, 0.5);
+            overflow: hidden;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+            position: relative;
+            z-index: 2;
+        }
+
+        #sr-bubble-icon {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .sr-pulse-ring {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 50%;
+            border: 2px solid #00f0ff;
+            animation: sr-ripple 2s linear infinite;
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .sr-bubble-tooltip {
+            position: absolute;
+            left: 75px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s;
+        }
+
+        #sr-bubble-trigger:hover .sr-bubble-tooltip {
+            opacity: 1;
+        }
+
+        /* --- Reproductor Expandido --- */
+        #sr-player-card {
+            position: absolute;
+            bottom: 80px;
+            left: 0;
+            width: 280px;
+            background: #101018;
+            /* Fallback */
+            background: rgba(16, 16, 24, 0.98);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 16px;
+            padding: 20px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+            transform-origin: bottom left;
+            transform: scale(0.8);
+            /* Start smaller */
+            opacity: 0;
+            visibility: hidden;
+            /* Hide completly when closed */
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            overflow: hidden;
+        }
+
+        #sr-player-card.active {
+            transform: scale(1);
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .sr-card-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .sr-card-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .sr-card-info {
+            flex: 1;
+        }
+
+        .sr-card-info h4 {
+            margin: 0;
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.2;
+        }
+
+        .sr-card-info span {
+            font-size: 11px;
+            color: #a0a0b0;
+            display: block;
+            margin-top: 2px;
+        }
+
+        .sr-close-btn {
+            background: transparent;
+            border: none;
+            color: #a0a0b0;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 0;
+            line-height: 1;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: color 0.2s;
+        }
+
+        .sr-close-btn:hover {
+            color: white;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .sr-card-status {
+            background: rgba(0, 240, 255, 0.15);
+            color: #00f0ff;
+            font-size: 10px;
+            padding: 6px 10px;
+            border-radius: 20px;
+            display: inline-flex;
+            align-items: center;
+            margin-bottom: 20px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .sr-dot {
+            width: 6px;
+            height: 6px;
+            background: #00f0ff;
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: sr-blink 1s infinite alternate;
+        }
+
+        .sr-card-controls {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        #sr-play-toggle {
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            border: none;
+            background: linear-gradient(135deg, #00c6ff, #0072ff);
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 114, 255, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s, background 0.2s;
+            outline: none;
+            -webkit-tap-highlight-color: transparent;
+            /* Mejora mobile */
+        }
+
+        #sr-play-toggle:hover {
+            transform: scale(1.05);
+            background: linear-gradient(135deg, #20d0ff, #2080ff);
+        }
+
+        #sr-play-toggle:active {
+            transform: scale(0.95);
+        }
+
+        .sr-visualizer {
+            display: flex;
+            gap: 4px;
+            align-items: flex-end;
+            height: 30px;
+            flex: 1;
+            margin-left: 20px;
+        }
+
+        .bar {
+            width: 5px;
+            background: rgba(255, 255, 255, 0.3);
+            height: 30%;
+            border-radius: 3px;
+            transition: height 0.1s;
+        }
+
+        /* Animación del ecualizador cuando está activo */
+        .sr-playing .bar {
+            animation: sr-eq 0.8s infinite ease-in-out;
+            background: #00f0ff;
+            box-shadow: 0 0 10px rgba(0, 240, 255, 0.5);
+        }
+
+        .sr-playing .bar:nth-child(1) {
+            animation-delay: 0.1s;
+        }
+
+        .sr-playing .bar:nth-child(2) {
+            animation-delay: 0.3s;
+        }
+
+        .sr-playing .bar:nth-child(3) {
+            animation-delay: 0.5s;
+        }
+
+        .sr-playing .bar:nth-child(4) {
+            animation-delay: 0.2s;
+        }
+
+        #sr-sponsor-msg {
+            display: none;
+            text-align: center;
+            font-size: 11px;
+            color: #d0d0d0;
+            margin-bottom: 15px;
+            padding: 8px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 8px;
+            line-height: 1.4;
+            animation: sr-fade-in 0.5s ease-out;
+        }
+
+        #sr-sponsor-msg strong {
+            color: #00f0ff;
+            font-weight: 600;
+        }
+
+        @keyframes sr-fade-in {
+            from {
+                opacity: 0;
+                transform: translateY(5px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .sr-card-footer {
+            text-align: center;
+            padding-top: 15px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .sr-card-footer a {
+            color: #8888aa;
+            text-decoration: none;
+            font-size: 12px;
+            transition: color 0.2s;
+        }
+
+        .sr-card-footer a:hover {
+            color: #fff;
+            text-decoration: underline;
+        }
+
+        @keyframes sr-ripple {
+            0% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            100% {
+                transform: scale(1.6);
+                opacity: 0;
+            }
+        }
+
+        @keyframes sr-blink {
+            from {
+                opacity: 0.4;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes sr-eq {
+            0% {
+                height: 20%;
+            }
+
+            50% {
+                height: 100%;
+            }
+
+            100% {
+                height: 20%;
+            }
+        }
+    </style>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Inicializar Widget Signal Radio de forma segura
+
+            // Referencias DOM
+            var container = document.getElementById('sr-floating-widget-container');
+            var bubbleTrigger = document.getElementById('sr-bubble-trigger');
+            var playerCard = document.getElementById('sr-player-card');
+            var closeBtn = document.getElementById('sr-close-btn');
+            var playBtn = document.getElementById('sr-play-toggle');
+            var audio = document.getElementById('sr-audio-stream');
+
+            var iconPlay = document.getElementById('sr-icon-play');
+            var iconPause = document.getElementById('sr-icon-pause');
+            var visualizer = document.querySelector('.sr-visualizer');
+            var sponsorMsg = document.getElementById('sr-sponsor-msg');
+
+            var isPlaying = false;
+
+            // Handlers
+            function toggleWidget(e) {
+                if (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+                playerCard.classList.toggle('active');
+            }
+
+            function toggleAudio(e) {
+                if (e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                }
+
+                if (isPlaying) {
+                    audio.pause();
+                    isPlaying = false;
+                    updateUIstate();
+                } else {
+                    // Resetear audio para asegurar que es En Vivo
+                    // Truco: añadir timestamp para saltar la caché
+                    var streamUrl = "https://signalradio.aspergerparaasperger.org/listen/signal_radio/radio.mp3";
+                    audio.src = streamUrl + "?t=" + new Date().getTime();
+                    audio.load();
+                    var playPromise = audio.play();
+
+                    if (playPromise !== undefined) {
+                        playPromise.then(function () {
+                            isPlaying = true;
+                            updateUIstate();
+                        }).catch(function (error) {
+                            console.error("Signal Radio Play Error:", error);
+                        });
+                    }
+                }
+            }
+
+            function updateUIstate() {
+                if (isPlaying) {
+                    iconPlay.style.display = 'none';
+                    iconPause.style.display = 'block';
+                    visualizer.classList.add('sr-playing');
+                    if (sponsorMsg) sponsorMsg.style.display = 'block';
+                } else {
+                    iconPlay.style.display = 'block';
+                    iconPause.style.display = 'none';
+                    visualizer.classList.remove('sr-playing');
+                    if (sponsorMsg) sponsorMsg.style.display = 'none';
+                }
+            }
+
+            // Listeners seguros (sin onclick inline)
+            if (bubbleTrigger) bubbleTrigger.addEventListener('click', toggleWidget);
+            if (closeBtn) closeBtn.addEventListener('click', toggleWidget);
+            if (playBtn) playBtn.addEventListener('click', toggleAudio);
+
+        });
+    </script>
+</div>
