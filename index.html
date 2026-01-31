@@ -253,57 +253,6 @@
             </div>
         </section>
 
-        <!-- Additional Channels Section -->
-        <section id="channels" class="section bg-darker" style="padding: 60px 0;">
-            <div class="container">
-                <h2 class="section-title text-center" style="font-size: 2.5rem; margin-bottom: 40px;">
-                    <span data-i18n="channels_title">Nuestras</span> <span class="text-highlight"
-                        data-i18n="channels_highlight">Señales</span>
-                </h2>
-                <div class="grid-cards" style="grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));">
-                    <!-- Channel 1: Inspiration -->
-                    <div class="card channel-card">
-                        <div class="card-icon"><i class='bx bx-bulb'></i></div>
-                        <h3 data-i18n="channel_inst_title">Inspiración y Motivación</h3>
-                        <p data-i18n="channel_inst_desc">Instrumental y Neuroamigable</p>
-                        <div class="mini-player">
-                            <audio controls preload="none" class="channel-player">
-                                <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/inst.mp3"
-                                    type="audio/mpeg">
-                            </audio>
-                        </div>
-                    </div>
-
-                    <!-- Channel 2: Soft -->
-                    <div class="card channel-card">
-                        <div class="card-icon"><i class='bx bx-water'></i></div>
-                        <h3 data-i18n="channel_soft_title">Neuro-Soft</h3>
-                        <p data-i18n="channel_soft_desc">Sonidos suaves para la calma</p>
-                        <div class="mini-player">
-                            <audio controls preload="none" class="channel-player">
-                                <source
-                                    src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/radio_soft.mp3"
-                                    type="audio/mpeg">
-                            </audio>
-                        </div>
-                    </div>
-
-                    <!-- Channel 3: Voice/Education -->
-                    <div class="card channel-card">
-                        <div class="card-icon"><i class='bx bx-book-reader'></i></div>
-                        <h3 data-i18n="channel_voz_title">Canciones Neuro-Educativas</h3>
-                        <p data-i18n="channel_voz_desc">Voz y aprendizaje</p>
-                        <div class="mini-player">
-                            <audio controls preload="none" class="channel-player">
-                                <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/voz.mp3"
-                                    type="audio/mpeg">
-                            </audio>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- Weekly Schedule -->
         <section id="schedule" class="section" style="padding-bottom: 50px;">
             <div class="container text-center">
@@ -918,27 +867,6 @@
                 });
             }
 
-            // Global Player Management (One at a time)
-            const allAudios = document.querySelectorAll('audio');
-            allAudios.forEach(audio => {
-                audio.addEventListener('play', () => {
-                    allAudios.forEach(otherAudio => {
-                        if (otherAudio !== audio && !otherAudio.paused) {
-                            otherAudio.pause();
-                            // If it was the widget audio, update the button state
-                            if (otherAudio.id === 'widgetAudio') {
-                                const widgetPlayBtn = document.getElementById('widgetPlayBtn');
-                                const widgetIcon = widgetPlayBtn.querySelector('i');
-                                const toggleBtn = document.getElementById('widgetToggle');
-                                widgetIcon.classList.add('bx-play');
-                                widgetIcon.classList.remove('bx-pause');
-                                toggleBtn.classList.remove('playing');
-                            }
-                        }
-                    });
-                });
-            });
-
             // Initial translation load
             let savedLang = localStorage.getItem('siteLang');
 
@@ -1204,14 +1132,6 @@
                 'modal_step4_title': '4. Tu Turno al Aire',
                 'modal_step4_desc': 'Puedes enviar saludos, pedir canciones específicas (Focus, Relax, Energy) o grabar una nota de voz para ser parte de nuestra programación.',
                 'modal_btn_start': '¡Entendido, quiero escuchar!',
-                'channels_title': 'Nuestras',
-                'channels_highlight': 'Señales',
-                'channel_inst_title': 'Inspiración y Motivación',
-                'channel_inst_desc': 'Instrumental y Neuroamigable',
-                'channel_soft_title': 'Neuro-Soft',
-                'channel_soft_desc': 'Sonidos suaves para la calma',
-                'channel_voz_title': 'Canciones Neuro-Educativas',
-                'channel_voz_desc': 'Voz y aprendizaje',
                 'voice_msg_title': 'Tu Voz, Nuestra Señal',
                 'voice_msg_desc': 'Te invitamos a dejar un mensaje de voz compartiendo tu vivencia en la comunidad y tu visión sobre la aceptación de la diversidad cognitiva. Tu voz importa.',
                 'btn_record_voice': 'Grabar Mensaje de Voz',
@@ -1247,14 +1167,6 @@
                 'modal_step4_title': '4. Your Turn On Air',
                 'modal_step4_desc': 'You can send greetings, request specific songs (Focus, Relax, Energy), or record a voice note to be part of our programming.',
                 'modal_btn_start': 'Got it, let\'s listen!',
-                'channels_title': 'Our',
-                'channels_highlight': 'Signals',
-                'channel_inst_title': 'Inspiration & Motivation',
-                'channel_inst_desc': 'Instrumental and Neuro-friendly',
-                'channel_soft_title': 'Neuro-Soft',
-                'channel_soft_desc': 'Soft sounds for calm',
-                'channel_voz_title': 'Neuro-Educational Songs',
-                'channel_voz_desc': 'Voice and learning',
                 'voice_msg_title': 'Your Voice, Our Signal',
                 'voice_msg_desc': 'We invite you to leave a voice message sharing your experience in the community and your vision on the acceptance of cognitive diversity. Your voice matters.',
                 'btn_record_voice': 'Record Voice Message',
