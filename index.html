@@ -462,34 +462,18 @@
                     nuestra voz neurodivergente como puente para la convivencia y la inclusión laboral de toda la
                     diversidad cognitiva.</p>
 
-                <!-- Custom High-Tech Player -->
-                <div class="custom-player-wrapper" id="customPlayer">
-                    <button class="cp-play-btn" id="cpPlayBtn" onclick="toggleCustomPlayer()">
-                        <i class='bx bx-play'></i>
-                    </button>
-
-                    <div
-                        style="flex: 1; display: flex; flex-direction: column; justify-content: center; height: 100%; padding-left: 15px;">
-                        <div class="cp-status">
-                            <span class="pulse-dot"></span> <span id="cpStatusText">OFF AIR</span>
-                        </div>
-                        <div class="cp-visualizer">
-                            <!-- JS generates bars here -->
-                        </div>
-                        <div class="cp-track-name" id="cpTrackName">Cargando señal...</div>
-                    </div>
-
-                    <div class="cp-volume">
-                        <i class='bx bx-volume-full' id="cpVolIcon" onclick="toggleMute()"></i>
-                        <input type="range" class="cp-vol-slider" id="cpVolSlider" min="0" max="1" step="0.1" value="1"
-                            oninput="setVolume(this.value)">
-                    </div>
-
-                    <!-- Invisible Audio Element -->
-                    <audio id="mainRadio" preload="metadata" crossorigin="anonymous">
+                <!-- Opcion 1: Audio Tag (Restored) -->
+                <div class="player-container" id="listen">
+                    <div class="player-label"><i class='bx bx-broadcast'></i> <span data-i18n="player_label">Señal en
+                            Vivo</span></div>
+                    <audio id="mainRadio" controls preload="metadata">
                         <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/radio.mp3"
                             type="audio/mpeg">
+                        Tu navegador no soporta el elemento de audio.
                     </audio>
+                    <p data-i18n="player_note" class="player-note"
+                        style="margin-top: 15px; font-size: 0.85rem; opacity: 0.9; text-align: center; color: var(--text-color);">
+                    </p>
                 </div>
 
                 <div class="hero-actions">
@@ -1127,120 +1111,7 @@
 
     }); // END DOMContentLoaded Listener
 
-        // --- GLOBAL SCOPE (Available for onclick events) ---
 
-        document.addEventListener('DOMContentLoaded', () => {
-            // --- Custom Player Logic (Initializing Elements) ---
-            // We need to re-attach logic here because these elements might not exist when the script first parses
-
-            const cpWrapper = document.getElementById('customPlayer');
-            const cpPlayBtn = document.getElementById('cpPlayBtn');
-            const mainAudio = document.getElementById('mainRadio');
-            const cpVisualizer = document.querySelector('.cp-visualizer');
-            const cpStatusText = document.getElementById('cpStatusText');
-            const cpTrackName = document.getElementById('cpTrackName');
-            const cpIcon = cpPlayBtn.querySelector('i');
-
-            if (cpVisualizer && cpVisualizer.children.length === 0) {
-                // Generate Visualizer Bars if empty
-                for (let i = 0; i < 20; i++) {
-                    let bar = document.createElement('div');
-                    bar.className = 'cp-bar';
-                    cpVisualizer.appendChild(bar);
-                }
-            }
-
-            if (mainAudio) {
-                // Sync with Audio Events
-                mainAudio.addEventListener('play', () => {
-                    if (cpWrapper) cpWrapper.classList.add('is-playing');
-                    if (cpIcon) cpIcon.className = 'bx bx-pause';
-                    if (cpStatusText) {
-                        cpStatusText.innerText = 'ON AIR';
-                        cpStatusText.style.color = 'var(--accent-primary)';
-                    }
-                    const dot = document.querySelector('.pulse-dot');
-                    if (dot) dot.style.backgroundColor = '#00f0ff';
-                    if (typeof fetchNowPlaying === 'function') fetchNowPlaying(); // Start Metadata
-                });
-
-                mainAudio.addEventListener('pause', () => {
-                    if (cpWrapper) cpWrapper.classList.remove('is-playing');
-                    if (cpIcon) cpIcon.className = 'bx bx-play';
-                    if (cpStatusText) {
-                        cpStatusText.innerText = 'PAUSED';
-                        cpStatusText.style.color = '#ff4757';
-                    }
-                    const dot = document.querySelector('.pulse-dot');
-                    if (dot) dot.style.backgroundColor = '#ff4757';
-                });
-
-                mainAudio.addEventListener('waiting', () => {
-                    if (cpStatusText) {
-                        cpStatusText.innerText = 'BUFFERING...';
-                        cpStatusText.style.color = 'yellow';
-                    }
-                });
-
-                mainAudio.addEventListener('error', (e) => {
-                    console.error('Audio Element Error:', e);
-                    if (cpStatusText) {
-                        cpStatusText.innerText = 'OFFLINE';
-                        cpStatusText.style.color = 'red';
-                    }
-                    if (cpTrackName) cpTrackName.innerText = "Error de conexión.";
-                });
-            }
-        });
-
-        // --- GLOBAL Player Functions (must be outside DOMContentLoaded scope for onclick) ---
-        window.toggleCustomPlayer = function () {
-            const mainAudio = document.getElementById('mainRadio');
-            const cpStatusText = document.getElementById('cpStatusText');
-
-            if (mainAudio.paused) {
-                cpStatusText.innerText = 'CONECTANDO...'; // Immediate feedback
-                cpStatusText.style.color = 'var(--text-muted)';
-
-                var playPromise = mainAudio.play();
-
-                if (playPromise !== undefined) {
-                    playPromise.then(_ => {
-                        // Play has started! UI updates via 'play' event listener
-                    })
-                        .catch(error => {
-                            console.error('Playback Error:', error);
-                            cpStatusText.innerText = 'ERROR';
-                            cpStatusText.style.color = 'red';
-                            alert("No se pudo iniciar la reproducción. Por favor verifica tu conexión o intenta de nuevo.");
-                        });
-                }
-            } else {
-                mainAudio.pause();
-            }
-        };
-
-        window.setVolume = function (val) {
-            const mainAudio = document.getElementById('mainRadio');
-            mainAudio.volume = val;
-            const icon = document.getElementById('cpVolIcon');
-            if (val == 0) icon.className = 'bx bx-volume-mute';
-            else if (val < 0.5) icon.className = 'bx bx-volume-low';
-            else icon.className = 'bx bx-volume-full';
-        };
-
-        window.toggleMute = function () {
-            const mainAudio = document.getElementById('mainRadio');
-            const slider = document.getElementById('cpVolSlider');
-            if (mainAudio.volume > 0) {
-                mainAudio.dataset.prevVol = mainAudio.volume;
-                window.setVolume(0);
-                slider.value = 0;
-            } else {
-                window.setVolume(mainAudio.dataset.prevVol || 1);
-                slider.value = mainAudio.dataset.prevVol || 1;
-            }
-        };
 
 
 
