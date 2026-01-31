@@ -1156,9 +1156,11 @@
             cpStatusText.style.color = '#ff4757';
             document.querySelector('.pulse-dot').style.backgroundColor = '#ff4757';
         });
+    });
 
-        // Toggle Play
+        // --- GLOBAL Player Functions (must be outside DOMContentLoaded scope for onclick) ---
         window.toggleCustomPlayer = function () {
+            const mainAudio = document.getElementById('mainRadio');
             if (mainAudio.paused) {
                 mainAudio.play();
             } else {
@@ -1166,8 +1168,8 @@
             }
         };
 
-        // Volume Control
         window.setVolume = function (val) {
+            const mainAudio = document.getElementById('mainRadio');
             mainAudio.volume = val;
             const icon = document.getElementById('cpVolIcon');
             if (val == 0) icon.className = 'bx bx-volume-mute';
@@ -1176,16 +1178,19 @@
         };
 
         window.toggleMute = function () {
+            const mainAudio = document.getElementById('mainRadio');
             const slider = document.getElementById('cpVolSlider');
             if (mainAudio.volume > 0) {
                 mainAudio.dataset.prevVol = mainAudio.volume;
-                setVolume(0);
+                window.setVolume(0);
                 slider.value = 0;
             } else {
-                setVolume(mainAudio.dataset.prevVol || 1);
+                window.setVolume(mainAudio.dataset.prevVol || 1);
                 slider.value = mainAudio.dataset.prevVol || 1;
             }
         };
+
+
 
         // Metadata Fetcher (AzuraCast API)
         // https://signalradio.aspergerparaasperger.org/api/nowplaying/signal_radio
