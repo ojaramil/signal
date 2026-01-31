@@ -1121,54 +1121,77 @@
             }
 
         });
-            });
+            }
 
-        // --- Custom Player Logic ---
-        const cpWrapper = document.getElementById('customPlayer');
-        const cpPlayBtn = document.getElementById('cpPlayBtn');
-        const cpIcon = cpPlayBtn.querySelector('i');
-        const mainAudio = document.getElementById('mainRadio');
-        const cpVisualizer = document.querySelector('.cp-visualizer');
-        const cpTrackName = document.getElementById('cpTrackName');
-        const cpStatusText = document.getElementById('cpStatusText');
+        }); // END DOMContentLoaded
 
-        // Generate Visualizer Bars
-        for (let i = 0; i < 20; i++) {
-            let bar = document.createElement('div');
-            bar.className = 'cp-bar';
-            cpVisualizer.appendChild(bar);
-        }
+    }); // END DOMContentLoaded Listener
 
-        // Sync with Audio Events
-        mainAudio.addEventListener('play', () => {
-            cpWrapper.classList.add('is-playing');
-            cpIcon.className = 'bx bx-pause';
-            cpStatusText.innerText = 'ON AIR';
-            cpStatusText.style.color = 'var(--accent-primary)';
-            document.querySelector('.pulse-dot').style.backgroundColor = '#00f0ff';
-            fetchNowPlaying(); // Start Metadata
+        // --- GLOBAL SCOPE (Available for onclick events) ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- Custom Player Logic (Initializing Elements) ---
+            // We need to re-attach logic here because these elements might not exist when the script first parses
+
+            const cpWrapper = document.getElementById('customPlayer');
+            const cpPlayBtn = document.getElementById('cpPlayBtn');
+            const mainAudio = document.getElementById('mainRadio');
+            const cpVisualizer = document.querySelector('.cp-visualizer');
+            const cpStatusText = document.getElementById('cpStatusText');
+            const cpTrackName = document.getElementById('cpTrackName');
+            const cpIcon = cpPlayBtn.querySelector('i');
+
+            if (cpVisualizer && cpVisualizer.children.length === 0) {
+                // Generate Visualizer Bars if empty
+                for (let i = 0; i < 20; i++) {
+                    let bar = document.createElement('div');
+                    bar.className = 'cp-bar';
+                    cpVisualizer.appendChild(bar);
+                }
+            }
+
+            if (mainAudio) {
+                // Sync with Audio Events
+                mainAudio.addEventListener('play', () => {
+                    if (cpWrapper) cpWrapper.classList.add('is-playing');
+                    if (cpIcon) cpIcon.className = 'bx bx-pause';
+                    if (cpStatusText) {
+                        cpStatusText.innerText = 'ON AIR';
+                        cpStatusText.style.color = 'var(--accent-primary)';
+                    }
+                    const dot = document.querySelector('.pulse-dot');
+                    if (dot) dot.style.backgroundColor = '#00f0ff';
+                    fetchNowPlaying(); // Start Metadata
+                });
+
+                mainAudio.addEventListener('pause', () => {
+                    if (cpWrapper) cpWrapper.classList.remove('is-playing');
+                    if (cpIcon) cpIcon.className = 'bx bx-play';
+                    if (cpStatusText) {
+                        cpStatusText.innerText = 'PAUSED';
+                        cpStatusText.style.color = '#ff4757';
+                    }
+                    const dot = document.querySelector('.pulse-dot');
+                    if (dot) dot.style.backgroundColor = '#ff4757';
+                });
+
+                mainAudio.addEventListener('waiting', () => {
+                    if (cpStatusText) {
+                        cpStatusText.innerText = 'BUFFERING...';
+                        cpStatusText.style.color = 'yellow';
+                    }
+                });
+
+                mainAudio.addEventListener('error', (e) => {
+                    console.error('Audio Element Error:', e);
+                    if (cpStatusText) {
+                        cpStatusText.innerText = 'OFFLINE';
+                        cpStatusText.style.color = 'red';
+                    }
+                    if (cpTrackName) cpTrackName.innerText = "Error de conexión.";
+                });
+            }
         });
-
-        mainAudio.addEventListener('pause', () => {
-            cpWrapper.classList.remove('is-playing');
-            cpIcon.className = 'bx bx-play';
-            cpStatusText.innerText = 'PAUSED';
-            cpStatusText.style.color = '#ff4757';
-            document.querySelector('.pulse-dot').style.backgroundColor = '#ff4757';
-        });
-
-        mainAudio.addEventListener('waiting', () => {
-            cpStatusText.innerText = 'BUFFERING...';
-            cpStatusText.style.color = 'yellow';
-        });
-
-        mainAudio.addEventListener('error', (e) => {
-            console.error('Audio Element Error:', e);
-            cpStatusText.innerText = 'OFFLINE';
-            cpStatusText.style.color = 'red';
-            cpTrackName.innerText = "Error de conexión con la señal.";
-        });
-    });
 
         // --- GLOBAL Player Functions (must be outside DOMContentLoaded scope for onclick) ---
         window.toggleCustomPlayer = function () {
@@ -1259,7 +1282,7 @@
         if (typeof updateLanguageDOM === 'function') {
             updateLanguageDOM(savedLang);
         }
-        });
+        }); // END DOMContentLoaded (Ensure this matches the opening)
 
         // Onboarding Modal Functions
         function openOnboarding() {
