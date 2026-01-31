@@ -889,10 +889,7 @@
                             <i class='bx bx-check-shield'></i> <span data-i18n="btn_certify">Certifica tu Espacio
                                 Gratis</span>
                         </a>
-                        <button id="btn-local-play" class="btn btn-primary btn-lg"
-                            style="margin-left: 10px; margin-top: 10px;">
-                            <i class='bx bx-play-circle'></i> <span data-i18n="btn_local_play">Play para tu Local</span>
-                        </button>
+
                     </div>
                     <div class="spaces-badge">
                         <div class="badge-card">
@@ -1083,67 +1080,16 @@
                 glow.style.top = e.clientY + 'px';
             });
 
-            /* Signal Spaces Play Button Logic */
-            const btnLocalPlay = document.getElementById('btn-local-play');
-            if (btnLocalPlay) {
-                btnLocalPlay.addEventListener('click', () => {
-                    // 1. Check if widget is already playing
-                    const widgetAudio = document.getElementById('widgetAudio');
-                    const widgetPlayBtn = document.getElementById('widgetPlayBtn');
 
-                    if (widgetAudio.paused) {
-                        // Trigger click on widget play button to handle icon swap and logic
-                        if (widgetPlayBtn) widgetPlayBtn.click();
-                    }
-
-                    // 2. Open the widget to show it's playing
-                    const widget = document.getElementById('floatingWidget');
-                    if (widget && !widget.classList.contains('expanded')) {
-                        widget.classList.add('expanded');
-                    }
-                });
-            }
 
         });
-            }
-
-        }); // END DOMContentLoaded
-
-    }); // END DOMContentLoaded Listener
 
 
 
 
 
-        // Metadata Fetcher (AzuraCast API)
-        // https://signalradio.aspergerparaasperger.org/api/nowplaying/signal_radio
-        // Metadata Fetcher (AzuraCast API)
-        // https://signalradio.aspergerparaasperger.org/api/nowplaying/signal_radio
-        async function fetchNowPlaying() {
-            const cpTrackName = document.getElementById('cpTrackName'); // Re-query to ensure access
-            if (!cpTrackName) return;
 
-            try {
-                const res = await fetch('https://signalradio.aspergerparaasperger.org/api/nowplaying/signal_radio');
-                const data = await res.json();
-                if (data && data.now_playing && data.now_playing.song) {
-                    const title = data.now_playing.song.title;
-                    const artist = data.now_playing.song.artist;
-                    cpTrackName.innerText = `${artist} - ${title}`;
 
-                    // Auto-update document title for cool effect
-                    document.title = `▶ ${title} | Signal Radio`;
-                }
-            } catch (err) {
-                console.log('Metadata error', err);
-                cpTrackName.innerText = "Signal Radio - Conectando...";
-            }
-        }
-
-        // Initial metadata check
-        fetchNowPlaying();
-        // Poll every 15s
-        setInterval(fetchNowPlaying, 15000);
 
         // Initial translation load
         let savedLang = localStorage.getItem('siteLang');
@@ -1158,10 +1104,7 @@
         if (typeof updateLanguageDOM === 'function') {
             updateLanguageDOM(savedLang);
         }
-        // Ensure updateLanguageDOM is called if defined
-        if (typeof updateLanguageDOM === 'function') {
-            updateLanguageDOM(savedLang);
-        }
+
 
         // Onboarding Modal Functions
         function openOnboarding() {
