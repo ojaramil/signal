@@ -38,8 +38,9 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="styles.css?v=3">
+    <link rel="stylesheet" href="styles.css?v=4">
     <link rel="icon" type="image/png" href="icono-signal.png">
+    <link rel="manifest" href="manifest.json">
 
     <!-- Boxicons for icons -->
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
@@ -167,7 +168,6 @@
 
         .cta-section h2 {
             font-size: 2.5rem;
-        }
         }
 
         /* --- Custom Player Styles --- */
@@ -466,6 +466,18 @@
                 <div class="player-container" id="listen">
                     <div class="player-label"><i class='bx bx-broadcast'></i> <span data-i18n="player_label">Señal en
                             Vivo</span></div>
+
+                    <!-- Visualizer Added -->
+                    <div class="visualizer-container">
+                        <div class="v-bar"></div>
+                        <div class="v-bar"></div>
+                        <div class="v-bar"></div>
+                        <div class="v-bar"></div>
+                        <div class="v-bar"></div>
+                        <div class="v-bar"></div>
+                        <div class="v-bar"></div>
+                        <div class="v-bar"></div>
+                    </div>
                     <audio id="mainRadio" controls preload="metadata">
                         <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/radio.mp3"
                             type="audio/mpeg">

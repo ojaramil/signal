@@ -1313,6 +1313,12 @@ ul {
     background: rgba(255, 255, 255, 0.08);
 }
 
+.btn-secondary:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    border-color: #fff;
+}
+
 .clock-city {
     font-size: 0.85rem;
     color: var(--text-muted);
@@ -1851,4 +1857,75 @@ ul {
     background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
     border-color: #fff;
+}
+
+/* --- MEJORAS VISUALES (VISUALIZADOR) --- */
+.visualizer-container {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 4px;
+    height: 30px;
+    margin-bottom: 15px;
+    width: 100%;
+}
+
+.v-bar {
+    width: 6px;
+    background: var(--accent-primary);
+    border-radius: 4px;
+    height: 10%;
+    opacity: 0.5;
+    transition: all 0.2s;
+}
+
+/* Animación activa con clase 'playing' */
+.player-container.playing .v-bar {
+    animation: soundWave 1.2s infinite ease-in-out;
+    opacity: 1;
+    box-shadow: 0 0 10px var(--accent-primary);
+}
+
+.player-container.playing .v-bar:nth-child(1) {
+    animation-duration: 0.8s;
+}
+
+.player-container.playing .v-bar:nth-child(2) {
+    animation-duration: 1.1s;
+}
+
+.player-container.playing .v-bar:nth-child(3) {
+    animation-duration: 1.3s;
+}
+
+.player-container.playing .v-bar:nth-child(4) {
+    animation-duration: 0.9s;
+}
+
+.player-container.playing .v-bar:nth-child(5) {
+    animation-duration: 1.0s;
+}
+
+.player-container.playing .v-bar:nth-child(6) {
+    animation-duration: 1.2s;
+}
+
+.player-container.playing .v-bar:nth-child(7) {
+    animation-duration: 1.4s;
+}
+
+.player-container.playing .v-bar:nth-child(8) {
+    animation-duration: 1.1s;
+}
+
+@keyframes soundWave {
+
+    0%,
+    100% {
+        height: 20%;
+    }
+
+    50% {
+        height: 80%;
+    }
 }
