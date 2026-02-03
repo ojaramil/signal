@@ -488,7 +488,20 @@
                     </p>
                 </div>
 
-                <div class="hero-actions">
+                <!-- NEWS TICKER (Mix Proposal 1) -->
+                <div class="news-ticker-container">
+                    <div class="ticker-wrapper">
+                        <div class="ticker-item">✨ Conectamos capacidades con oportunidades. <a
+                                href="https://autenticamentecapaces.work" target="_blank">Visita nuestro ecosistema de
+                                inclusión</a></div>
+                        <div class="ticker-item">🛒 Diseño desde la Neurodivergencia. <a
+                                href="https://tienda.aspergerparaasperger.org" target="_blank">Apoya nuestra misión</a>
+                        </div>
+                        <div class="ticker-item">🎙️ Signal Radio: Tu espacio de enfoque y conexión.</div>
+                    </div>
+                </div>
+
+                <div class="hero-actions" style="margin-top: 30px;">
                     <!-- Removed Play Button since player is active -->
                     <a href="#community" class="btn btn-outline btn-lg" data-i18n="hero_community">Sumarse a la
                         comunidad</a>
@@ -782,19 +795,27 @@
                                 instrumental para el enfoque</strong> y <strong>voces neurodivergentes para la
                                 conexión</strong>. El equilibrio perfecto entre productividad y compañía.</p>
                     </div>
-                    <div class="card">
-                        <div class="card-icon"><i class='bx bx-message-rounded-dots'></i></div>
-                        <h3 data-i18n="card2_title">Comunicación Social</h3>
-                        <p data-i18n="card2_desc">Plataformas de expresión que conectan historias reales con una
-                            audiencia global.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon"><i class='bx bx-chip'></i></div>
-                        <h3 data-i18n="card3_title">Tecnología</h3>
-                        <p data-i18n="card3_desc">Innovación en formatos digitales y herramientas accesibles para la
-                            creación de contenidos.
-                        </p>
-                    </div>
+
+                    <!-- Card 2: Empleo/Talento (Action Card) -->
+                    <a href="https://autenticamentecapaces.work" target="_blank" class="card action-card">
+                        <div class="card-icon"><i class='bx bx-briefcase'></i></div>
+                        <h3 data-i18n="card2_title">Ecosistema de Talento</h3>
+                        <p data-i18n="card2_desc">Un puente entre el potencial neurodivergente y oportunidades reales de
+                            desarrollo.</p>
+                        <div class="card-cta" data-i18n="card2_cta">Explorar Ecosistema <i
+                                class='bx bx-right-arrow-alt'></i>
+                        </div>
+                    </a>
+
+                    <!-- Card 3: Tienda (Action Card) -->
+                    <a href="https://tienda.aspergerparaasperger.org" target="_blank" class="card action-card">
+                        <div class="card-icon"><i class='bx bx-store'></i></div>
+                        <h3 data-i18n="card3_title">Identidad y Propósito</h3>
+                        <p data-i18n="card3_desc">Viste el orgullo de la neurodivergencia. Cada diseño apoya la
+                            continuidad de esta señal.</p>
+                        <div class="card-cta" data-i18n="card3_cta">Ver Colección <i class='bx bx-right-arrow-alt'></i>
+                        </div>
+                    </a>
                     <div class="card highlight-card"
                         style="position: relative; overflow: hidden; border: 1px solid var(--accent-secondary);">
                         <div
@@ -1338,14 +1359,11 @@
                 'about_desc': 'Signal Radio es la señal pionera de Asperger para Asperger® hacia el mundo. Somos el primer escenario sonoro diseñado para todos donde el talento neurodivergente hispano lidera una programación musical global. Con el respaldo de una década de trayectoria de Asperger para Asperger®, derribamos barreras para la convivencia e inclusión laboral de toda la diversidad cognitiva.',
                 'services_title': 'Nuestra',
                 'services_highlight': 'Señal',
-                'card1_title': 'Radio Online',
-                'card1_desc': 'Un ecosistema sonoro diseñado para tu mente: <strong>Música instrumental para el enfoque</strong> y <strong>voces neurodivergentes para la conexión</strong>. El equilibrio perfecto entre productividad y compañía.',
-                'card2_title': 'Comunicación Social',
-                'card2_desc': 'Plataformas de expresión que conectan historias reales con una audiencia global.',
-                'card3_title': 'Tecnología',
-                'card3_desc': 'Innovación en formatos digitales y herramientas accesibles para la creación de contenidos.',
-                'card4_title': 'Oportunidades',
-                'card4_desc': 'Desarrollo profesional real y participación activa en proyectos creativos.',
+                card1_title: "Radio Online", card1_desc: "Un ecosistema sonoro diseñado para tu mente: <strong>Música instrumental para el enfoque</strong> y <strong>voces neurodivergentes para la conexión</strong>.",
+                card2_title: "Ecosistema de Talento", card2_desc: "Un puente entre el potencial neurodivergente y oportunidades reales de desarrollo.", card2_cta: "Explorar Ecosistema",
+                card3_title: "Identidad y Propósito", card3_desc: "Expresiones auténticas desde y para la neurodivergencia. Productos que apoyan la causa.", card3_cta: "Ver Colección",
+                'card4_title': 'Programa Embajadores',
+                'card4_desc': '<strong>Para Adultos:</strong> Potencia tu Marca Personal. Recibe capacitación y dirige tu propio programa en nuestra señal.',
                 'values_title': 'Impacto y',
                 'values_highlight': 'Valores',
                 'value1_title': 'Inclusión',
@@ -1463,15 +1481,12 @@
                 'about_lead': 'Labor inclusion initiative <strong class="text-cyan">Asperger para Asperger®</strong>.',
                 'about_desc': 'Signal Radio is the pioneer signal from Asperger para Asperger® to the world. We are the first acoustic stage designed for everyone, where Hispanic neurodivergent talent leads a global musical programming. Backed by a decade of experience from Asperger para Asperger®, we tear down barriers for coexistence and workplace inclusion for all cognitive diversity.',
                 'services_title': 'Our',
-                'services_highlight': 'Signal',
-                'card1_title': 'Online Radio',
-                'card1_desc': 'A sound ecosystem designed for your mind: <strong>Instrumental music for focus</strong> and <strong>neurodivergent voices for connection</strong>. The perfect balance between productivity and company.',
-                'card2_title': 'Social Communication',
-                'card2_desc': 'Expression platforms bridging real stories with a global audience.',
-                'card3_title': 'Technology',
-                'card3_desc': 'Innovation in digital formats and accessible tools for content creation.',
-                'card4_title': 'Opportunities',
-                'card4_desc': 'Real professional development and active participation in creative projects.',
+                'services_highlight': 'Solutions',
+                card1_title: "Online Radio", card1_desc: "A sound ecosystem designed for your mind: <strong>Instrumental music for focus</strong> and <strong>neurodivergent voices for connection</strong>.",
+                card2_title: "Talent Ecosystem", card2_desc: "A bridge between neurodivergent potential and real development opportunities.", card2_cta: "Explore Ecosystem",
+                card3_title: "Identity & Purpose", card3_desc: "Authentic expressions from and for neurodivergence. Products that support the cause.", card3_cta: "View Collection",
+                'card4_title': 'Ambassador Program',
+                'card4_desc': '<strong>For Adults:</strong> Boost your Personal Brand. Receive training and host your own show.',
                 'values_title': 'Impact &',
                 'values_highlight': 'Values',
                 'value1_title': 'Inclusion',
