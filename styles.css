@@ -1932,7 +1932,7 @@ ul {
 
 /* --- CINTILLA DE NOTICIAS (NEWS TICKER) --- */
 .news-ticker-container {
-    margin-top: 20px;
+    margin: 20px auto 0 auto;
     height: 40px;
     overflow: hidden;
     position: relative;
