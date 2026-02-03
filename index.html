@@ -1739,6 +1739,24 @@
             btnEl.style.display = 'none';
         }
 
+        // 3. VISUALIZER & AUDIO SYNC (Robust)
+        document.addEventListener('DOMContentLoaded', () => {
+            const audioPlayer = document.getElementById('mainRadio');
+            const playerContainer = document.getElementById('listen');
+
+            if (audioPlayer && playerContainer) {
+                audioPlayer.addEventListener('play', () => {
+                    playerContainer.classList.add('playing');
+                });
+                audioPlayer.addEventListener('pause', () => {
+                    playerContainer.classList.remove('playing');
+                });
+                audioPlayer.addEventListener('ended', () => {
+                    playerContainer.classList.remove('playing');
+                });
+            }
+        });
+
         // Initialize clocks
         initClocks();
 
