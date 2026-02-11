@@ -1962,13 +1962,11 @@ ul {
     align-items: center;
     justify-content: center;
     opacity: 0;
-    /* Oculto por defecto */
     animation: rotateTicker 15s infinite;
     padding: 0 15px;
     font-size: 0.9rem;
     text-align: center;
-    pointer-events: none;
-    /* Evita clics fantasma cuando está oculto */
+    pointer-events: auto;
 }
 
 .ticker-item a {
@@ -2001,6 +1999,7 @@ ul {
     0% {
         opacity: 0;
         transform: translateY(10px);
+        pointer-events: none;
     }
 
     5% {
