@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Signal Radio App</title>
+    <style>
+        /* 1. Reset total para el contenedor principal */
+        *,
+        *::before,
+        *::after {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #050510;
+            /* Color de fondo oscuro de tu marca */
+            overflow: hidden;
+            /* BLOQUEA el scroll elástico de iOS en el body */
+            -webkit-overflow-scrolling: touch;
+        }
+
+        /* 2. El Iframe ocupa todo el espacio disponible */
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+            background-color: #050510;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Carga tu contenido móvil aquí -->
+    <iframe src="app-mobile.html" id="appFrame" title="Signal Radio App"></iframe>
+</body>
+
+</html>
