@@ -1983,6 +1983,14 @@ ul {
 }
 
 /* Animación escalonada para 3 items - Total 15s (5s cada uno) */
+/* Revised Logic: 5 items, 25s total loop (5s each) */
+.ticker-item {
+    position: absolute;
+    width: 100%;
+    opacity: 0;
+    animation: rotateTickerNew 25s infinite;
+}
+
 .ticker-item:nth-child(1) {
     animation-delay: 0s;
 }
@@ -1995,26 +2003,34 @@ ul {
     animation-delay: 10s;
 }
 
-@keyframes rotateTicker {
+.ticker-item:nth-child(4) {
+    animation-delay: 15s;
+}
+
+.ticker-item:nth-child(5) {
+    animation-delay: 20s;
+}
+
+@keyframes rotateTickerNew {
     0% {
         opacity: 0;
         transform: translateY(10px);
         pointer-events: none;
     }
 
-    5% {
+    2% {
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
     }
 
-    30% {
+    18% {
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
     }
 
-    35% {
+    20% {
         opacity: 0;
         transform: translateY(-10px);
         pointer-events: none;
