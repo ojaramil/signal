@@ -66,21 +66,25 @@
 
         html {
             background-color: var(--bg-color);
+            /* #050510 */
             height: 100%;
+            overscroll-behavior-y: none;
+            /* Previene el rebote blanco en iOS */
         }
 
         body {
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            /* Asegura que cubra toda la pantalla */
             margin: 0;
             padding: 0;
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background-color: var(--bg-color);
             color: var(--text-color);
             overflow-x: hidden;
-            padding-bottom: calc(var(--bottom-nav-height) + 20px);
-            /* Space for bottom nav */
-            /* Safe Area for notched phones */
+            /* Safe Area coloring fix */
             padding-top: env(safe-area-inset-top);
             padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom));
+            -webkit-overflow-scrolling: touch;
         }
 
         /* --- UI COMPONENTS FOR MOBILE --- */
