@@ -531,22 +531,22 @@
                     </div>
                 </div>
 
-                <!-- Card 2: Ep 165 -->
+                <!-- Card: Ezra -->
                 <div class="schedule-mini">
-                    <div class="s-day" id="t-sch2-badge">DIFERIDO</div>
-                    <div class="s-title">Sintonizando con el Autismo #165</div>
-                    <div class="s-meta" id="t-sch2-topic">Tema: Consulta Pediátrica y Autismo</div>
-                    <div class="s-meta">Guest: Dr. Jesus Rojas</div>
-                    <div class="s-meta">7:00 AM | 26 Ene - 31 Ene</div>
+                    <div class="s-day" id="t-sch1-badge">DIFERIDO</div>
+                    <div class="s-title">Signal Radio CLub Talks</div>
+                    <div class="s-meta" id="t-sch1-topic">Tema: Projectopia.live</div>
+                    <div class="s-meta">Guest: Ezra "The CoderzLegend"</div>
+                    <div class="s-meta">12:30 PM EST | 1 Feb - 11 Feb</div>
                 </div>
 
-                <!-- Card 3: Ep 166 -->
+                <!-- Card: Ignacio -->
                 <div class="schedule-mini">
-                    <div class="s-day" id="t-sch4-badge">DIFERIDO</div>
-                    <div class="s-title">Sintonizando con el Autismo #166</div>
-                    <div class="s-meta" id="t-sch4-topic">Tema: Migración y Cambio</div>
-                    <div class="s-meta">Guest: Andrés Galli</div>
-                    <div class="s-meta">7:00 AM | 26 Ene - 31 Ene</div>
+                    <div class="s-day" id="t-sch3-badge">DIFERIDO</div>
+                    <div class="s-title">Signal Radio CLub Talks</div>
+                    <div class="s-meta" id="t-sch3-topic">Tema: Habilidades Sociales</div>
+                    <div class="s-meta">Guest: Ignacio CF</div>
+                    <div class="s-meta">7:00 PM EST | 28 Ene - 11 Feb</div>
                 </div>
             </div>
 
@@ -742,8 +742,8 @@
                 's_def': 'DIFERIDO',
                 's_live_thu': 'ESTRENO - JUEVES',
                 's_futbol_desc': 'Análisis, debate y pasión por el deporte rey desde una perspectiva única.',
-                's2_topic': 'Tema: Consulta Pediátrica y Autismo',
-                's4_topic': 'Tema: Migración y Cambio',
+                's1_topic': 'Tema: Projectopia.live',
+                's3_topic': 'Tema: Habilidades Sociales',
                 'android_soon': 'PRONTO'
             },
             'en': {
@@ -763,8 +763,8 @@
                 's_def': 'DEFERRED',
                 's_live_thu': 'PREMIERE - THURSDAY',
                 's_futbol_desc': 'Analysis, debate, and passion for the beautiful game from a unique perspective.',
-                's2_topic': 'Topic: Pediatric Consultation & Autism',
-                's4_topic': 'Topic: Migration and Change',
+                's1_topic': 'Topic: Projectopia.live',
+                's3_topic': 'Topic: Social Skills',
                 'android_soon': 'SOON'
             }
         };
@@ -798,11 +798,11 @@
             document.getElementById('t-sch-futbol-badge').innerText = t.s_live_thu;
             document.getElementById('t-sch-futbol-desc').innerText = t.s_futbol_desc;
 
-            // Restore Sintonizando Cards logic
-            document.getElementById('t-sch2-badge').innerText = t.s_def;
-            document.getElementById('t-sch4-badge').innerText = t.s_def;
-            document.getElementById('t-sch2-topic').innerText = t.s2_topic;
-            document.getElementById('t-sch4-topic').innerText = t.s4_topic;
+            // Restore Talks Cards logic
+            document.getElementById('t-sch1-badge').innerText = t.s_def;
+            document.getElementById('t-sch3-badge').innerText = t.s_def;
+            document.getElementById('t-sch1-topic').innerText = t.s1_topic;
+            document.getElementById('t-sch3-topic').innerText = t.s3_topic;
 
             document.getElementById('t-android-soon').innerText = t.android_soon;
 
