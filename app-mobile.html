@@ -519,6 +519,7 @@
             <div class="card-list">
                 <!-- Schedule Items Updated -->
                 <!-- Card 1: Hablando de Futbol -->
+                <!-- Card 1: Hablando de Futbol -->
                 <div class="schedule-mini" style="border-left-color: #00f0ff;">
                     <div class="s-day" id="t-sch-futbol-badge">EN VIVO - JUEVES</div>
                     <div class="s-title">Hablando de Fútbol con Gómez y López</div>
@@ -528,6 +529,24 @@
                     <div class="s-meta" id="t-sch-futbol-time">
                         🇪🇸 21:00 | 🇦🇷 17:00 | 🇨🇴 15:00 | 🇲🇽 14:00
                     </div>
+                </div>
+
+                <!-- Card 2: Ep 165 -->
+                <div class="schedule-mini">
+                    <div class="s-day" id="t-sch2-badge">DIFERIDO</div>
+                    <div class="s-title">Sintonizando con el Autismo #165</div>
+                    <div class="s-meta" id="t-sch2-topic">Tema: Consulta Pediátrica y Autismo</div>
+                    <div class="s-meta">Guest: Dr. Jesus Rojas</div>
+                    <div class="s-meta">7:00 AM | 26 Ene - 31 Ene</div>
+                </div>
+
+                <!-- Card 3: Ep 166 -->
+                <div class="schedule-mini">
+                    <div class="s-day" id="t-sch4-badge">DIFERIDO</div>
+                    <div class="s-title">Sintonizando con el Autismo #166</div>
+                    <div class="s-meta" id="t-sch4-topic">Tema: Migración y Cambio</div>
+                    <div class="s-meta">Guest: Andrés Galli</div>
+                    <div class="s-meta">7:00 AM | 26 Ene - 31 Ene</div>
                 </div>
             </div>
 
@@ -723,6 +742,8 @@
                 's_def': 'DIFERIDO',
                 's_live_thu': 'EN VIVO - JUEVES',
                 's_futbol_desc': 'Análisis, debate y pasión por el deporte rey desde una perspectiva única.',
+                's2_topic': 'Tema: Consulta Pediátrica y Autismo',
+                's4_topic': 'Tema: Migración y Cambio',
                 'android_soon': 'PRONTO'
             },
             'en': {
@@ -742,6 +763,8 @@
                 's_def': 'DEFERRED',
                 's_live_thu': 'LIVE - THURSDAY',
                 's_futbol_desc': 'Analysis, debate, and passion for the beautiful game from a unique perspective.',
+                's2_topic': 'Topic: Pediatric Consultation & Autism',
+                's4_topic': 'Topic: Migration and Change',
                 'android_soon': 'SOON'
             }
         };
@@ -774,6 +797,13 @@
 
             document.getElementById('t-sch-futbol-badge').innerText = t.s_live_thu;
             document.getElementById('t-sch-futbol-desc').innerText = t.s_futbol_desc;
+
+            // Restore Sintonizando Cards logic
+            document.getElementById('t-sch2-badge').innerText = t.s_def;
+            document.getElementById('t-sch4-badge').innerText = t.s_def;
+            document.getElementById('t-sch2-topic').innerText = t.s2_topic;
+            document.getElementById('t-sch4-topic').innerText = t.s4_topic;
+
             document.getElementById('t-android-soon').innerText = t.android_soon;
 
             document.getElementById('t-values').innerText = t.values;
