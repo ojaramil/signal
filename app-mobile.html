@@ -531,22 +531,15 @@
                     </div>
                 </div>
 
-                <!-- Card: Ezra -->
+                <!-- Card: Sintonizando -->
                 <div class="schedule-mini">
-                    <div class="s-day" id="t-sch1-badge">DIFERIDO</div>
-                    <div class="s-title">Signal Radio CLub Talks</div>
-                    <div class="s-meta" id="t-sch1-topic">Tema: Projectopia.live</div>
-                    <div class="s-meta">Guest: Ezra "The CoderzLegend"</div>
-                    <div class="s-meta">12:30 PM EST | 1 Feb - 11 Feb</div>
-                </div>
-
-                <!-- Card: Ignacio -->
-                <div class="schedule-mini">
-                    <div class="s-day" id="t-sch3-badge">DIFERIDO</div>
-                    <div class="s-title">Signal Radio CLub Talks</div>
-                    <div class="s-meta" id="t-sch3-topic">Tema: Habilidades Sociales</div>
-                    <div class="s-meta">Guest: Ignacio CF</div>
-                    <div class="s-meta">7:00 PM EST | 28 Ene - 11 Feb</div>
+                    <div class="s-day" id="t-sch-sintonizando-badge">DIFERIDO</div>
+                    <div class="s-title">Sintonizando con el Autismo</div>
+                    <div class="s-meta" id="t-sch-sintonizando-topic">Tema: Variedad de temas sobre el espectro</div>
+                    <div class="s-meta">Host: Federico Garcia</div>
+                    <div class="s-meta">
+                        <span id="t-sch-sintonizando-time">🇪🇸 13:00 | 🇦🇷 09:00 | 🇨🇴 07:00 | 🇲🇽 06:00</span>
+                    </div>
                 </div>
             </div>
 
@@ -742,8 +735,7 @@
                 's_def': 'DIFERIDO',
                 's_live_thu': 'ESTRENO - JUEVES',
                 's_futbol_desc': 'Análisis, debate y pasión por el deporte rey desde una perspectiva única.',
-                's1_topic': 'Tema: Projectopia.live',
-                's3_topic': 'Tema: Habilidades Sociales',
+                's_sint_topic': 'Tema: Variedad de temas sobre el espectro',
                 'android_soon': 'PRONTO'
             },
             'en': {
@@ -763,8 +755,7 @@
                 's_def': 'DEFERRED',
                 's_live_thu': 'PREMIERE - THURSDAY',
                 's_futbol_desc': 'Analysis, debate, and passion for the beautiful game from a unique perspective.',
-                's1_topic': 'Topic: Projectopia.live',
-                's3_topic': 'Topic: Social Skills',
+                's_sint_topic': 'Topic: Variety of topics about the spectrum',
                 'android_soon': 'SOON'
             }
         };
@@ -799,10 +790,8 @@
             document.getElementById('t-sch-futbol-desc').innerText = t.s_futbol_desc;
 
             // Restore Talks Cards logic
-            document.getElementById('t-sch1-badge').innerText = t.s_def;
-            document.getElementById('t-sch3-badge').innerText = t.s_def;
-            document.getElementById('t-sch1-topic').innerText = t.s1_topic;
-            document.getElementById('t-sch3-topic').innerText = t.s3_topic;
+            document.getElementById('t-sch-sintonizando-badge').innerText = t.s_def;
+            document.getElementById('t-sch-sintonizando-topic').innerText = t.s_sint_topic;
 
             document.getElementById('t-android-soon').innerText = t.android_soon;
 
