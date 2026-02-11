@@ -472,7 +472,9 @@
                             </g>
                         </svg>
                     </span>
-                    <span style="display: inline-block; cursor: default; opacity: 0.9;">
+                    <span style="display: inline-block; cursor: default; opacity: 0.9; position: relative;">
+                        <span id="t-android-soon"
+                            style="position: absolute; top: -10px; right: -10px; background: #ff4757; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.6rem; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.3); z-index: 10;">PRONTO</span>
                         <svg xmlns="http://www.w3.org/2000/svg" width="135" height="36" viewBox="0 0 157 42">
                             <rect width="157" height="42" rx="7" fill="#000" stroke="#A6A6A6" stroke-width="1" />
                             <text x="55" y="14" fill="#fff" font-family="Arial, sans-serif" font-size="7"
@@ -746,7 +748,8 @@
                 's1_topic': 'Tema: Projectopia.live',
                 's2_topic': 'Tema: Consulta Pediátrica y Autismo',
                 's3_topic': 'Tema: Habilidades Sociales',
-                's4_topic': 'Tema: Migración y Cambio'
+                's4_topic': 'Tema: Migración y Cambio',
+                'android_soon': 'PRONTO'
             },
             'en': {
                 'live': 'LIVE', 'subtitle': 'The first Hispanic-led open signal for the world. Backed by a decade of experience, we use global music and neurodivergent voices as a bridge for coexistence and workplace inclusion of all cognitive diversity.',
@@ -766,7 +769,8 @@
                 's1_topic': 'Topic: Projectopia.live',
                 's2_topic': 'Topic: Pediatric Consultation & Autism',
                 's3_topic': 'Topic: Social Skills',
-                's4_topic': 'Topic: Migration and Change'
+                's4_topic': 'Topic: Migration and Change',
+                'android_soon': 'SOON'
             }
         };
 
@@ -805,6 +809,7 @@
             document.getElementById('t-sch2-topic').innerText = t.s2_topic;
             document.getElementById('t-sch3-topic').innerText = t.s3_topic;
             document.getElementById('t-sch4-topic').innerText = t.s4_topic;
+            document.getElementById('t-android-soon').innerText = t.android_soon;
 
             document.getElementById('t-values').innerText = t.values;
             document.getElementById('t-val1').innerText = t.v1;

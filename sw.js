@@ -1,4 +1,4 @@
-const CACHE_NAME = 'signal-radio-v1';
+const CACHE_NAME = 'signal-radio-v3';
 const urlsToCache = [
   './',
   './index.html',
