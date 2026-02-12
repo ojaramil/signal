@@ -85,7 +85,17 @@
             padding-top: env(safe-area-inset-top);
             padding-bottom: 0;
             -webkit-overflow-scrolling: touch;
+            position: fixed;
+            width: 100%;
+            overflow: hidden;
         }
+
+        body,
+        html {
+            height: 100%;
+            background: var(--bg-color);
+        }
+
 
         /* --- UI COMPONENTS FOR MOBILE --- */
 
@@ -150,6 +160,12 @@
         .app-content {
             padding: 20px;
             padding-bottom: calc(var(--bottom-nav-height) + env(safe-area-inset-bottom));
+
+            /* 🔥 CLAVE */
+            min-height: 100svh;
+            /* mejor que 100dvh en WebView */
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         /* Hero Card (Replica of Main Site but Card-based) */
