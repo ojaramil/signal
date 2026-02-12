@@ -5,6 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport"
         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>SIGNAL RADIO | La Primera Señal Abierta Neuro-Inclusiva</title>
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-HJBBLT3CT5"></script>
@@ -65,16 +67,17 @@
         }
 
         html {
-            background-color: var(--bg-color);
+            background-color: var(--bg-color) !important;
             /* #050510 */
             height: 100%;
+            width: 100%;
             overscroll-behavior-y: none;
             /* Previene el rebote blanco en iOS */
         }
 
         body {
-            background-color: var(--bg-color);
-            min-height: 100vh;
+            background-color: var(--bg-color) !important;
+            min-height: 100dvh;
             /* Asegura que cubra toda la pantalla */
             margin: 0;
             padding: 0;
