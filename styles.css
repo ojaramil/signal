@@ -312,12 +312,13 @@ ul {
 /* Hero Section */
 .hero-section {
     position: relative;
-    height: 100vh;
+    min-height: 100vh;
+    height: auto;
     display: flex;
     align-items: flex-start;
     justify-content: center;
     overflow: hidden;
-    padding-top: 180px;
+    padding-top: 140px;
     /* Offset for fixed header */
 }
 
@@ -424,12 +425,13 @@ ul {
 
 .scroll-down {
     position: absolute;
-    bottom: 30px;
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     font-size: 2rem;
     color: var(--accent-primary);
     animation: bounce 2s infinite;
+    z-index: 10;
 }
 
 @keyframes bounce {
@@ -1206,6 +1208,10 @@ ul {
     font-size: 0.9rem;
     letter-spacing: 1px;
     text-transform: uppercase;
+    max-width: 90%;
+    text-align: center;
+    white-space: normal;
+    line-height: 1.2;
     animation: bounce 2s infinite;
 }
 
@@ -1931,19 +1937,22 @@ ul {
 }
 
 /* --- CINTILLA DE NOTICIAS (NEWS TICKER) --- */
+/* --- CINTILLA DE NOTICIAS (NEWS TICKER) --- */
 .news-ticker-container {
-    margin: 20px auto 0 auto;
-    height: 40px;
+    margin: 25px auto 0 auto;
+    height: 48px;
     overflow: hidden;
     position: relative;
     width: 100%;
-    max-width: 600px;
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    max-width: 650px;
+    background: rgba(0, 0, 0, 0.85);
+    border-radius: 24px;
+    border: 1px solid rgba(0, 240, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 50;
 }
 
 .ticker-wrapper {
@@ -1959,14 +1968,22 @@ ul {
     width: 100%;
     height: 100%;
     display: flex;
-    align-items: center;
+    flex-direction: column;
+    /* Allows stacking if needed */
     justify-content: center;
-    opacity: 0;
-    animation: rotateTicker 15s infinite;
+    align-items: center;
     padding: 0 15px;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
+    /* Smaller for cleaner fit */
+    line-height: 1.2;
     text-align: center;
+    color: #ffffff !important;
+    font-weight: 500;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    animation: tickerFadeLoop 15s infinite;
     pointer-events: auto;
+    z-index: 51;
 }
 
 .ticker-item a {
@@ -1975,22 +1992,15 @@ ul {
     margin-left: 5px;
     text-decoration: none;
     pointer-events: auto;
-    /* Reactiva el link */
+    transition: color 0.3s;
 }
 
 .ticker-item a:hover {
     text-decoration: underline;
+    color: #fff;
 }
 
-/* Animación escalonada para 3 items - Total 15s (5s cada uno) */
-/* Revised Logic: 5 items, 25s total loop (5s each) */
-.ticker-item {
-    position: absolute;
-    width: 100%;
-    opacity: 0;
-    animation: rotateTickerNew 25s infinite;
-}
-
+/* Animation Delays for 3 Items */
 .ticker-item:nth-child(1) {
     animation-delay: 0s;
 }
@@ -2003,34 +2013,26 @@ ul {
     animation-delay: 10s;
 }
 
-.ticker-item:nth-child(4) {
-    animation-delay: 15s;
-}
-
-.ticker-item:nth-child(5) {
-    animation-delay: 20s;
-}
-
-@keyframes rotateTickerNew {
+@keyframes tickerFadeLoop {
     0% {
         opacity: 0;
         transform: translateY(10px);
         pointer-events: none;
     }
 
-    2% {
+    3% {
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
     }
 
-    18% {
+    30% {
         opacity: 1;
         transform: translateY(0);
         pointer-events: auto;
     }
 
-    20% {
+    33% {
         opacity: 0;
         transform: translateY(-10px);
         pointer-events: none;

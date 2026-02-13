@@ -522,25 +522,37 @@
             <div class="card-list">
                 <!-- Schedule Items Updated -->
                 <!-- Card 1: Hablando de Futbol -->
-                <!-- Card 1: Hablando de Futbol -->
                 <div class="schedule-mini" style="border-left-color: #00f0ff;">
-                    <div class="s-day" id="t-sch-futbol-badge">ESTRENO - JUEVES</div>
+                    <div class="s-day" id="t-sch-futbol-badge">REPETICIÓN DE VIERNES A MIERCOLES - ESTRENO LOS JUEVES
+                    </div>
                     <div class="s-title">Hablando de Fútbol con Gómez y López</div>
                     <div class="s-meta" id="t-sch-futbol-desc">Análisis, debate y pasión por el deporte rey desde una
                         perspectiva única.</div>
                     <div class="s-meta">Hosts: Gómez & López</div>
                     <div class="s-meta" id="t-sch-futbol-time">
-                        🇪🇸 21:00 | 🇦🇷 17:00 | 🇨🇴 15:00 | 🇲🇽 14:00
+                        🇪🇸 9:00 PM | 🇦🇷 5:00 PM | 🇻🇪 4:00 PM | 🇨🇴 3:00 PM | 🇲🇽 2:00 PM
+                    </div>
+                </div>
+
+                <!-- Card: Charlas Talks (NEW) -->
+                <div class="schedule-mini" style="border-left-color: #f0f;">
+                    <div class="s-day" id="t-sch-talks-badge">LUNES A DOMINGO</div>
+                    <div class="s-title" id="t-sch-talks-title">Charlas Talks: Construyendo Realidades</div>
+                    <div class="s-meta" id="t-sch-talks-desc">Conversaciones que inspiran y transforman realidades.
+                    </div>
+                    <div class="s-meta" id="t-sch-talks-time">
+                        🇪🇸 6:30 PM | 🇦🇷 2:30 PM | 🇻🇪 1:30 PM | 🇨🇴 12:30 PM | 🇲🇽 11:30 AM
                     </div>
                 </div>
 
                 <!-- Card: Sintonizando -->
                 <div class="schedule-mini">
-                    <div class="s-day" id="t-sch-sintonizando-badge">DIFERIDO</div>
+                    <div class="s-day" id="t-sch-sintonizando-badge">LUNES A DOMINGO</div>
                     <div class="s-title">Sintonizando con el Autismo</div>
                     <div class="s-meta" id="t-sch-sintonizando-topic">Invitados Varios</div>
                     <div class="s-meta">
-                        <span id="t-sch-sintonizando-time">🇪🇸 13:00 | 🇦🇷 09:00 | 🇨🇴 07:00 | 🇲🇽 06:00</span>
+                        <span id="t-sch-sintonizando-time">🇪🇸 1:00 AM (+1) | 🇦🇷 9:00 PM | 🇻🇪 8:00 PM | 🇨🇴 7:00
+                            PM | 🇲🇽 6:00 PM</span>
                     </div>
                 </div>
             </div>
@@ -734,10 +746,12 @@
                 'trust': 'RECONOCIMIENTOS',
                 'ogen': 'Mensaje General', 'ofoc': 'Música para Concentrarse', 'orel': 'Música para Relajarse', 'oene': 'Música para Subir Ánimo',
                 // Schedule
-                's_def': 'DIFERIDO',
-                's_live_thu': 'ESTRENO - JUEVES',
+                's_daily': 'LUNES A DOMINGO',
+                's_live_thu': 'DE JUEVES A JUEVES - ESTRENO LOS JUEVES',
                 's_futbol_desc': 'Análisis, debate y pasión por el deporte rey desde una perspectiva única.',
                 's_sint_topic': 'Invitados Varios',
+                's_talks_title': 'Charlas Talks: Construyendo Realidades',
+                's_talks_desc': 'Conversaciones que inspiran y transforman realidades.',
                 'android_soon': 'PRONTO'
             },
             'en': {
@@ -754,10 +768,12 @@
                 'trust': 'RECOGNITIONS',
                 'ogen': 'General Message', 'ofoc': 'Music for Focus', 'orel': 'Music for Relax', 'oene': 'Music for Energy',
                 // Schedule
-                's_def': 'DEFERRED',
-                's_live_thu': 'PREMIERE - THURSDAY',
+                's_daily': 'MONDAY TO SUNDAY',
+                's_live_thu': 'THURSDAY TO THURSDAY - PREMIERE THURSDAYS',
                 's_futbol_desc': 'Analysis, debate, and passion for the beautiful game from a unique perspective.',
                 's_sint_topic': 'Various Guests',
+                's_talks_title': 'Charlas Talks: Building Realities',
+                's_talks_desc': 'Conversations that inspire and transform realities.',
                 'android_soon': 'SOON'
             }
         };
@@ -792,8 +808,13 @@
             document.getElementById('t-sch-futbol-desc').innerText = t.s_futbol_desc;
 
             // Restore Talks Cards logic
-            document.getElementById('t-sch-sintonizando-badge').innerText = t.s_def;
+            document.getElementById('t-sch-sintonizando-badge').innerText = t.s_daily;
             document.getElementById('t-sch-sintonizando-topic').innerText = t.s_sint_topic;
+
+            // Talks Card
+            document.getElementById('t-sch-talks-badge').innerText = t.s_daily;
+            document.getElementById('t-sch-talks-title').innerText = t.s_talks_title;
+            document.getElementById('t-sch-talks-desc').innerText = t.s_talks_desc;
 
             document.getElementById('t-android-soon').innerText = t.android_soon;
 
