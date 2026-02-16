@@ -623,6 +623,16 @@
                 </div>
 
                 <script>
+                    // Anti-Copy & Inspection Protection
+                    document.addEventListener('contextmenu', event => event.preventDefault());
+                    document.onkeydown = function (e) {
+                        if (e.keyCode == 123) return false; // F12
+                        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
+                        if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
+                        if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
+                        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U
+                    };
+
                     function playSmartVideo() {
                         // 1. Pause Radio Audio (Neuro-Friendly: No Audio Conflict)
                         const mainRadio = document.getElementById('mainRadio');
@@ -641,12 +651,21 @@
                             }
                         }
 
-                        // 2. Load YouTube Player (Autoplay)
+                        // 2. Load YouTube Player (Autoplay + Obfuscated + Protected Params)
                         const container = document.getElementById('smart-video-container');
+
+                        // Obfuscated Base URL (Base64 for: https://www.youtube-nocookie.com/embed/)
+                        const _0x1a2b = atob('aHR0cHM6Ly93d3cueW91dHViZS1ub2Nvb2tpZS5jb20vZW1iZWQv');
+                        const _0x3c4d = 'sht_GWXginA'; // Video ID
+                        // Params: Autoplay, No Related (from others), No Branding, No Keyboard
+                        const _0x5e6f = '?autoplay=1&modestbranding=1&rel=0&disablekb=1&controls=1';
+
+                        const videoSrc = _0x1a2b + _0x3c4d + _0x5e6f;
+
                         container.innerHTML = `
                             <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;"
-                                src="https://www.youtube-nocookie.com/embed/sht_GWXginA?autoplay=1" 
-                                title="Transmisión Especial 18F" 
+                                src="${videoSrc}" 
+                                title="Transmisión Especial" 
                                 frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
                                 referrerpolicy="strict-origin-when-cross-origin" 
