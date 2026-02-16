@@ -606,15 +606,56 @@
                         data-i18n="event_title_2">18F</span></h2>
 
                 <!-- Video Embed: Index 2 Style -->
-                <div
-                    style="width:100%;position:relative;padding-top:56.25%;margin-bottom:2rem;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,240,255,0.1);border: 1px solid rgba(255,255,255,0.1);">
-                    <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;"
-                        src="https://www.youtube-nocookie.com/embed/sht_GWXginA" title="Transmisión Especial 18F"
-                        frameborder="0" referrerpolicy="strict-origin-when-cross-origin"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                        allowfullscreen>
-                    </iframe>
+                <!-- Intelligent Video Facade: Pauses Radio on Click -->
+                <div id="smart-video-container"
+                    style="width:100%;position:relative;padding-top:56.25%;margin-bottom:2rem;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,240,255,0.1);border: 1px solid rgba(255,255,255,0.1); background: #000; cursor: pointer;">
+
+                    <!-- Cover Image & Play Button -->
+                    <div id="video-cover" onclick="playSmartVideo()"
+                        style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background-image:url('https://img.youtube.com/vi/sht_GWXginA/maxresdefault.jpg');background-size:cover;background-position:center;">
+                        <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);">
+                        </div> <!-- Overlay Dark -->
+                        <div
+                            style="width:80px;height:80px;background:rgba(255,0,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(255,0,0,0.5);z-index:10;transition:transform 0.3s;">
+                            <i class='bx bx-play' style="font-size:3.5rem;color:#fff;margin-left:5px;"></i>
+                        </div>
+                    </div>
                 </div>
+
+                <script>
+                    function playSmartVideo() {
+                        // 1. Pause Radio Audio (Neuro-Friendly: No Audio Conflict)
+                        const mainRadio = document.getElementById('mainRadio');
+                        const widgetAudio = document.getElementById('widgetAudio');
+                        const playBtn = document.getElementById('widgetPlayBtn'); // Widget button
+
+                        if (mainRadio && !mainRadio.paused) {
+                            mainRadio.pause();
+                        }
+                        if (widgetAudio && !widgetAudio.paused) {
+                            widgetAudio.pause();
+                            // Update Widget UI if needed
+                            if (playBtn) {
+                                playBtn.innerHTML = "<i class='bx bx-play'></i>";
+                                document.getElementById('widgetToggle').classList.remove('playing');
+                            }
+                        }
+
+                        // 2. Load YouTube Player (Autoplay)
+                        const container = document.getElementById('smart-video-container');
+                        container.innerHTML = `
+                            <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                                src="https://www.youtube-nocookie.com/embed/sht_GWXginA?autoplay=1" 
+                                title="Transmisión Especial 18F" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                                referrerpolicy="strict-origin-when-cross-origin" 
+                                allowfullscreen>
+                            </iframe>`;
+
+                        container.style.cursor = 'default';
+                    }
+                </script>
 
                 <p class="lead-text" style="max-width: 700px; margin: 0 auto; color: var(--text-muted);"
                     data-i18n="event_desc">
