@@ -591,124 +591,6 @@
             </div>
         </section>
 
-        <!-- Special Event Section - 18F -->
-        <section id="special-event" class="section"
-            style="background: linear-gradient(to bottom, #050510, #000); border-bottom: 1px solid rgba(255,255,255,0.05);">
-            <div class="container text-center">
-                <div class="badge-event"
-                    style="background: var(--accent-secondary); color: #000; display: inline-block; padding: 5px 15px; border-radius: 20px; font-weight: 700; font-size: 0.8rem; margin-bottom: 20px;">
-                    <i class='bx bxs-circle'
-                        style="font-size: 0.6rem; vertical-align: middle; margin-right: 5px; color: #fff; animation: pulse 2s infinite;"></i>
-                    <span data-i18n="event_badge">EVENTO ESPECIAL</span>
-                </div>
-                <h2 class="section-title" style="margin-bottom: 30px;"><span
-                        data-i18n="event_title_1">Transmisión</span> <span class="text-highlight"
-                        data-i18n="event_title_2">18F</span></h2>
-
-                <!-- Video Embed: Index 2 Style -->
-                <!-- Intelligent Video Facade: Pauses Radio on Click -->
-                <div id="smart-video-container"
-                    style="width:100%;position:relative;padding-top:56.25%;margin-bottom:2rem;border-radius:20px;overflow:hidden;box-shadow:0 10px 40px rgba(0,240,255,0.1);border: 1px solid rgba(255,255,255,0.1); background: #000; cursor: pointer;">
-
-                    <!-- Cover Image & Play Button -->
-                    <div id="video-cover" onclick="playSmartVideo()"
-                        style="position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background-image:url('https://img.youtube.com/vi/sht_GWXginA/hqdefault.jpg');background-size:cover;background-position:center;">
-                        <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.4);">
-                        </div> <!-- Overlay Dark -->
-                        <div
-                            style="width:80px;height:80px;background:rgba(255,0,0,0.9);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 0 30px rgba(255,0,0,0.5);z-index:10;transition:transform 0.3s;">
-                            <i class='bx bx-play' style="font-size:3.5rem;color:#fff;margin-left:5px;"></i>
-                        </div>
-                    </div>
-                </div>
-
-                <script>
-                    // Anti-Copy & Inspection Protection
-                    document.addEventListener('contextmenu', event => event.preventDefault());
-                    document.onkeydown = function (e) {
-                        if (e.keyCode == 123) return false; // F12
-                        if (e.ctrlKey && e.shiftKey && e.keyCode == 'I'.charCodeAt(0)) return false; // Ctrl+Shift+I
-                        if (e.ctrlKey && e.shiftKey && e.keyCode == 'C'.charCodeAt(0)) return false; // Ctrl+Shift+C
-                        if (e.ctrlKey && e.shiftKey && e.keyCode == 'J'.charCodeAt(0)) return false; // Ctrl+Shift+J
-                        if (e.ctrlKey && e.keyCode == 'U'.charCodeAt(0)) return false; // Ctrl+U
-                    };
-
-                    function playSmartVideo() {
-                        // 1. Pause Radio Audio (Neuro-Friendly: No Audio Conflict)
-                        const mainRadio = document.getElementById('mainRadio');
-                        const widgetAudio = document.getElementById('widgetAudio');
-                        const playBtn = document.getElementById('widgetPlayBtn'); // Widget button
-
-                        if (mainRadio && !mainRadio.paused) {
-                            mainRadio.pause();
-                        }
-                        if (widgetAudio && !widgetAudio.paused) {
-                            widgetAudio.pause();
-                            // Update Widget UI if needed
-                            if (playBtn) {
-                                playBtn.innerHTML = "<i class='bx bx-play'></i>";
-                                document.getElementById('widgetToggle').classList.remove('playing');
-                            }
-                        }
-
-                        // 2. Load YouTube Player (Autoplay + Obfuscated + Protected Params)
-                        const container = document.getElementById('smart-video-container');
-
-                        // Obfuscated Base URL (Base64 for: https://www.youtube-nocookie.com/embed/)
-                        const _0x1a2b = atob('aHR0cHM6Ly93d3cueW91dHViZS1ub2Nvb2tpZS5jb20vZW1iZWQv');
-                        const _0x3c4d = 'sht_GWXginA'; // Video ID
-                        // Params: Autoplay, No Related (from others), No Branding, No Keyboard
-                        const _0x5e6f = '?autoplay=1&modestbranding=1&rel=0&disablekb=1&controls=1';
-
-                        const videoSrc = _0x1a2b + _0x3c4d + _0x5e6f;
-
-                        container.innerHTML = `
-                            <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;"
-                                src="${videoSrc}" 
-                                title="Transmisión Especial" 
-                                frameborder="0" 
-                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                                referrerpolicy="strict-origin-when-cross-origin" 
-                                allowfullscreen>
-                            </iframe>`;
-
-                        container.style.cursor = 'default';
-                    }
-                </script>
-
-                <!-- Event Details Block -->
-                <div
-                    style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; margin-bottom: 25px; border: 1px solid rgba(255,255,255,0.1); max-width: 800px; margin-left: auto; margin-right: auto;">
-                    <p style="font-size: 1.1rem; color: #fff; margin-bottom: 15px;">
-                        <i class='bx bx-calendar-event' style="color: var(--accent-secondary);"></i>
-                        La transmisión comienza el <strong style="color: var(--accent-secondary);">18 de Febrero
-                            2026</strong> a las <strong style="color: #fff;">🕖 7:00 PM</strong> hora España
-                        (peninsular).
-                    </p>
-                    <div
-                        style="display: flex; flex-wrap: wrap; justify-content: center; gap: 15px; font-size: 0.95rem; color: #ccc;">
-                        <span><span style="font-size: 1.2rem;">🌎</span> Equivalencias:</span>
-                        <span style="background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 8px;">🇦🇷 3:00
-                            PM</span>
-                        <span style="background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 8px;">🇨🇴 1:00
-                            PM</span>
-                        <span style="background: rgba(0,0,0,0.3); padding: 4px 10px; border-radius: 8px;">🇲🇽 12:00
-                            PM</span>
-                    </div>
-                </div>
-
-                <p class="lead-text" style="max-width: 700px; margin: 0 auto; color: var(--text-muted);"
-                    data-i18n="event_desc">
-                    Acompáñanos en esta transmisión especial del 18 de Febrero. Un espacio para compartir visión y
-                    futuro.
-                </p>
-                <div style="margin-top: 20px;">
-                    <a href="https://www.youtube.com/@AspergerparaAsperger" target="_blank"
-                        class="btn btn-outline btn-sm"><i class='bx bxl-youtube'></i> <span data-i18n="event_btn">Ver en
-                            YouTube</span></a>
-                </div>
-            </div>
-        </section>
 
         <!-- Weekly Schedule -->
         <section id="schedule" class="section" style="padding-bottom: 50px;">
@@ -717,7 +599,21 @@
                         data-i18n="schedule_title_1">Programación</span> <span class="text-highlight"
                         data-i18n="schedule_title_2">Semanal</span></h2>
 
-                <!-- Card 1 -->
+                <!-- Card: Edición Especial (New) -->
+                <div class="schedule-card" id="schedule-especial"
+                    style="border-left: 4px solid #ff4757; margin-bottom: 60px;">
+                    <div class="schedule-badge" style="background: var(--accent-secondary); color: #000;">TODOS LOS DÍAS
+                        HASTA EL 28 DE FEBRERO</div>
+                    <h3 class="schedule-title">Edición Especial de Signal Radio</h3>
+                    <p class="schedule-topic"><span>Episodio: Resurgimiento del Asperger como condición
+                            independiente</span></p>
+                    <div class="schedule-details">
+                        <div class="schedule-time">
+                            <i class='bx bx-time'></i> 🇪🇸 7:00 PM | 🇦🇷 3:00 PM | 🇨🇴 1:00 PM | 🇲🇽 12:00 PM
+                        </div>
+                    </div>
+                </div>
+
                 <!-- Card 1: Hablando de Futbol -->
                 <div class="schedule-card" id="schedule-futbol" style="border-left: 4px solid #00f0ff;">
                     <div class="schedule-badge" data-i18n="s_live_thu">REPETICIÓN DE VIERNES A MIERCOLES - ESTRENO -
@@ -732,37 +628,36 @@
                             2:00 PM
                         </div>
                     </div>
+                </div>
 
-                    <!-- Card: Charlas Talks -->
-                    <div class="schedule-card" id="schedule-talks"
-                        style="margin-top: 60px; border-left: 4px solid #f0f;">
-                        <div class="schedule-badge" data-i18n="s_daily">LUNES A DOMINGO</div>
-                        <h3 class="schedule-title" data-i18n="s_talks_title">Charlas Talks: Construyendo Realidades</h3>
-                        <p class="schedule-topic" data-i18n="s_talks_desc">Conversaciones que inspiran y transforman
-                            realidades.</p>
-                        <div class="schedule-details">
-                            <div class="schedule-time">
-                                <i class='bx bx-time'></i> 🇪🇸 6:30 PM | 🇦🇷 2:30 PM | 🇻🇪 1:30 PM | 🇨🇴 12:30 PM |
-                                🇲🇽 11:30 AM
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Second Card: Andrés Galli -->
-                    <!-- Card: Sintonizando -->
-                    <div class="schedule-card" id="schedule-sintonizando" style="margin-top: 60px;">
-                        <div class="schedule-badge" data-i18n="s_daily">LUNES A DOMINGO</div>
-                        <h3 class="schedule-title">Sintonizando con el Autismo</h3>
-                        <p class="schedule-topic"><span data-i18n="s_sint_topic">Invitados Varios</span></p>
-                        <div class="schedule-details">
-                            <div class="schedule-time">
-                                <i class='bx bx-time'></i> 🇪🇸 1:00 AM (+1) | 🇦🇷 9:00 PM | 🇻🇪 8:00 PM | 🇨🇴 7:00
-                                PM | 🇲🇽
-                                6:00 PM
-                            </div>
+                <!-- Card: Charlas Talks -->
+                <div class="schedule-card" id="schedule-talks" style="margin-top: 60px; border-left: 4px solid #f0f;">
+                    <div class="schedule-badge" data-i18n="s_daily">LUNES A DOMINGO</div>
+                    <h3 class="schedule-title" data-i18n="s_talks_title">Charlas Talks: Construyendo Realidades</h3>
+                    <p class="schedule-topic" data-i18n="s_talks_desc">Conversaciones que inspiran y transforman
+                        realidades.</p>
+                    <div class="schedule-details">
+                        <div class="schedule-time">
+                            <i class='bx bx-time'></i> 🇪🇸 6:30 PM | 🇦🇷 2:30 PM | 🇻🇪 1:30 PM | 🇨🇴 12:30 PM |
+                            🇲🇽 11:30 AM
                         </div>
                     </div>
                 </div>
+
+                <!-- Card: Sintonizando -->
+                <div class="schedule-card" id="schedule-sintonizando" style="margin-top: 60px;">
+                    <div class="schedule-badge" data-i18n="s_daily">LUNES A DOMINGO</div>
+                    <h3 class="schedule-title">Sintonizando con el Autismo</h3>
+                    <p class="schedule-topic"><span data-i18n="s_sint_topic">Invitados Varios</span></p>
+                    <div class="schedule-details">
+                        <div class="schedule-time">
+                            <i class='bx bx-time'></i> 🇪🇸 1:00 AM (+1) | 🇦🇷 9:00 PM | 🇻🇪 8:00 PM | 🇨🇴 7:00
+                            PM | 🇲🇽
+                            6:00 PM
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- World Clock Section -->
