@@ -427,7 +427,10 @@
                     <li><a href="/#about" data-i18n="nav_about">Quiénes somos</a></li>
                     <li><a href="/#services" data-i18n="nav_what_we_do">Qué hacemos</a></li>
                     <li><a href="/#values" data-i18n="nav_impact">Impacto</a></li>
-                    <li><a href="programacion" data-i18n="nav_schedule_menu" class="active">Programación</a></li>
+                    <li><a href="programacion" class="active" style="display: inline-flex; align-items: center;"><span
+                                data-i18n="nav_schedule_menu">Programación</span> <span
+                                style="background: #ff4757; color: white; font-size: 0.6rem; font-weight: bold; padding: 2px 6px; border-radius: 10px; margin-left: 8px; animation: bounce 2s infinite;">NUEVO</span></a>
+                    </li>
                 </ul>
             </nav>
 
@@ -442,8 +445,10 @@
                 <a href="/#listen" class="btn btn-primary btn-sm" data-i18n="nav_listen">Escuchar ahora</a>
             </div>
 
-            <button class="mobile-menu-btn" aria-label="Abrir menú">
+            <button class="mobile-menu-btn" aria-label="Abrir menú" style="position: relative;">
                 <i class='bx bx-menu'></i>
+                <span class="menu-alert-badge"
+                    style="position: absolute; top: -5px; right: -5px; background: #ff4757; color: white; font-size: 0.5rem; font-weight: bold; padding: 2px 5px; border-radius: 10px; border: 2px solid #000; box-shadow: 0 0 5px rgba(255, 71, 87, 0.5);">1</span>
             </button>
         </div>
     </header>
@@ -894,7 +899,7 @@
         <button class="comment-toggle-btn" id="toggleCommentWidget" aria-label="Abrir Mensajes">
             <i class='bx bx-message-detail'></i>
         </button>
-        <span class="comment-tooltip" data-i18n="comment_tooltip">¡Pide tu canción o saludo!</span>
+        <!-- Tooltip removed manually to reduce visual clutter -->
     </div>
 
     <script>
