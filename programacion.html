@@ -490,6 +490,12 @@
                         <div class="schedule-time">
                             <i class='bx bx-time'></i> 🇪🇸 7:00 PM | 🇦🇷 3:00 PM | 🇨🇴 1:00 PM | 🇲🇽 12:00 PM
                         </div>
+                        <button
+                            onclick="shareItem('schedule-especial', 'Edición Especial de Signal Radio', '🎧✨ ¡Conéctate a la Edición Especial de Signal Radio! Analizamos el resurgimiento del Asperger como condición independiente con grandes invitados internacionales.\\n\\nEscúchalo aquí: {url}')"
+                            class="btn btn-primary btn-sm"
+                            style="border-radius: 10px; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class='bx bx-share-alt'></i> Compartir
+                        </button>
                     </div>
                 </div>
 
@@ -508,6 +514,12 @@
                             <i class='bx bx-time'></i> 🇪🇸 9:00 PM | 🇦🇷 5:00 PM | 🇻🇪 4:00 PM | 🇨🇴 3:00 PM | 🇲🇽
                             2:00 PM
                         </div>
+                        <button
+                            onclick="shareItem('schedule-futbol', 'Hablando de Fútbol con Gómez y López', '⚽🔥 ¡Acompáñanos a Hablando de Fútbol con Gómez y López! Análisis, debate y pasión por el deporte rey desde una perspectiva única.\\n\\nEscúchalo aquí: {url}')"
+                            class="btn btn-primary btn-sm"
+                            style="border-radius: 10px; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class='bx bx-share-alt'></i> Compartir
+                        </button>
                     </div>
                 </div>
 
@@ -519,9 +531,15 @@
                         realidades.</p>
                     <div class="schedule-details">
                         <div class="schedule-time">
-                            <i class='bx bx-time'></i> 🇪🇸 6:30 PM | 🇦🇷 2:30 PM | 🇻🇪 1:30 PM | 🇨🇴 12:30 PM |
-                            🇲🇽 11:30 AM
+                            <i class='bx bx-time'></i> 🇪🇸 6:30 PM | 🇦🇷 2:30 PM | 🇻🇪 1:30 PM | 🇨🇴 12:30 PM | 🇲🇽
+                            11:30 AM
                         </div>
+                        <button
+                            onclick="shareItem('schedule-talks', 'Charlas Talks: Construyendo Realidades', '🗣️✨ ¡Únete a Charlas Talks en Signal Radio! Conversaciones que inspiran y transforman realidades.\\n\\nEscúchalo aquí: {url}')"
+                            class="btn btn-primary btn-sm"
+                            style="border-radius: 10px; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class='bx bx-share-alt'></i> Compartir
+                        </button>
                     </div>
                 </div>
 
@@ -532,22 +550,19 @@
                     <p class="schedule-topic"><span data-i18n="s_sint_topic">Invitados Varios</span></p>
                     <div class="schedule-details">
                         <div class="schedule-time">
-                            <i class='bx bx-time'></i> 🇪🇸 1:00 AM (+1) | 🇦🇷 9:00 PM | 🇻🇪 8:00 PM | 🇨🇴 7:00
-                            PM | 🇲🇽
-                            6:00 PM
+                            <i class='bx bx-time'></i> 🇪🇸 1:00 AM (+1) | 🇦🇷 9:00 PM | 🇻🇪 8:00 PM | 🇨🇴 7:00 PM |
+                            🇲🇽 6:00 PM
                         </div>
+                        <button
+                            onclick="shareItem('schedule-sintonizando', 'Sintonizando con el Autismo', '📻💙 ¡Escucha Sintonizando con el Autismo en Signal Radio! Un espacio de conexión y aprendizaje.\\n\\nEscúchalo aquí: {url}')"
+                            class="btn btn-primary btn-sm"
+                            style="border-radius: 10px; display: inline-flex; align-items: center; gap: 5px;">
+                            <i class='bx bx-share-alt'></i> Compartir
+                        </button>
                     </div>
                 </div>
             </div>
 
-            <!-- Share Button -->
-            <div style="margin-top: 60px;">
-                <button onclick="shareProgramacion()" class="btn btn-primary btn-lg"
-                    style="border-radius: 50px; padding: 15px 40px; font-size: 1.1rem; box-shadow: 0 10px 25px rgba(0, 240, 255, 0.4); display: inline-flex; justify-content: center; align-items: center; gap: 10px;">
-                    <i class='bx bx-share-alt' style="font-size: 1.4rem;"></i> <span
-                        data-i18n="btn_share_prog">Compartir Programación</span>
-                </button>
-            </div>
             </div>
         </section>
 
@@ -1532,19 +1547,13 @@
             }
         }
 
-        function shareProgramacion() {
-            // Check if site is accessed locally or prod
+        function shareItem(id, title, textTemplate) {
             let url = window.location.href;
             if (url.includes('file://')) url = 'https://signalradio.club/programacion';
+            url = url.split('#')[0] + '#' + id;
 
+            const text = textTemplate.replace('{url}', url);
             const lang = localStorage.getItem('siteLang') || 'es';
-            let title = 'Programación Signal Radio';
-            let text = `🎧✨ ¡Descubre la programación y horarios de Signal Radio!\n\nConéctate con nuestros invitados, ediciones especiales y más. La señal neuro-inclusiva.\n\nEscúchalo aquí: ${url}`;
-
-            if (lang === 'en') {
-                title = 'Signal Radio Schedule';
-                text = `🎧✨ Discover the schedule for Signal Radio!\n\nConnect with our guests, special editions and more. The neuro-inclusive signal.\n\nCheck it out: ${url}`;
-            }
 
             if (navigator.share) {
                 navigator.share({
@@ -1552,7 +1561,7 @@
                     text: text
                 }).catch(console.error);
             } else {
-                const alertMsg = lang === 'en' ? 'Link copied to clipboard!' : '¡Texto y enlace copiados al portapapeles! Listo para pegar en WhatsApp u otra red.';
+                const alertMsg = lang === 'en' ? 'Link copied to clipboard!' : '¡Texto y enlace copiados al portapapeles!';
                 navigator.clipboard.writeText(text).then(() => {
                     alert(alertMsg);
                 }).catch(err => {
