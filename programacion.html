@@ -424,10 +424,10 @@
 
             <nav class="main-nav">
                 <ul>
-                    <li><a href="#about" data-i18n="nav_about">Quiénes somos</a></li>
-                    <li><a href="#services" data-i18n="nav_what_we_do">Qué hacemos</a></li>
-                    <li><a href="#values" data-i18n="nav_impact">Impacto</a></li>
-                    <li><a href="programacion.html" data-i18n="nav_schedule_menu">Programación</a></li>
+                    <li><a href="index.html#about" data-i18n="nav_about">Quiénes somos</a></li>
+                    <li><a href="index.html#services" data-i18n="nav_what_we_do">Qué hacemos</a></li>
+                    <li><a href="index.html#values" data-i18n="nav_impact">Impacto</a></li>
+                    <li><a href="programacion.html" data-i18n="nav_schedule_menu" class="active">Programación</a></li>
                 </ul>
             </nav>
 
@@ -439,7 +439,7 @@
             </div>
 
             <div class="header-cta">
-                <a href="#listen" class="btn btn-primary btn-sm" data-i18n="nav_listen">Escuchar ahora</a>
+                <a href="index.html#listen" class="btn btn-primary btn-sm" data-i18n="nav_listen">Escuchar ahora</a>
             </div>
 
             <button class="mobile-menu-btn" aria-label="Abrir menú">
@@ -449,421 +449,166 @@
     </header>
 
     <main>
-        <!-- Hero Section -->
-        <section id="hero" class="hero-section">
-            <div class="hero-bg">
-                <img src="hero-bg.png" alt="Ondas digitales fondo">
-                <div class="overlay"></div>
-            </div>
-            <div class="container hero-content">
-                <div class="signal-indicator">
-                    <span class="dot"></span> <span data-i18n="hero_live">EN VIVO</span>
-                </div>
-                <h2 class="main-title">Signal <span class="text-gradient">Radio</span></h2>
-                <p class="subtitle" data-i18n="hero_subtitle">La primera señal abierta neuro-amigable y neuro-inclusiva
-                    de origen hispanohablante para el mundo. Con el respaldo de una década de trayectoria de Asperger
-                    para Asperger®, usamos la música global y nuestra voz neurodivergente como puente para la
-                    convivencia y la inclusión laboral de toda la diversidad cognitiva.</p>
-
-                <!-- Opcion 1: Audio Tag (Restored) -->
-                <div class="player-container" id="listen">
-
-
-
-
-                    <div class="player-status"
-                        style="color: var(--accent-primary); font-size: 0.8rem; font-weight: 700; letter-spacing: 1px; margin-bottom: 5px;">
-                        <span class="dot"
-                            style="display: inline-block; width: 8px; height: 8px; background: var(--accent-primary); border-radius: 50%; margin-right: 5px; box-shadow: 0 0 5px var(--accent-primary);"></span>
-                        <span data-i18n="hero_live">EN LÍNEA</span>
-                    </div>
-
-                    <!-- Visualizer Added -->
-                    <div class="visualizer-container">
-                        <div class="v-bar"></div>
-                        <div class="v-bar"></div>
-                        <div class="v-bar"></div>
-                        <div class="v-bar"></div>
-                        <div class="v-bar"></div>
-                        <div class="v-bar"></div>
-                        <div class="v-bar"></div>
-                        <div class="v-bar"></div>
-                    </div>
-                    <audio id="mainRadio" controls preload="metadata">
-                        <source src="https://signalradio.aspergerparaasperger.org/listen/signal_radio/radio.mp3"
-                            type="audio/mpeg">
-                        Tu navegador no soporta el elemento de audio.
-                    </audio>
-                    <p data-i18n="player_note" class="player-note"
-                        style="margin-top: 15px; font-size: 0.85rem; opacity: 0.9; text-align: center; color: var(--text-color);">
-                    </p>
-                </div>
-
-
-
-
-                <!-- NEWS TICKER (Standard Position) -->
-                <div class="news-ticker-container">
-                    <div class="ticker-wrapper">
-                        <div class="ticker-item" data-i18n="ticker_item_1">✨ Conectamos capacidades con oportunidades.
-                            <a href="https://autenticamentecapaces.work" target="_blank">Visita nuestro ecosistema de
-                                inclusión</a>
-                        </div>
-                        <div class="ticker-item" data-i18n="ticker_item_2">🛒 Promovemos el talento con diversidad
-                            cognitiva. <a href="https://tienda.aspergerparaasperger.org" target="_blank">Visita la
-                                Tienda</a>
-                        </div>
-                        <div class="ticker-item" data-i18n="ticker_item_3">🎙️ Signal Radio: Tu espacio de enfoque y
-                            conexión.</div>
-                    </div>
-                </div>
-
-                <div class="hero-actions" style="margin-top: 30px;">
-                    <!-- Removed Play Button since player is active -->
-                    <button class="btn btn-secondary btn-lg" onclick="openOnboarding()">
-                        <i class='bx bx-info-circle'></i> <span data-i18n="btn_how_it_works">Cómo funciona</span>
-                    </button>
-                </div>
-
-                <!-- App Store Badges -->
-                <div class="app-store-badges"
-                    style="display: flex; justify-content: center; align-items: center; gap: 16px; margin-top: 25px; flex-wrap: wrap;">
-                    <span
-                        style="display: inline-block; cursor: default; transition: transform 0.2s ease, opacity 0.2s ease; opacity: 0.9;"
-                        onmouseover="this.style.transform='scale(1.05)'; this.style.opacity='1'"
-                        onmouseout="this.style.transform='scale(1)'; this.style.opacity='0.9'">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="140" height="42" viewBox="0 0 140 42">
-                            <rect width="140" height="42" rx="7" fill="#000" stroke="#A6A6A6" stroke-width="1" />
-                            <text x="43" y="14" fill="#fff" font-family="Arial, sans-serif" font-size="7"
-                                letter-spacing="0.5">Download on the</text>
-                            <text x="43" y="29" fill="#fff" font-family="Arial, sans-serif" font-size="16"
-                                font-weight="600">App Store</text>
-                            <g transform="translate(12, 7) scale(0.6)">
-                                <path fill="#fff"
-                                    d="M24.769 20.3a5.904 5.904 0 0 1 2.816-4.949 6.04 6.04 0 0 0-4.764-2.578c-2.006-.211-3.954 1.2-4.976 1.2-1.04 0-2.613-1.181-4.306-1.148a6.343 6.343 0 0 0-5.334 3.257c-2.3 3.987-.587 9.854 1.621 13.084 1.104 1.582 2.393 3.351 4.084 3.29 1.652-.067 2.271-1.058 4.267-1.058 1.978 0 2.558 1.058 4.284 1.02 1.773-.03 2.892-1.592 3.956-3.192a13.222 13.222 0 0 0 1.804-3.668 5.702 5.702 0 0 1-3.452-5.258zM21.535 10.543a5.804 5.804 0 0 0 1.328-4.157 5.906 5.906 0 0 0-3.823 1.978 5.527 5.527 0 0 0-1.362 4.003 4.882 4.882 0 0 0 3.857-1.824z" />
-                            </g>
-                        </svg>
-                    </span>
-                    <span
-                        style="display: inline-block; cursor: default; transition: transform 0.2s ease, opacity 0.2s ease; opacity: 0.9; position: relative;"
-                        onmouseover="this.style.transform='scale(1.05)'; this.style.opacity='1'"
-                        onmouseout="this.style.transform='scale(1)'; this.style.opacity='0.9'">
-                        <span data-i18n="android_soon"
-                            style="position: absolute; top: -10px; right: -10px; background: #ff4757; color: white; padding: 2px 8px; border-radius: 10px; font-size: 0.6rem; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.3); z-index: 10;">PRONTO</span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="157" height="42" viewBox="0 0 157 42">
-                            <rect width="157" height="42" rx="7" fill="#000" stroke="#A6A6A6" stroke-width="1" />
-                            <text x="55" y="14" fill="#fff" font-family="Arial, sans-serif" font-size="7"
-                                letter-spacing="0.5">GET IT ON</text>
-                            <text x="55" y="29" fill="#fff" font-family="Arial, sans-serif" font-size="15"
-                                font-weight="600">Google Play</text>
-                            <g transform="translate(13, 9)">
-                                <defs>
-                                    <linearGradient id="gp1" x1="0" y1="0" x2="1" y2="1">
-                                        <stop offset="0%" stop-color="#00C3FF" />
-                                        <stop offset="100%" stop-color="#1B6EF3" />
-                                    </linearGradient>
-                                    <linearGradient id="gp2" x1="0" y1="0" x2="1" y2="0">
-                                        <stop offset="0%" stop-color="#00F076" />
-                                        <stop offset="100%" stop-color="#00D2FF" />
-                                    </linearGradient>
-                                    <linearGradient id="gp3" x1="0" y1="1" x2="1" y2="0">
-                                        <stop offset="0%" stop-color="#FF3A44" />
-                                        <stop offset="100%" stop-color="#FFE000" />
-                                    </linearGradient>
-                                    <linearGradient id="gp4" x1="0" y1="0" x2="0" y2="1">
-                                        <stop offset="0%" stop-color="#FF3A44" />
-                                        <stop offset="100%" stop-color="#C31162" />
-                                    </linearGradient>
-                                </defs>
-                                <path fill="url(#gp1)"
-                                    d="M1 1.5 L1 22.5 C1 23.3 1.7 24 2.5 24 L2.5 24 L14 12.75 L2.5 0 C1.7 0 1 0.7 1 1.5Z" />
-                                <path fill="url(#gp2)" d="M2.5 0 L14 12.75 L19 7.75 L5.5 0 C4.5 -0.6 3.4 -0.3 2.5 0Z" />
-                                <path fill="url(#gp3)"
-                                    d="M2.5 24 L14 12.75 L19 17.25 L5.5 24.5 C4.5 25.1 3.4 24.6 2.5 24Z" />
-                                <path fill="url(#gp4)"
-                                    d="M19 7.75 L14 12.75 L19 17.25 L22 15.5 C23 14.9 23 10.6 22 10 L19 7.75Z" />
-                            </g>
-                        </svg>
-                    </span>
-                </div>
-            </div>
-            <div class="scroll-down">
-                <i class='bx bx-chevron-down'></i>
-            </div>
-        </section>
-
-
-<!-- Quiénes somos -->
-        <section id="about" class="section">
-            <div class="container about-container">
-                <div class="about-text">
-                    <h2 class="section-title"><span data-i18n="about_title">Quiénes</span> <span class="text-highlight"
-                            data-i18n="about_highlight">Somos</span></h2>
-                    <p class="lead-text" data-i18n="about_lead">
-                        Iniciativa de inclusión laboral <strong class="text-cyan">Asperger para Asperger®</strong>.
-                    </p>
-                    <p data-i18n="about_desc">
-                        Signal Radio es la señal pionera de Asperger para Asperger® hacia el mundo. Somos el primer
-                        escenario sonoro diseñado para todos donde el talento neurodivergente hispano lidera una
-                        programación musical global. Con el respaldo de una década de trayectoria de Asperger para
-                        Asperger®, derribamos barreras para la convivencia e inclusión laboral de toda la diversidad
-                        cognitiva.
-                    </p>
-                </div>
-                <div class="about-visual">
-                    <div class="pulse-circle">
-                        <img src="logo-signal-v2.png" alt="Signal" class="floating-icon">
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Qué hacemos -->
-        <section id="services" class="section bg-darker">
-            <div class="container">
-                <h2 class="section-title text-center"><span data-i18n="services_title">Nuestra</span> <span
-                        class="text-highlight" data-i18n="services_highlight">Señal</span></h2>
-                <div class="grid-cards">
-                    <div class="card">
-                        <div class="card-icon"><i class='bx bx-broadcast'></i></div>
-                        <h3 data-i18n="card1_title">Radio Online</h3>
-                        <p data-i18n="card1_desc">Un ecosistema sonoro diseñado para tu mente: <strong>Música
-                                instrumental para el enfoque</strong> y <strong>voces neurodivergentes para la
-                                conexión</strong>. El equilibrio perfecto entre productividad y compañía.</p>
-                    </div>
-
-                    <!-- Card 2: Empleo/Talento (Action Card) -->
-                    <a href="https://autenticamentecapaces.work" target="_blank" class="card action-card">
-                        <div class="card-icon"><i class='bx bx-briefcase'></i></div>
-                        <h3 data-i18n="card2_title">Ecosistema de Talento</h3>
-                        <p data-i18n="card2_desc">Un puente entre el potencial del espectro autista, toda la diversidad
-                            cognitiva y oportunidades reales de
-                            desarrollo.</p>
-                        <div class="card-cta" data-i18n="card2_cta">Explorar Ecosistema <i
-                                class='bx bx-right-arrow-alt'></i>
-                        </div>
-                    </a>
-
-                    <!-- Card 3: Tienda (Action Card) -->
-                    <a href="https://tienda.aspergerparaasperger.org" target="_blank" class="card action-card">
-                        <div class="card-icon"><i class='bx bx-store'></i></div>
-                        <h3 data-i18n="card3_title">Talento y Diversidad</h3>
-                        <p data-i18n="card3_desc">Una plataforma donde se promociona el talento con diversidad
-                            cognitiva. Apoya a los creadores.</p>
-                        <div class="card-cta" data-i18n="card3_cta">Ver Talento <i class='bx bx-right-arrow-alt'></i>
-                        </div>
-                    </a>
-                    <div class="card highlight-card"
-                        style="position: relative; overflow: hidden; border: 1px solid var(--accent-secondary);">
-                        <div
-                            style="position: absolute; top: 0; right: 0; background: var(--accent-secondary); color: #000; font-size: 0.6rem; font-weight: 800; padding: 4px 12px; border-bottom-left-radius: 12px;">
-                            NUEVO</div>
-                        <div class="card-icon"><i class='bx bx-microphone'></i></div>
-                        <h3 data-i18n="card4_title">Voces de la comunidad</h3>
-                        <p data-i18n="card4_desc">Un escenario global para visibilizar historias, compartir
-                            conocimientos y
-                            celebrar el valor de pensar diferente.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Impacto / Valores -->
-        <section id="values" class="section">
-            <div class="container">
-                <h2 class="section-title text-center"><span data-i18n="values_title">Impacto y</span> <span
-                        class="text-highlight" data-i18n="values_highlight">Valores</span></h2>
-                <div class="values-grid">
-                    <div class="value-item">
-                        <span class="value-number">01</span>
-                        <h3 data-i18n="value1_title">Inclusión</h3>
-                        <p data-i18n="value1_desc">Sin barreras.</p>
-                    </div>
-                    <div class="value-item">
-                        <span class="value-number">02</span>
-                        <h3 data-i18n="value2_title">Autenticidad</h3>
-                        <p data-i18n="value2_desc">Voces reales y auténticas.</p>
-                    </div>
-                    <div class="value-item">
-                        <span class="value-number">03</span>
-                        <h3 data-i18n="value3_title">Comunidad</h3>
-                        <p data-i18n="value3_desc">Red de apoyo y crecimiento mutuo.</p>
-                    </div>
-                    <div class="value-item">
-                        <span class="value-number">04</span>
-                        <h3 data-i18n="value4_title">Innovación</h3>
-                        <p data-i18n="value4_desc">Mirando siempre hacia el futuro.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Trust Badges Section -->
-        <section class="trust-container" style="padding: 40px 0; border-bottom: 1px solid rgba(255,255,255,0.05);">
+        <!-- Weekly Schedule -->
+        <section id="schedule" class="section" style="padding-top: 120px;" style="padding-bottom: 50px;">
             <div class="container text-center">
-                <p style="color: var(--text-muted); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 25px;"
-                    data-i18n="trust_label">RECONOCIMIENTOS Y ESTÁNDARES</p>
-                <div style="display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap;">
-                    <img src="logo-neuro-amigable.png" alt="Sello Neuro-Amigable"
-                        style="height: 70px; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s;"
-                        onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'"
-                        onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.7'">
+                <h2 class="section-title" style="margin-bottom: 50px;"><span
+                        data-i18n="schedule_title_1">Programación</span> <span class="text-highlight"
+                        data-i18n="schedule_title_2">Semanal</span></h2>
+
+                <!-- Card: Edición Especial (New) -->
+                <div class="schedule-card" id="schedule-especial"
+                    style="border-left: 4px solid #ff4757; margin-bottom: 60px;">
+                    <div class="schedule-badge" style="background: var(--accent-secondary); color: #000;">TODOS LOS DÍAS
+                        HASTA EL 28 DE FEBRERO</div>
+                    <h3 class="schedule-title">Edición Especial de Signal Radio</h3>
+                    <p class="schedule-topic"><span>Episodio: Resurgimiento del Asperger como condición
+                            independiente</span></p>
                     <div
-                        style="width: 1px; height: 50px; background: linear-gradient(to bottom, transparent, rgba(255,255,255,0.2), transparent);">
-                    </div>
-                    <img src="sello-english.png" alt="Global Neuro-Inclusive Seal"
-                        style="height: 70px; filter: grayscale(100%); opacity: 0.7; transition: all 0.3s;"
-                        onmouseover="this.style.filter='grayscale(0%)'; this.style.opacity='1'"
-                        onmouseout="this.style.filter='grayscale(100%)'; this.style.opacity='0.7'">
-                </div>
-
-                <!-- New Ecosystem Section -->
-                <div style="margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 40px;">
-                    <p style="color: var(--text-muted); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 30px;"
-                        data-i18n="ecosystem_label">ECOSISTEMA DE SOLUCIONES</p>
-
-                    <div style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
-                        <!-- Auténticamente Capaces -->
-                        <div style="display: flex; flex-direction: column; align-items: center; max-width: 150px;">
-                            <img src="logo-autenticamente.png" alt="Auténticamente Capaces"
-                                style="height: 50px; object-fit: contain; margin-bottom: 15px; filter: grayscale(100%) brightness(1.2); opacity: 0.8; transition: all 0.3s;"
-                                onmouseover="this.style.filter='grayscale(0%) brightness(1)'; this.style.opacity='1'"
-                                onmouseout="this.style.filter='grayscale(100%) brightness(1.2)'; this.style.opacity='0.8'">
-                            <p style="font-size: 0.8rem; color: var(--text-color); font-weight: 500; text-align: center;"
-                                data-i18n="desc_autenticamente">Bolsa de Empleo</p>
-                        </div>
-
-                        <!-- Escudo Seguro -->
-                        <div style="display: flex; flex-direction: column; align-items: center; max-width: 150px;">
-                            <img src="logo-escudo-seguro.png" alt="Escudo Seguro"
-                                style="height: 50px; object-fit: contain; margin-bottom: 15px; filter: grayscale(100%) brightness(1.2); opacity: 0.8; transition: all 0.3s;"
-                                onmouseover="this.style.filter='grayscale(0%) brightness(1)'; this.style.opacity='1'"
-                                onmouseout="this.style.filter='grayscale(100%) brightness(1.2)'; this.style.opacity='0.8'">
-                            <p style="font-size: 0.8rem; color: var(--text-color); font-weight: 500; text-align: center;"
-                                data-i18n="desc_escudo">App de IA</p>
-                        </div>
-
-                        <!-- Tienda -->
-                        <div style="display: flex; flex-direction: column; align-items: center; max-width: 150px;">
-                            <img src="logo-tienda.png" alt="La Tienda"
-                                style="height: 50px; object-fit: contain; margin-bottom: 15px; filter: grayscale(100%) brightness(1.2); opacity: 0.8; transition: all 0.3s;"
-                                onmouseover="this.style.filter='grayscale(0%) brightness(1)'; this.style.opacity='1'"
-                                onmouseout="this.style.filter='grayscale(100%) brightness(1.2)'; this.style.opacity='0.8'">
-                            <p style="font-size: 0.8rem; color: var(--text-color); font-weight: 500; text-align: center;"
-                                data-i18n="desc_tienda">Tienda con Propósito</p>
-                        </div>
-
-                        <!-- Revista -->
-                        <div style="display: flex; flex-direction: column; align-items: center; max-width: 150px;">
-                            <img src="logo-revista.png" alt="La Revista"
-                                style="height: 50px; object-fit: contain; margin-bottom: 15px; filter: grayscale(100%) brightness(1.2); opacity: 0.8; transition: all 0.3s;"
-                                onmouseover="this.style.filter='grayscale(0%) brightness(1)'; this.style.opacity='1'"
-                                onmouseout="this.style.filter='grayscale(100%) brightness(1.2)'; this.style.opacity='0.8'">
-                            <p style="font-size: 0.8rem; color: var(--text-color); font-weight: 500; text-align: center;"
-                                data-i18n="desc_revista">Revista Tech</p>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Signal Spaces (B2B / Viralization) -->
-        <section id="signal-spaces" class="section bg-darker">
-            <div class="container">
-                <div class="spaces-content">
-                    <div class="spaces-text">
-                        <h2 class="section-title"><span data-i18n="spaces_title">Signal en tu</span> <span
-                                class="text-highlight" data-i18n="spaces_highlight">Espacio</span></h2>
-                        <p class="lead-text" style="color: #fff;" data-i18n="spaces_lead">
-                            ¿Tienes un Café, Hotel u Oficina?
-                        </p>
-                        <p data-i18n="spaces_desc">
-                            Convierte tu negocio en un <strong>Espacio Neuro-Inclusivo</strong>.
-                            Nuestra programación musical está curada para favorecer la <strong>calma, la concentración y
-                                el bienestar</strong>,
-                            creando la atmósfera perfecta para tus clientes y colaboradores mientras apoyas una causa
-                            global.
-                        </p>
-                        <ul class="spaces-benefits">
-                            <li data-i18n="benefit1"><i class='bx bx-check-circle'></i> Ambiente sonoro sin
-                                estridencias.</li>
-                            <li data-i18n="benefit2"><i class='bx bx-check-circle'></i> Ideal para el "Deep Work" y
-                                conversaciones.</li>
-                            <li data-i18n="benefit_eq"><i class='bx bx-equalizer'></i> Fusión de instrumental/voz para
-                                el enfoque sin aislamiento.</li>
-                            <li data-i18n="benefit3"><i class='bx bx-check-circle'></i> Distintivo digital de "Marca
-                                Inclusiva".</li>
+                        style="text-align: left; margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px;">
+                        <p style="margin-bottom: 10px; font-weight: 700; color: var(--accent-primary);">El panel contará
+                            con la participación:</p>
+                        <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem;">
+                            <li style="margin-bottom: 5px;"><i class='bx bx-user'
+                                    style="margin-right: 5px; color: var(--accent-secondary);"></i> <strong>Ps. Juan
+                                    Hinojosa</strong>, psicólogo y adulto Asperger (México)</li>
+                            <li style="margin-bottom: 5px;"><i class='bx bx-user'
+                                    style="margin-right: 5px; color: var(--accent-secondary);"></i> <strong>Rodolfo
+                                    Geloso</strong>, Liga Asperger 7 (Argentina)</li>
+                            <li style="margin-bottom: 5px;"><i class='bx bx-user'
+                                    style="margin-right: 5px; color: var(--accent-secondary);"></i> <strong>D. Rafael
+                                    Jorreto</strong>, presidente de Confederación Asperger España (España)</li>
+                            <li style="margin-bottom: 5px;"><i class='bx bx-user'
+                                    style="margin-right: 5px; color: var(--accent-secondary);"></i> <strong>Ps. José
+                                    Antonio Peral Parrado</strong>, director técnico de CONFAE (España)</li>
+                            <li><i class='bx bx-user' style="margin-right: 5px; color: var(--accent-secondary);"></i>
+                                <strong>Gastón Javier Perile</strong>, cofundador de Liga Asperger 7 (Argentina)</li>
                         </ul>
-                        <br>
-                        <a href="https://lp.aspergerparaasperger.org/22wd5h94" id="btn-signal-space"
-                            class="btn btn-outline btn-lg" target="_blank">
-                            <i class='bx bx-check-shield'></i> <span data-i18n="btn_certify">Certifica tu Espacio
-                                Gratis</span>
-                        </a>
-
                     </div>
-                    <div class="spaces-badge">
-                        <div class="badge-card">
-                            <div class="badge-header" data-i18n="badge_header">AQUÍ SUENA</div>
-                            <div class="badge-logo">
-                                <img src="logo-neuro-amigable.png" alt="Neuro Amigable" id="badge-logo-img">
-                            </div>
-                            <div class="badge-footer" data-i18n="badge_zone">ZONA NEURO-AMIGABLE</div>
-                            <div class="badge-verified"
-                                style="font-size: 0.6rem; color: #a0a0b0; letter-spacing: 1px; margin-top: 5px; text-transform: uppercase;"
-                                data-i18n="badge_verified">
-                                ESPACIO INCLUSIVO CERTIFICADO</div>
-                            <div class="badge-url">signalradio.club</div>
-                            <div class="badge-sub">
-                                <span data-i18n="badge_initiative">Una iniciativa de:</span>
-                                <img src="logo.png" alt="Asperger para Asperger">
-                            </div>
+                    <div class="schedule-details">
+                        <div class="schedule-time">
+                            <i class='bx bx-time'></i> 🇪🇸 7:00 PM | 🇦🇷 3:00 PM | 🇨🇴 1:00 PM | 🇲🇽 12:00 PM
                         </div>
-                        <p class="badge-caption" data-i18n="badge_caption">Ejemplo de Sticker para puerta</p>
+                    </div>
+                </div>
+
+                <!-- Card 1: Hablando de Futbol -->
+                <div class="schedule-card" id="schedule-futbol" style="border-left: 4px solid #00f0ff;">
+                    <div class="schedule-badge" data-i18n="s_live_thu">REPETICIÓN DE VIERNES A MIERCOLES - ESTRENO -
+                        JUEVES</div>
+                    <h3 class="schedule-title"><a href="https://futbol.signalradio.club" target="_blank"
+                            style="color: inherit; text-decoration: underline; text-decoration-color: var(--accent-primary);">Hablando
+                            de Fútbol con Gómez y López</a></h3>
+                    <p class="schedule-topic"><span data-i18n="s_futbol_desc">Análisis, debate y pasión por el deporte
+                            rey desde una perspectiva única.</span></p>
+                    <p class="schedule-guest"><strong>Hosts:</strong> Gómez & López</p>
+                    <div class="schedule-details">
+                        <div class="schedule-time">
+                            <i class='bx bx-time'></i> 🇪🇸 9:00 PM | 🇦🇷 5:00 PM | 🇻🇪 4:00 PM | 🇨🇴 3:00 PM | 🇲🇽
+                            2:00 PM
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Charlas Talks -->
+                <div class="schedule-card" id="schedule-talks" style="margin-top: 60px; border-left: 4px solid #f0f;">
+                    <div class="schedule-badge" data-i18n="s_daily">LUNES A DOMINGO</div>
+                    <h3 class="schedule-title" data-i18n="s_talks_title">Charlas Talks: Construyendo Realidades</h3>
+                    <p class="schedule-topic" data-i18n="s_talks_desc">Conversaciones que inspiran y transforman
+                        realidades.</p>
+                    <div class="schedule-details">
+                        <div class="schedule-time">
+                            <i class='bx bx-time'></i> 🇪🇸 6:30 PM | 🇦🇷 2:30 PM | 🇻🇪 1:30 PM | 🇨🇴 12:30 PM |
+                            🇲🇽 11:30 AM
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Card: Sintonizando -->
+                <div class="schedule-card" id="schedule-sintonizando" style="margin-top: 60px;">
+                    <div class="schedule-badge" data-i18n="s_daily">LUNES A DOMINGO</div>
+                    <h3 class="schedule-title">Sintonizando con el Autismo</h3>
+                    <p class="schedule-topic"><span data-i18n="s_sint_topic">Invitados Varios</span></p>
+                    <div class="schedule-details">
+                        <div class="schedule-time">
+                            <i class='bx bx-time'></i> 🇪🇸 1:00 AM (+1) | 🇦🇷 9:00 PM | 🇻🇪 8:00 PM | 🇨🇴 7:00
+                            PM | 🇲🇽
+                            6:00 PM
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- Call to Action -->
-        <section id="community" class="section cta-section">
-            <div class="background-waves"></div>
-            <div class="container text-center">
-                <h2><span data-i18n="cta_title">Sintoniza el</span> <span class="text-gradient"
-                        data-i18n="cta_highlight">Futuro</span></h2>
-                <p data-i18n="cta_desc">Forma parte de una comunidad que valora el talento por lo que es.</p>
-                <div class="cta-buttons">
-                    <a href="https://comunidad.aspergerparaasperger.org/invitation?code=9J8594" target="_blank"
-                        class="btn btn-primary btn-lg" data-i18n="cta_join">Unirse a la Comunidad</a>
-                    <a href="https://www.aspergerparaasperger.org/" target="_blank" class="btn btn-outline btn-lg"
-                        data-i18n="cta_more">Más
-                        Soluciones</a>
+        <!-- World Clock Section -->
+        <section id="world-clock" class="world-clock-section">
+            <div class="container">
+                <h2 class="section-title text-center" style="margin-bottom: 40px; font-size: 2rem;"><span
+                        data-i18n="clock_title">Horarios</span> <span class="text-highlight"
+                        data-i18n="clock_highlight">Globales</span></h2>
+                <div class="world-clock-grid" id="clockGrid">
+                    <!-- Clocks will be injected here by JS -->
                 </div>
+            </div>
 
-                <!-- Feedspace Voice Widget -->
-                <div
-                    style="margin-top: 50px; background: rgba(255,255,255,0.03); padding: 30px; border-radius: 20px; border: 1px solid rgba(255,255,255,0.05); max-width: 800px; margin-left: auto; margin-right: auto;">
-                    <h3 style="color: #fff; font-size: 1.5rem; margin-bottom: 10px;" data-i18n="voice_msg_title">Déjanos
-                        tu Mensaje de Voz</h3>
-                    <p style="color: #a0a0b0; margin-bottom: 25px; font-size: 0.95rem; max-width: 600px; margin-left: auto; margin-right: auto;"
-                        data-i18n="voice_msg_desc">Tu testimonio inspira. Comparte tu experiencia para que sea escuchada
-                        en Signal Radio.</p>
+            <!-- Scrolling Flags Banner -->
+            <div class="flags-banner">
+                <div class="flags-track">
+                    <!-- Set 1 -->
+                    <div class="flag-item">🇦🇷<span>Argentina</span></div>
+                    <div class="flag-item">🇧🇴<span>Bolivia</span></div>
+                    <div class="flag-item">🇧🇷<span>Brasil</span></div>
+                    <div class="flag-item">🇨🇱<span>Chile</span></div>
+                    <div class="flag-item">🇨🇴<span>Colombia</span></div>
+                    <div class="flag-item">🇨🇷<span>Costa Rica</span></div>
+                    <div class="flag-item">🇨🇺<span>Cuba</span></div>
+                    <div class="flag-item">🇩🇴<span>Rep. Dom.</span></div>
+                    <div class="flag-item">🇪🇨<span>Ecuador</span></div>
+                    <div class="flag-item">🇸🇻<span>El Salvador</span></div>
+                    <div class="flag-item">🇪🇸<span>España</span></div>
+                    <div class="flag-item">🇺🇸<span>USA</span></div>
+                    <div class="flag-item">🇬🇧<span>UK</span></div>
+                    <div class="flag-item">🇬🇹<span>Guatemala</span></div>
+                    <div class="flag-item">🇭🇳<span>Honduras</span></div>
+                    <div class="flag-item">🇲🇽<span>México</span></div>
+                    <div class="flag-item">🇳🇮<span>Nicaragua</span></div>
+                    <div class="flag-item">🇵🇦<span>Panamá</span></div>
+                    <div class="flag-item">🇵🇾<span>Paraguay</span></div>
+                    <div class="flag-item">🇵🇪<span>Perú</span></div>
+                    <div class="flag-item">🇵🇹<span>Portugal</span></div>
+                    <div class="flag-item">🇵🇷<span>Puerto Rico</span></div>
+                    <div class="flag-item">🇺🇾<span>Uruguay</span></div>
+                    <div class="flag-item">🇻🇪<span>Venezuela</span></div>
 
-                    <div style="text-align: center;">
-                        <a href="voz-de-la-comunidad.html" target="_blank" class="btn btn-outline btn-lg"
-                            style="border-radius: 50px; padding: 15px 30px;">
-                            <i class='bx bx-microphone'
-                                style="font-size: 1.2rem; vertical-align: middle; margin-right: 5px;"></i> <span
-                                data-i18n="btn_record_voice">Grabar Mensaje de Voz</span>
-                        </a>
-                    </div>
+                    <!-- Set 2 (Duplicate for loop) -->
+                    <div class="flag-item">🇦🇷<span>Argentina</span></div>
+                    <div class="flag-item">🇧🇴<span>Bolivia</span></div>
+                    <div class="flag-item">🇧🇷<span>Brasil</span></div>
+                    <div class="flag-item">🇨🇱<span>Chile</span></div>
+                    <div class="flag-item">🇨🇴<span>Colombia</span></div>
+                    <div class="flag-item">🇨🇷<span>Costa Rica</span></div>
+                    <div class="flag-item">🇨🇺<span>Cuba</span></div>
+                    <div class="flag-item">🇩🇴<span>Rep. Dom.</span></div>
+                    <div class="flag-item">🇪🇨<span>Ecuador</span></div>
+                    <div class="flag-item">🇸🇻<span>El Salvador</span></div>
+                    <div class="flag-item">🇪🇸<span>España</span></div>
+                    <div class="flag-item">🇺🇸<span>USA</span></div>
+                    <div class="flag-item">🇬🇧<span>UK</span></div>
+                    <div class="flag-item">🇬🇹<span>Guatemala</span></div>
+                    <div class="flag-item">🇭🇳<span>Honduras</span></div>
+                    <div class="flag-item">🇲🇽<span>México</span></div>
+                    <div class="flag-item">🇳🇮<span>Nicaragua</span></div>
+                    <div class="flag-item">🇵🇦<span>Panamá</span></div>
+                    <div class="flag-item">🇵🇾<span>Paraguay</span></div>
+                    <div class="flag-item">🇵🇪<span>Perú</span></div>
+                    <div class="flag-item">🇵🇹<span>Portugal</span></div>
+                    <div class="flag-item">🇵🇷<span>Puerto Rico</span></div>
+                    <div class="flag-item">🇺🇾<span>Uruguay</span></div>
+                    <div class="flag-item">🇻🇪<span>Venezuela</span></div>
                 </div>
-
-
             </div>
         </section>
+
     </main>
 
     <footer class="main-footer">
