@@ -424,10 +424,10 @@
 
             <nav class="main-nav">
                 <ul>
-                    <li><a href="index.html#about" data-i18n="nav_about">Quiénes somos</a></li>
-                    <li><a href="index.html#services" data-i18n="nav_what_we_do">Qué hacemos</a></li>
-                    <li><a href="index.html#values" data-i18n="nav_impact">Impacto</a></li>
-                    <li><a href="programacion.html" data-i18n="nav_schedule_menu" class="active">Programación</a></li>
+                    <li><a href="/#about" data-i18n="nav_about">Quiénes somos</a></li>
+                    <li><a href="/#services" data-i18n="nav_what_we_do">Qué hacemos</a></li>
+                    <li><a href="/#values" data-i18n="nav_impact">Impacto</a></li>
+                    <li><a href="programacion" data-i18n="nav_schedule_menu" class="active">Programación</a></li>
                 </ul>
             </nav>
 
@@ -439,7 +439,7 @@
             </div>
 
             <div class="header-cta">
-                <a href="index.html#listen" class="btn btn-primary btn-sm" data-i18n="nav_listen">Escuchar ahora</a>
+                <a href="/#listen" class="btn btn-primary btn-sm" data-i18n="nav_listen">Escuchar ahora</a>
             </div>
 
             <button class="mobile-menu-btn" aria-label="Abrir menú">
@@ -466,7 +466,7 @@
                             independiente</span></p>
                     <div
                         style="text-align: left; margin: 15px 0; padding: 15px; background: rgba(0,0,0,0.2); border-radius: 10px;">
-                        <p style="margin-bottom: 10px; font-weight: 700; color: var(--accent-primary);">El panel contará
+                        <p style="margin-bottom: 10px; font-weight: 700; color: var(--accent-primary);">El panel cuenta
                             con la participación:</p>
                         <ul style="list-style: none; padding: 0; margin: 0; font-size: 0.9rem;">
                             <li style="margin-bottom: 5px;"><i class='bx bx-user'
@@ -482,7 +482,8 @@
                                     style="margin-right: 5px; color: var(--accent-secondary);"></i> <strong>Ps. José
                                     Antonio Peral Parrado</strong>, director técnico de CONFAE (España)</li>
                             <li><i class='bx bx-user' style="margin-right: 5px; color: var(--accent-secondary);"></i>
-                                <strong>Gastón Javier Perile</strong>, cofundador de Liga Asperger 7 (Argentina)</li>
+                                <strong>Gastón Javier Perile</strong>, cofundador de Liga Asperger 7 (Argentina)
+                            </li>
                         </ul>
                     </div>
                     <div class="schedule-details">
@@ -537,6 +538,16 @@
                         </div>
                     </div>
                 </div>
+            </div>
+
+            <!-- Share Button -->
+            <div style="margin-top: 60px;">
+                <button onclick="shareProgramacion()" class="btn btn-primary btn-lg"
+                    style="border-radius: 50px; padding: 15px 40px; font-size: 1.1rem; box-shadow: 0 10px 25px rgba(0, 240, 255, 0.4); display: inline-flex; justify-content: center; align-items: center; gap: 10px;">
+                    <i class='bx bx-share-alt' style="font-size: 1.4rem;"></i> <span
+                        data-i18n="btn_share_prog">Compartir Programación</span>
+                </button>
+            </div>
             </div>
         </section>
 
@@ -1036,7 +1047,8 @@
                 'event_title_1': 'Transmisión',
                 'event_title_2': 'Especial 18F',
                 'event_desc': 'Acompáñanos en esta transmisión especial del 18 de Febrero. Un espacio para compartir visión y futuro.',
-                'event_btn': 'Ver canal de YouTube'
+                'event_btn': 'Ver canal de YouTube',
+                'btn_share_prog': 'Compartir Programación'
             },
             'en': {
                 'banner_tag': '📣 NEWS',
@@ -1167,7 +1179,8 @@
                 'event_title_1': '18F',
                 'event_title_2': 'Broadcast',
                 'event_desc': 'Join us for this special broadcast on February 18th. A space to share vision and future.',
-                'event_btn': 'Watch on YouTube'
+                'event_btn': 'Watch on YouTube',
+                'btn_share_prog': 'Share Schedule'
             }
         };
 
@@ -1515,6 +1528,36 @@
                 }).catch(err => {
                     console.error('Error al copiar:', err);
                     prompt('Copia este enlace:', url);
+                });
+            }
+        }
+
+        function shareProgramacion() {
+            // Check if site is accessed locally or prod
+            let url = window.location.href;
+            if (url.includes('file://')) url = 'https://signalradio.club/programacion';
+
+            const lang = localStorage.getItem('siteLang') || 'es';
+            let title = 'Programación Signal Radio';
+            let text = `🎧✨ ¡Descubre la programación y horarios de Signal Radio!\n\nConéctate con nuestros invitados, ediciones especiales y más. La señal neuro-inclusiva.\n\nEscúchalo aquí: ${url}`;
+
+            if (lang === 'en') {
+                title = 'Signal Radio Schedule';
+                text = `🎧✨ Discover the schedule for Signal Radio!\n\nConnect with our guests, special editions and more. The neuro-inclusive signal.\n\nCheck it out: ${url}`;
+            }
+
+            if (navigator.share) {
+                navigator.share({
+                    title: title,
+                    text: text
+                }).catch(console.error);
+            } else {
+                const alertMsg = lang === 'en' ? 'Link copied to clipboard!' : '¡Texto y enlace copiados al portapapeles! Listo para pegar en WhatsApp u otra red.';
+                navigator.clipboard.writeText(text).then(() => {
+                    alert(alertMsg);
+                }).catch(err => {
+                    console.error('Error al copiar:', err);
+                    prompt(lang === 'en' ? 'Copy this text:' : 'Copia este texto para compartir:', text);
                 });
             }
         }
