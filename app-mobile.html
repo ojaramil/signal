@@ -526,6 +526,17 @@
                 <!-- Schedule Items Updated -->
 
 
+                <!-- Card: Modo Avion -->
+                <div class="schedule-mini" style="border-left-color: #00f0ff;">
+                    <div class="s-day" id="t-sch-modoavion-badge">NUEVO PROGRAMA</div>
+                    <div class="s-title" id="t-sch-modoavion-title">Modo Avión</div>
+                    <div class="s-meta" id="t-sch-modoavion-desc">Historias y aviación con Fátima y Andrés.</div>
+                    <div class="s-meta">Hosts: Fátima & Andrés</div>
+                    <div class="s-meta" id="t-sch-modoavion-time">
+                        🇪🇸 9:00 PM | 🇦🇷 4:00 PM | 🇻🇪 3:00 PM | 🇨🇴 2:00 PM | 🇲🇽 1:00 PM
+                    </div>
+                </div>
+
                 <!-- Card 1: Hablando de Futbol -->
                 <div class="schedule-mini" style="border-left-color: #00f0ff;">
                     <div class="s-day" id="t-sch-futbol-badge">REPETICIÓN DE VIERNES A MIERCOLES - ESTRENO LOS JUEVES
@@ -769,7 +780,10 @@
                 's_sint_topic': 'Invitados Varios',
                 's_talks_title': 'Charlas Talks: Construyendo Realidades',
                 's_talks_desc': 'Conversaciones que inspiran y transforman realidades.',
-                'android_soon': 'NUEVO',
+                's_modoavion_badge': 'NUEVO PROGRAMA',
+                's_modoavion_title': 'Modo Avión',
+                's_modoavion_desc': 'El programa sobre aviación e historias donde Fátima y Andrés serán los conductores.',
+                'android_soon': 'PRONTO',
                 'apple_new': 'NUEVO'
             },
             'en': {
@@ -791,8 +805,11 @@
                 's_futbol_desc': 'Analysis, debate, and passion for the beautiful game from a unique perspective (Spoken in Spanish).',
                 's_sint_topic': 'Various Guests (Spoken in Spanish)',
                 's_talks_title': 'Charlas Talks: Building Realities',
-                's_talks_desc': 'Conversaciones that inspire and transform realities (Spoken in Spanish).',
-                'android_soon': 'NEW',
+                's_talks_desc': 'Conversasiones that inspire and transform realities (Spoken in Spanish).',
+                's_modoavion_badge': 'NEW SHOW',
+                's_modoavion_title': 'Airplane Mode (Modo Avión)',
+                's_modoavion_desc': 'The show about aviation and stories where Fatima and Andres will be the hosts (Spoken in Spanish).',
+                'android_soon': 'SOON',
                 'apple_new': 'NEW'
             }
         };
@@ -834,6 +851,11 @@
             document.getElementById('t-sch-talks-badge').innerText = t.s_daily;
             document.getElementById('t-sch-talks-title').innerText = t.s_talks_title;
             document.getElementById('t-sch-talks-desc').innerText = t.s_talks_desc;
+
+            // Modo Avion
+            document.getElementById('t-sch-modoavion-badge').innerText = t.s_modoavion_badge;
+            document.getElementById('t-sch-modoavion-title').innerText = t.s_modoavion_title;
+            document.getElementById('t-sch-modoavion-desc').innerText = t.s_modoavion_desc;
 
             document.getElementById('t-android-soon').innerText = t.android_soon;
             document.getElementById('t-apple-new').innerText = t.apple_new;
