@@ -584,3 +584,52 @@
 
             </div>
         </section>
+    <script>
+        // Translations
+        const translations = {
+            'es': {
+                'banner_tag': '🇻🇪 AYUDA A VENEZUELA',
+                'banner_text': 'Ayuda a nuestros hermanos venezolanos que necesitan apoyo mundial. Visita <a href="https://ayuda123venezuela.com" target="_blank" style="color: #fff; text-decoration: underline;">ayuda123venezuela.com</a>',
+            },
+            'en': {
+                'banner_tag': '🇻🇪 HELP VENEZUELA',
+                'banner_text': 'Help our Venezuelan brothers and sisters in need. Visit <a href="https://ayuda123venezuela.com" target="_blank" style="color: #fff; text-decoration: underline;">ayuda123venezuela.com</a>',
+            }
+        };
+
+        function toggleLanguage() {
+            const currentLang = localStorage.getItem('siteLang') === 'en' ? 'en' : 'es';
+            const newLang = currentLang === 'es' ? 'en' : 'es';
+            updateLanguageDOM(newLang);
+        }
+
+        function updateLanguageDOM(lang) {
+            localStorage.setItem('siteLang', lang);
+            const switchEl = document.getElementById('langSwitch');
+            if (switchEl) {
+                if (lang === 'en') {
+                    switchEl.classList.add('en-active');
+                    document.getElementById('btn-en').classList.add('active');
+                    document.getElementById('btn-es').classList.remove('active');
+                } else {
+                    switchEl.classList.remove('en-active');
+                    document.getElementById('btn-es').classList.add('active');
+                    document.getElementById('btn-en').classList.remove('active');
+                }
+            }
+            const texts = translations[lang];
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.getAttribute('data-i18n');
+                if (texts[key]) {
+                    el.innerHTML = texts[key];
+                }
+            });
+            document.documentElement.lang = lang;
+        }
+
+        // Initialize language on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            const savedLang = localStorage.getItem('siteLang') || 'es';
+            updateLanguageDOM(savedLang);
+        });
+    </script>
